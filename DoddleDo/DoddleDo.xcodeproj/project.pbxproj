@@ -7,25 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		72D60B1C22E72E7B00B630CD /* ShadowedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */; };
 		72FC9E4F22E6F4BE00A920DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */; };
-		72FC9E5122E6F4BE00A920DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E5022E6F4BE00A920DA /* ViewController.swift */; };
+		72FC9E5122E6F4BE00A920DA /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */; };
 		72FC9E5422E6F4BE00A920DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5222E6F4BE00A920DA /* Main.storyboard */; };
 		72FC9E5622E6F4C700A920DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5522E6F4C700A920DA /* Assets.xcassets */; };
 		72FC9E5922E6F4C700A920DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5722E6F4C700A920DA /* LaunchScreen.storyboard */; };
-		72FC9E6122E6FD1A00A920DA /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E6022E6FD1A00A920DA /* BackgroundImageView.swift */; };
-		72FC9E6322E703A900A920DA /* SmallButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E6222E703A900A920DA /* SmallButtonView.swift */; };
+		72FC9E6122E6FD1A00A920DA /* MainSceneBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowedImageView.swift; sourceTree = "<group>"; };
 		72FC9E4B22E6F4BE00A920DA /* DoddleDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoddleDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		72FC9E5022E6F4BE00A920DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
 		72FC9E5322E6F4BE00A920DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		72FC9E5522E6F4C700A920DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72FC9E5822E6F4C700A920DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72FC9E5A22E6F4C700A920DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72FC9E6022E6FD1A00A920DA /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
-		72FC9E6222E703A900A920DA /* SmallButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallButtonView.swift; sourceTree = "<group>"; };
+		72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneBackgroundImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,13 +59,13 @@
 			isa = PBXGroup;
 			children = (
 				72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */,
-				72FC9E5022E6F4BE00A920DA /* ViewController.swift */,
+				72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */,
 				72FC9E5222E6F4BE00A920DA /* Main.storyboard */,
 				72FC9E5522E6F4C700A920DA /* Assets.xcassets */,
 				72FC9E5722E6F4C700A920DA /* LaunchScreen.storyboard */,
 				72FC9E5A22E6F4C700A920DA /* Info.plist */,
-				72FC9E6022E6FD1A00A920DA /* BackgroundImageView.swift */,
-				72FC9E6222E703A900A920DA /* SmallButtonView.swift */,
+				72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundImageView.swift */,
+				72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */,
 			);
 			path = DoddleDo;
 			sourceTree = "<group>";
@@ -141,10 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72FC9E6322E703A900A920DA /* SmallButtonView.swift in Sources */,
-				72FC9E6122E6FD1A00A920DA /* BackgroundImageView.swift in Sources */,
-				72FC9E5122E6F4BE00A920DA /* ViewController.swift in Sources */,
+				72FC9E6122E6FD1A00A920DA /* MainSceneBackgroundImageView.swift in Sources */,
+				72FC9E5122E6F4BE00A920DA /* MainSceneViewController.swift in Sources */,
 				72FC9E4F22E6F4BE00A920DA /* AppDelegate.swift in Sources */,
+				72D60B1C22E72E7B00B630CD /* ShadowedImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
