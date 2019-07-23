@@ -8,6 +8,7 @@
 
 import UIKit
 
+@IBDesignable
 class ShadowedImageView: UIImageView {
 
     override func awakeFromNib() {

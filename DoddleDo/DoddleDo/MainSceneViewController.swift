@@ -11,13 +11,30 @@ import UIKit
 class MainSceneViewController: UIViewController {
 
     
+    @IBOutlet weak var settings: ShadowedImageView!{
+        didSet{
+            let tap = UITapGestureRecognizer(target: self, action: #selector(openSettings))
+            settings.addGestureRecognizer(tap)
+            settings.isUserInteractionEnabled = true
+        }
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+    @objc func openSettings(){
+        performSegue(withIdentifier: "settings", sender: nil)
     }
 
-
+    
+    @IBOutlet weak var help: ShadowedImageView!{
+        didSet{
+            let tap = UITapGestureRecognizer(target: self, action: #selector(openHelp))
+            help.addGestureRecognizer(tap)
+            help.isUserInteractionEnabled = true
+        }
+    }
+    
+    @objc func openHelp(){
+        print("*****Tapped on*****")
+        performSegue(withIdentifier: "help", sender: nil)
+    }
 }
 
