@@ -10,31 +10,66 @@ import UIKit
 @IBDesignable
 class MainSceneViewController: UIViewController {
 
-    
-    @IBOutlet weak var settings: ShadowedImageView!{
-        didSet{
-            let tap = UITapGestureRecognizer(target: self, action: #selector(openSettings))
-            settings.addGestureRecognizer(tap)
-            settings.isUserInteractionEnabled = true
+
+    @IBOutlet weak var settings: ShadowedImageView! {
+        didSet {
+            addLongPressGesture(to: settings)
         }
-    }
-    
-    @objc func openSettings(){
-        performSegue(withIdentifier: "settings", sender: nil)
     }
 
-    
-    @IBOutlet weak var help: ShadowedImageView!{
-        didSet{
-            let tap = UITapGestureRecognizer(target: self, action: #selector(openHelp))
-            help.addGestureRecognizer(tap)
-            help.isUserInteractionEnabled = true
+
+    @IBOutlet weak var help: ShadowedImageView! {
+        didSet {
+            addLongPressGesture(to: help)
         }
-    }
-    
-    @objc func openHelp(){
-        print("*****Tapped on*****")
-        performSegue(withIdentifier: "help", sender: nil)
     }
 }
 
+extension UIViewController {
+
+    func addLongPressGesture(to view: UIView) {
+        let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
+        tapOrPress.minimumPressDuration = 0
+        view.addGestureRecognizer(tapOrPress)
+        view.isUserInteractionEnabled = true
+    }
+
+    @objc func buttonTappedOrPressed(recognizer: UILongPressGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            if let buttonView = recognizer.view as? ShadowedImageView {
+                UIView.animate(
+                    withDuration: 0.02,
+                    delay: 0,
+                    usingSpringWithDamping: 0.2,
+                    initialSpringVelocity: 0,
+                    options: [],
+                    animations: {
+                        buttonView.transform = CGAffineTransform.identity.scaledBy(x: 1.2, y: 1.2)
+                    }
+                )
+            }
+        case .ended:
+            if let buttonView = recognizer.view as? ShadowedImageView, let buttonName = buttonView.identifier {
+                UIView.animate(
+                    withDuration: 0.02,
+                    delay: 0,
+                    usingSpringWithDamping: 0.2,
+                    initialSpringVelocity: 0,
+                    options: [],
+                    animations: {
+                        buttonView.transform = CGAffineTransform.identity
+                    },
+                    completion: {
+                        finished in
+                        if finished {
+                            self.performSegue(withIdentifier: buttonName, sender: nil)
+                        }
+                    }
+                )
+            }
+
+        default: break
+        }
+    }
+}
