@@ -15,7 +15,7 @@ class OddSegue: UIStoryboardSegue {
         UIView.transition(
             from: source.view,
             to: destination.view,
-            duration: 0.35,
+            duration: 0.25,
             options: .transitionFlipFromBottom,
             completion: nil
         )

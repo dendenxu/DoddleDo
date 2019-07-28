@@ -14,6 +14,5 @@ class HelpSceneViewController: UIViewController {
         didSet {
             addLongPressGesture(to: back)
         }
-    }
-
+    } 
 }

@@ -23,10 +23,11 @@ class MainSceneViewController: UIViewController {
             addLongPressGesture(to: help)
         }
     }
+
 }
 
 extension UIViewController {
-
+    
     func addLongPressGesture(to view: UIView) {
         let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
         tapOrPress.minimumPressDuration = 0

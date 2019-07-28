@@ -45,5 +45,7 @@ class MainSceneBackgroundImageView: UIImageView {
         bottomLine.sizeToFit()
         bottomLine.center = CGPoint(x: 342, y: 354)
     }
+    
 
 }
+
