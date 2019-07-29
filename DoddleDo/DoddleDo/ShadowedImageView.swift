@@ -13,14 +13,20 @@ class ShadowedImageView: UIImageView {
 
     @IBInspectable
     var identifier: String?
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        self.layer.shadowColor = #colorLiteral(red: 0.1921568662, green: 0.007843137719, blue: 0.09019608051, alpha: 1)
-        self.layer.shadowOffset = CGSize(width: 4.0, height: 3.0)
-        self.layer.shadowOpacity = 0.9
-        self.layer.shadowRadius = 3.0
-        self.clipsToBounds = false
+    override init(image: UIImage?) {
+        super.init(image: image)
+        initializationWork()
     }
-
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initializationWork()
+    }
+    private func initializationWork() {
+        layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        layer.shadowOffset = CGSize(width: 4.0, height: 3.0)
+        layer.shadowOpacity = 0.9
+        layer.shadowRadius = 3.0
+        clipsToBounds = false
+        contentMode = .scaleToFill
+    }
 }

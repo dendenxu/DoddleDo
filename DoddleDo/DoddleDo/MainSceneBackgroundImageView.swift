@@ -37,9 +37,6 @@ class MainSceneBackgroundImageView: UIImageView {
 
     override func layoutSubviews() {
         nameImageView.frame = CGRect(x: 64, y: 52, width: 384, height: 89)
-        nameImageView.contentMode = .scaleToFill
-        nameImageView.awakeFromNib()
-        nameImageView.draw(nameImageView.frame)
         
         bottomLine.frame.size = CGSize.zero
         bottomLine.sizeToFit()
