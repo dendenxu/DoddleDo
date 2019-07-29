@@ -12,25 +12,15 @@ import UIKit
 class BackgroundView: UIView {
 
     override func draw(_ rect: CGRect) {
-        bounds = UIScreen.main.bounds
-        drawBlack()
-        clipInRoundedRect()
+        let path = UIBezierPath(roundedRect: bounds, cornerRadius: 40)
+        path.addClip()
         if let image = UIImage(named: "mainBackground", in: Bundle(for: classForCoder), compatibleWith: traitCollection) {
             image.draw(in: bounds)
         }
     }
-
-}
-
-extension UIView {
-    func drawBlack() {
-        let path = UIBezierPath(rect: bounds)
-        UIColor.black.setFill()
-        path.fill()
+    override func awakeFromNib() {
+        bounds = UIScreen.main.bounds
+        backgroundColor = UIColor.clear
     }
-    
-    func clipInRoundedRect() {
-        let path = UIBezierPath(roundedRect: bounds, cornerRadius: 40)
-        path.addClip()
-    }
+
 }

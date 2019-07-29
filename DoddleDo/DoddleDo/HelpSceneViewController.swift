@@ -14,5 +14,5 @@ class HelpSceneViewController: VCLLoggingViewController {
         didSet {
             addLongPressGesture(to: back)
         }
-    } 
+    }
 }

@@ -10,7 +10,6 @@ import UIKit
 @IBDesignable
 class MainSceneViewController: VCLLoggingViewController {
 
-
     @IBOutlet weak var settings: ShadowedImageView! {
         didSet {
             addLongPressGesture(to: settings)
@@ -23,7 +22,6 @@ class MainSceneViewController: VCLLoggingViewController {
             addLongPressGesture(to: help)
         }
     }
-
 }
 
 extension UIViewController {
