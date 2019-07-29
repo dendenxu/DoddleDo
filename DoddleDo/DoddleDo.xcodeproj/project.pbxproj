@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		72527D9922EDFA24002FA387 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72527D9822EDFA24002FA387 /* BackgroundView.swift */; };
+		72527D9922EDFA24002FA387 /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72527D9822EDFA24002FA387 /* BackgroundImageView.swift */; };
 		7285F09822E75A4E0019F232 /* SettingsSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */; };
 		7285F09B22E75A620019F232 /* HelpSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09A22E75A620019F232 /* HelpSceneViewController.swift */; };
 		72C24CFA22EE953500195B01 /* VCLLoggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C24CF922EE953400195B01 /* VCLLoggingViewController.swift */; };
@@ -18,11 +18,11 @@
 		72FC9E5422E6F4BE00A920DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5222E6F4BE00A920DA /* Main.storyboard */; };
 		72FC9E5622E6F4C700A920DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5522E6F4C700A920DA /* Assets.xcassets */; };
 		72FC9E5922E6F4C700A920DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5722E6F4C700A920DA /* LaunchScreen.storyboard */; };
-		72FC9E6122E6FD1A00A920DA /* MainSceneBackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundImageView.swift */; };
+		72FC9E6122E6FD1A00A920DA /* MainSceneBackgroundLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundLayoutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		72527D9822EDFA24002FA387 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		72527D9822EDFA24002FA387 /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
 		7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSceneViewController.swift; sourceTree = "<group>"; };
 		7285F09A22E75A620019F232 /* HelpSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSceneViewController.swift; sourceTree = "<group>"; };
 		72C24CF922EE953400195B01 /* VCLLoggingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCLLoggingViewController.swift; sourceTree = "<group>"; };
@@ -35,7 +35,7 @@
 		72FC9E5522E6F4C700A920DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72FC9E5822E6F4C700A920DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72FC9E5A22E6F4C700A920DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneBackgroundImageView.swift; sourceTree = "<group>"; };
+		72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundLayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneBackgroundLayoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,12 +75,12 @@
 				72FC9E5522E6F4C700A920DA /* Assets.xcassets */,
 				72FC9E5722E6F4C700A920DA /* LaunchScreen.storyboard */,
 				72FC9E5A22E6F4C700A920DA /* Info.plist */,
-				72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundImageView.swift */,
+				72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundLayoutView.swift */,
 				72C24CF922EE953400195B01 /* VCLLoggingViewController.swift */,
 				72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */,
 				7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */,
 				7285F09A22E75A620019F232 /* HelpSceneViewController.swift */,
-				72527D9822EDFA24002FA387 /* BackgroundView.swift */,
+				72527D9822EDFA24002FA387 /* BackgroundImageView.swift */,
 			);
 			path = DoddleDo;
 			sourceTree = "<group>";
@@ -157,8 +157,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				72C858CD22EC8EFD002F4F5B /* OddSegue.swift in Sources */,
-				72FC9E6122E6FD1A00A920DA /* MainSceneBackgroundImageView.swift in Sources */,
-				72527D9922EDFA24002FA387 /* BackgroundView.swift in Sources */,
+				72FC9E6122E6FD1A00A920DA /* MainSceneBackgroundLayoutView.swift in Sources */,
+				72527D9922EDFA24002FA387 /* BackgroundImageView.swift in Sources */,
 				72FC9E5122E6F4BE00A920DA /* MainSceneViewController.swift in Sources */,
 				7285F09B22E75A620019F232 /* HelpSceneViewController.swift in Sources */,
 				72FC9E4F22E6F4BE00A920DA /* AppDelegate.swift in Sources */,

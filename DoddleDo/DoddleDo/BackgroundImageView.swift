@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class BackgroundView: UIView {
+class BackgroundImageView: UIView {
 
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath(roundedRect: bounds, cornerRadius: 40)

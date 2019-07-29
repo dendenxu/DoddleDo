@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class MainSceneBackgroundImageView: UIImageView {
+class MainSceneBackgroundLayoutView: UIView {
 
     lazy var nameImageView = createNameImageView()
 
