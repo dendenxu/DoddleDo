@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsSceneViewController: UIViewController {
+class SettingsSceneViewController: VCLLoggingViewController {
 
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {

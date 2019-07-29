@@ -8,7 +8,7 @@
 
 import UIKit
 @IBDesignable
-class MainSceneViewController: UIViewController {
+class MainSceneViewController: VCLLoggingViewController {
 
 
     @IBOutlet weak var settings: ShadowedImageView! {

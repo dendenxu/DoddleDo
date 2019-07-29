@@ -11,7 +11,6 @@ import UIKit
 class OddSegue: UIStoryboardSegue {
 
     override func perform() {
-
         UIView.transition(
             from: source.view,
             to: destination.view,
@@ -19,7 +18,7 @@ class OddSegue: UIStoryboardSegue {
             options: .transitionFlipFromBottom,
             completion: nil
         )
-        
+
         source.present(destination, animated: false, completion: nil)
         source.dismiss(animated: false, completion: nil)
     }
