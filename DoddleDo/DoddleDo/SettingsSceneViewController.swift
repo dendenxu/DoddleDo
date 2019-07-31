@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+@IBDesignable
 class SettingsSceneViewController: UIViewController {
 
     @IBOutlet weak var back: ShadowedImageView! {

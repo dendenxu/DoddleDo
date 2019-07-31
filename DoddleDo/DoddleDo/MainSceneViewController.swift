@@ -7,7 +7,9 @@
 //
 
 import UIKit
-//@IBDesignable
+
+
+@IBDesignable
 class MainSceneViewController: UIViewController {
 
     @IBOutlet weak var settings: ShadowedImageView! {

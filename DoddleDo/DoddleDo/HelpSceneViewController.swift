@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+@IBDesignable
 class HelpSceneViewController: UIViewController {
 
     @IBOutlet weak var back: ShadowedImageView! {
@@ -15,11 +17,6 @@ class HelpSceneViewController: UIViewController {
             addLongPressGesture(to: back)
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     
     @IBOutlet weak var helpTest: ShadowedImageView! {
         didSet {

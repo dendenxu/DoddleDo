@@ -8,11 +8,17 @@
 
 import UIKit
 
-//@IBDesignable
+
+@IBDesignable
 class ShadowedImageView: UIImageView {
 
     @IBInspectable
     var identifier: String?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initializationWork()
+    }
     override init(image: UIImage?) {
         super.init(image: image)
         initializationWork()
