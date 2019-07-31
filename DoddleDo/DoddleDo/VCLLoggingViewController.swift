@@ -10,7 +10,8 @@ import UIKit
 
 class VCLLoggingViewController: UIViewController
 {
-    var damnIt: UIViewController?
+    weak var damnIt: UIViewController?
+    var heheda: UIViewController?
     
     private struct LogGlobals {
         var prefix = ""

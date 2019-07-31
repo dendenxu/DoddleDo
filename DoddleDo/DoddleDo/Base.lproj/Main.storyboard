@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VXX-WY-lrz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -139,52 +139,10 @@
             </objects>
             <point key="canvasLocation" x="218" y="1790"/>
         </scene>
-        <!--Launch Screen View Controller-->
-        <scene sceneID="iGj-tG-5ww">
-            <objects>
-                <viewController id="VXX-WY-lrz" customClass="LaunchScreenViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZOO-s4-yea">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="LEk-tc-1ZQ">
-                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="ga3-Ji-0Tl">
-                                <rect key="frame" x="164.5" y="140" width="567" height="114"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="567" id="IZW-8N-KR4"/>
-                                    <constraint firstAttribute="height" constant="114" id="nSk-DV-yDe"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="LEk-tc-1ZQ" secondAttribute="bottom" id="Bqp-ag-FfX"/>
-                            <constraint firstItem="ga3-Ji-0Tl" firstAttribute="centerX" secondItem="ZOO-s4-yea" secondAttribute="centerX" id="Evf-Dq-9jO"/>
-                            <constraint firstAttribute="top" secondItem="LEk-tc-1ZQ" secondAttribute="top" id="Zdh-ql-Ooz"/>
-                            <constraint firstItem="LEk-tc-1ZQ" firstAttribute="trailing" secondItem="ZOO-s4-yea" secondAttribute="trailing" id="foH-xR-emf"/>
-                            <constraint firstItem="ga3-Ji-0Tl" firstAttribute="centerY" secondItem="ZOO-s4-yea" secondAttribute="centerY" constant="-10" id="il8-Xi-q0t"/>
-                            <constraint firstItem="LEk-tc-1ZQ" firstAttribute="top" secondItem="Jk4-PC-Lle" secondAttribute="top" id="oEg-tA-rrz"/>
-                            <constraint firstItem="LEk-tc-1ZQ" firstAttribute="trailing" secondItem="ZOO-s4-yea" secondAttribute="trailing" id="pbI-Df-xkf"/>
-                            <constraint firstAttribute="leading" secondItem="LEk-tc-1ZQ" secondAttribute="leading" id="ztQ-tk-YCh"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Jk4-PC-Lle"/>
-                    </view>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="launchScreenSegue" animates="NO" id="5ud-iE-iGm"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="l1M-3g-l5p" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="17" y="-974"/>
-        </scene>
     </scenes>
     <resources>
         <image name="back" width="87" height="93"/>
         <image name="help" width="90" height="90"/>
-        <image name="mainBackground" width="2229" height="1029"/>
-        <image name="name" width="1080" height="252"/>
         <image name="settings" width="90" height="90"/>
     </resources>
 </document>

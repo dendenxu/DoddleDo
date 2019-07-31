@@ -26,15 +26,6 @@ class MainSceneViewController: VCLLoggingViewController {
 
 extension VCLLoggingViewController {
 
-    var backInTheHeap:UIViewController? {
-        get {
-            return parent
-        }
-        set {
-            setValue(newValue, forKey: "parent")
-        }
-    }
-    
     func addLongPressGesture(to view: UIView) {
         let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
         tapOrPress.minimumPressDuration = 0
@@ -71,39 +62,32 @@ extension VCLLoggingViewController {
                     completion: {
                         finished in
                         if finished {
-                            if let presenting = self.damnIt, buttonName.contains("Back") {
-                                print("Before transition and animation")
-                                UIView.transition(
-                                    from: self.view,
-                                    to: presenting.view,
-                                    duration: 0.25,
-                                    options: .transitionFlipFromBottom,
-                                    completion: {
-                                        finished in
-                                        print("After animation")
-//                                        self.removeFromParent()
-                                        self.dismiss(animated: false, completion: nil)
-                                    }
-                                )
-                                print("After transition")
-                            } else {
-                                if let destination = self.storyboard?.instantiateViewController(withIdentifier: buttonName) {
-                                    UIView.transition(
-                                        from: self.view,
-                                        to: destination.view,
-                                        duration: 0.25,
-                                        options: .transitionFlipFromBottom,
-                                        completion: {
-                                            finished in
-                                            
-                                            self.present(destination, animated: false, completion: nil)
-                                            (destination as? VCLLoggingViewController)?.damnIt = self
-//                                            self.addChild(destination)
-//                                            self.view.addSubview(destination.view)
-                                        }
-                                    )
-                                }
+                            weak var destination: UIViewController!
+                            var back: Bool!
+                            if let tempDestination = self.damnIt, buttonName.contains("Back") {
+                                destination = tempDestination
+                                back = true
+                                (destination as? VCLLoggingViewController)?.heheda = nil
+                            } else if let tempDestination = self.storyboard?.instantiateViewController(withIdentifier: buttonName) {
+                                destination = tempDestination
+                                back = false
+                                (destination as? VCLLoggingViewController)?.damnIt = self
+                                self.heheda = destination
                             }
+                            UIView.transition(
+                                from: self.view,
+                                to: destination.view,
+                                duration: 0.25,
+                                options: .transitionFlipFromBottom,
+                                completion: {
+                                    finished in
+                                    if back {
+                                        self.dismiss(animated: false, completion: nil)
+                                    } else {
+                                        self.present(destination!, animated: false, completion: nil)
+                                    }
+                                }
+                            )
                         }
                     }
                 )
