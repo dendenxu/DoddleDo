@@ -36,11 +36,22 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="help"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="h9J-L9-2Cx" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="64" y="52" width="384" height="89"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Doddle makes you do it" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-6b-q5j">
+                                <rect key="frame" x="198" y="337" width="332" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="25"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="bottomLine" destination="7ve-6b-q5j" id="XIz-gS-80S"/>
                         <outlet property="help" destination="v7C-nd-rc2" id="iVg-lu-EuH"/>
                         <outlet property="settings" destination="hxJ-0D-gp7" id="P4y-lr-v2F"/>
                     </connections>
@@ -143,6 +154,7 @@
     <resources>
         <image name="back" width="87" height="93"/>
         <image name="help" width="90" height="90"/>
+        <image name="name" width="1080" height="252"/>
         <image name="settings" width="90" height="90"/>
     </resources>
 </document>

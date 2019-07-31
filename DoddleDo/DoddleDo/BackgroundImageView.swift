@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class BackgroundImageView: UIView {
 
     override func draw(_ rect: CGRect) {

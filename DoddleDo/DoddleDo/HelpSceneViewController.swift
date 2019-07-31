@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HelpSceneViewController: VCLLoggingViewController {
+class HelpSceneViewController: UIViewController {
 
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {

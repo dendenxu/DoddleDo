@@ -7,8 +7,8 @@
 //
 
 import UIKit
-@IBDesignable
-class MainSceneViewController: VCLLoggingViewController {
+//@IBDesignable
+class MainSceneViewController: UIViewController {
 
     @IBOutlet weak var settings: ShadowedImageView! {
         didSet {
@@ -16,15 +16,36 @@ class MainSceneViewController: VCLLoggingViewController {
         }
     }
 
-
     @IBOutlet weak var help: ShadowedImageView! {
         didSet {
             addLongPressGesture(to: help)
         }
     }
+
+    @IBOutlet weak var bottomLine: UILabel! {
+        didSet {
+            configureBottomLine()
+        }
+    }
+    
+    private func configureBottomLine() {
+        if let text = bottomLine.text {
+            let font = UIFont.preferredFont(forTextStyle: .caption2).withSize(25.0)
+            let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
+                .font: font,
+                .kern: 2.0
+            ]
+            let attributedText = NSAttributedString(string: text, attributes: attributes)
+            bottomLine.attributedText = attributedText
+            bottomLine.frame.size = CGSize.zero
+            bottomLine.sizeToFit()
+        }
+    }
+
 }
 
-extension VCLLoggingViewController {
+extension UIViewController {
 
     func addLongPressGesture(to view: UIView) {
         let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
@@ -62,32 +83,11 @@ extension VCLLoggingViewController {
                     completion: {
                         finished in
                         if finished {
-                            weak var destination: UIViewController!
-                            var back: Bool!
-                            if let tempDestination = self.damnIt, buttonName.contains("Back") {
-                                destination = tempDestination
-                                back = true
-                                (destination as? VCLLoggingViewController)?.heheda = nil
-                            } else if let tempDestination = self.storyboard?.instantiateViewController(withIdentifier: buttonName) {
-                                destination = tempDestination
-                                back = false
-                                (destination as? VCLLoggingViewController)?.damnIt = self
-                                self.heheda = destination
+                            if buttonName.contains("Back") {
+                                self.dismiss(animated: true, completion: nil)
+                            } else if let destination = self.storyboard?.instantiateViewController(withIdentifier: buttonName) {
+                                self.present(destination, animated: true, completion: nil)
                             }
-                            UIView.transition(
-                                from: self.view,
-                                to: destination.view,
-                                duration: 0.25,
-                                options: .transitionFlipFromBottom,
-                                completion: {
-                                    finished in
-                                    if back {
-                                        self.dismiss(animated: false, completion: nil)
-                                    } else {
-                                        self.present(destination!, animated: false, completion: nil)
-                                    }
-                                }
-                            )
                         }
                     }
                 )

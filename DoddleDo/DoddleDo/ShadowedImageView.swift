@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class ShadowedImageView: UIImageView {
 
     @IBInspectable
