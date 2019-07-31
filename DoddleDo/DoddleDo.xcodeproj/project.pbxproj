@@ -10,6 +10,7 @@
 		72527D9922EDFA24002FA387 /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72527D9822EDFA24002FA387 /* BackgroundImageView.swift */; };
 		7285F09822E75A4E0019F232 /* SettingsSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */; };
 		7285F09B22E75A620019F232 /* HelpSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09A22E75A620019F232 /* HelpSceneViewController.swift */; };
+		728D0C5D22F0860E00DB05E9 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728D0C5C22F0860E00DB05E9 /* LaunchScreenViewController.swift */; };
 		72C24CFA22EE953500195B01 /* VCLLoggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C24CF922EE953400195B01 /* VCLLoggingViewController.swift */; };
 		72C858CD22EC8EFD002F4F5B /* OddSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C858CC22EC8EFD002F4F5B /* OddSegue.swift */; };
 		72D60B1C22E72E7B00B630CD /* ShadowedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */; };
@@ -25,6 +26,7 @@
 		72527D9822EDFA24002FA387 /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
 		7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSceneViewController.swift; sourceTree = "<group>"; };
 		7285F09A22E75A620019F232 /* HelpSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSceneViewController.swift; sourceTree = "<group>"; };
+		728D0C5C22F0860E00DB05E9 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		72C24CF922EE953400195B01 /* VCLLoggingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCLLoggingViewController.swift; sourceTree = "<group>"; };
 		72C858CC22EC8EFD002F4F5B /* OddSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OddSegue.swift; sourceTree = "<group>"; };
 		72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowedImageView.swift; sourceTree = "<group>"; };
@@ -69,18 +71,19 @@
 			isa = PBXGroup;
 			children = (
 				72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */,
-				72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */,
-				72C858CC22EC8EFD002F4F5B /* OddSegue.swift */,
-				72FC9E5222E6F4BE00A920DA /* Main.storyboard */,
 				72FC9E5522E6F4C700A920DA /* Assets.xcassets */,
 				72FC9E5722E6F4C700A920DA /* LaunchScreen.storyboard */,
+				72C858CC22EC8EFD002F4F5B /* OddSegue.swift */,
 				72FC9E5A22E6F4C700A920DA /* Info.plist */,
+				72FC9E5222E6F4BE00A920DA /* Main.storyboard */,
+				72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */,
 				72FC9E6022E6FD1A00A920DA /* MainSceneBackgroundLayoutView.swift */,
 				72C24CF922EE953400195B01 /* VCLLoggingViewController.swift */,
 				72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */,
 				7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */,
 				7285F09A22E75A620019F232 /* HelpSceneViewController.swift */,
 				72527D9822EDFA24002FA387 /* BackgroundImageView.swift */,
+				728D0C5C22F0860E00DB05E9 /* LaunchScreenViewController.swift */,
 			);
 			path = DoddleDo;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				72FC9E4F22E6F4BE00A920DA /* AppDelegate.swift in Sources */,
 				72C24CFA22EE953500195B01 /* VCLLoggingViewController.swift in Sources */,
 				7285F09822E75A4E0019F232 /* SettingsSceneViewController.swift in Sources */,
+				728D0C5D22F0860E00DB05E9 /* LaunchScreenViewController.swift in Sources */,
 				72D60B1C22E72E7B00B630CD /* ShadowedImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

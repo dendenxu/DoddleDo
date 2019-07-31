@@ -24,7 +24,16 @@ class MainSceneViewController: VCLLoggingViewController {
     }
 }
 
-extension UIViewController {
+extension VCLLoggingViewController {
+
+    var backInTheHeap:UIViewController? {
+        get {
+            return parent
+        }
+        set {
+            setValue(newValue, forKey: "parent")
+        }
+    }
     
     func addLongPressGesture(to view: UIView) {
         let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
@@ -62,12 +71,43 @@ extension UIViewController {
                     completion: {
                         finished in
                         if finished {
-                            self.performSegue(withIdentifier: buttonName, sender: nil)
+                            if let presenting = self.damnIt, buttonName.contains("Back") {
+                                print("Before transition and animation")
+                                UIView.transition(
+                                    from: self.view,
+                                    to: presenting.view,
+                                    duration: 0.25,
+                                    options: .transitionFlipFromBottom,
+                                    completion: {
+                                        finished in
+                                        print("After animation")
+//                                        self.removeFromParent()
+                                        self.dismiss(animated: false, completion: nil)
+                                    }
+                                )
+                                print("After transition")
+                            } else {
+                                if let destination = self.storyboard?.instantiateViewController(withIdentifier: buttonName) {
+                                    UIView.transition(
+                                        from: self.view,
+                                        to: destination.view,
+                                        duration: 0.25,
+                                        options: .transitionFlipFromBottom,
+                                        completion: {
+                                            finished in
+                                            
+                                            self.present(destination, animated: false, completion: nil)
+                                            (destination as? VCLLoggingViewController)?.damnIt = self
+//                                            self.addChild(destination)
+//                                            self.view.addSubview(destination.view)
+                                        }
+                                    )
+                                }
+                            }
                         }
                     }
                 )
             }
-
         default: break
         }
     }

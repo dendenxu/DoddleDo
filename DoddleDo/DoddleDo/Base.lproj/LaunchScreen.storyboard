@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="ohM-CF-lZn">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainBackground" translatesAutoresizingMaskIntoConstraints="NO" id="ohM-CF-lZn">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="mKl-y5-1YM">
@@ -32,10 +32,12 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ohM-CF-lZn" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="2ay-z2-FbB"/>
-                            <constraint firstAttribute="leading" secondItem="ohM-CF-lZn" secondAttribute="leading" id="Mkt-kI-vhu"/>
+                            <constraint firstItem="ohM-CF-lZn" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailing" id="Dfv-wb-z6q"/>
                             <constraint firstItem="mKl-y5-1YM" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="QDY-RC-dSz"/>
+                            <constraint firstAttribute="leading" secondItem="ohM-CF-lZn" secondAttribute="leading" id="UhO-1W-Kzv"/>
                             <constraint firstAttribute="top" secondItem="ohM-CF-lZn" secondAttribute="top" id="WVN-Og-XLE"/>
                             <constraint firstItem="mKl-y5-1YM" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-10" id="X5c-GX-U1g"/>
+                            <constraint firstItem="ohM-CF-lZn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="rcz-O8-A8E"/>
                             <constraint firstAttribute="bottom" secondItem="ohM-CF-lZn" secondAttribute="bottom" id="yoj-RF-nCG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

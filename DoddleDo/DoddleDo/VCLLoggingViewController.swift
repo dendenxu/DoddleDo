@@ -10,6 +10,8 @@ import UIKit
 
 class VCLLoggingViewController: UIViewController
 {
+    var damnIt: UIViewController?
+    
     private struct LogGlobals {
         var prefix = ""
         var instanceCounts = [String:Int]()
