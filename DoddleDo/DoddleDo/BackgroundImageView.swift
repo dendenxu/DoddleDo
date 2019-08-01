@@ -19,8 +19,8 @@ class BackgroundImageView: UIView {
             image.draw(in: bounds)
         }
     }
+    
     override func awakeFromNib() {
-//        bounds = UIScreen.main.bounds
         backgroundColor = UIColor.clear
     }
 

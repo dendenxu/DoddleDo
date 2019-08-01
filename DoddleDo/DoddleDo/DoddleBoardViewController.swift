@@ -9,6 +9,9 @@
 import UIKit
 
 class DoddleBoardViewController: UIViewController {
-
-    
+    @IBOutlet weak var back: ShadowedImageView! {
+        didSet {
+            addLongPressGesture(to: back)
+        }
+    }
 }

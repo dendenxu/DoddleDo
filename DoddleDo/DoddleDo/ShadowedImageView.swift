@@ -35,4 +35,5 @@ class ShadowedImageView: UIImageView {
         clipsToBounds = false
         contentMode = .scaleToFill
     }
+    
 }

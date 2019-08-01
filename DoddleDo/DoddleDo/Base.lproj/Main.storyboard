@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BAz-93-jbj">
     <device id="retina6_1" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,11 +37,51 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Doddle makes you do it" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-6b-q5j">
-                                <rect key="frame" x="198" y="339.5" width="280" height="29.5"/>
+                                <rect key="frame" x="198" y="340" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="25"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JwU-Ta-fyb">
+                                <rect key="frame" x="506" y="0.0" width="390" height="414"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7kS-1r-VG8">
+                                        <rect key="frame" x="17" y="29" width="338" height="680"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMV-kd-4ag" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="338" height="155"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRL-hL-Nhd" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="175" width="338" height="155"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KxA-fE-PQd" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="350" width="338" height="155"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-ft-tEi" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="525" width="338" height="155"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -49,6 +89,7 @@
                     <connections>
                         <outlet property="bottomLine" destination="7ve-6b-q5j" id="XIz-gS-80S"/>
                         <outlet property="help" destination="v7C-nd-rc2" id="iVg-lu-EuH"/>
+                        <outlet property="scroller" destination="JwU-Ta-fyb" id="I7M-sp-aot"/>
                         <outlet property="settings" destination="hxJ-0D-gp7" id="P4y-lr-v2F"/>
                         <segue destination="9WV-92-tHv" kind="custom" identifier="help" customClass="CustomSegue" customModule="DoddleDo" customModuleProvider="target" id="SUf-Gm-N8G"/>
                         <segue destination="6Hn-Md-Dfb" kind="custom" identifier="settings" customClass="CustomSegue" customModule="DoddleDo" customModuleProvider="target" id="m2h-as-al6"/>
@@ -96,11 +137,25 @@
                     <view key="view" contentMode="scaleToFill" id="oom-1y-glO">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="wcG-hU-mlj" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="27" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="boardBack"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="e6u-mN-NmT"/>
                     </view>
+                    <connections>
+                        <outlet property="back" destination="wcG-hU-mlj" id="Mfw-qo-69M"/>
+                        <segue destination="x26-mu-irf" kind="unwind" identifier="boardBack" customClass="CustomUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kWx-Kc-r3h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcx-dv-BBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="x26-mu-irf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="927" y="42"/>
         </scene>
@@ -170,6 +225,30 @@
                 <exit id="rLo-tE-xOm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="218" y="1790"/>
+        </scene>
+        <!--Launch Scene View Controller-->
+        <scene sceneID="6SY-VZ-OPs">
+            <objects>
+                <viewController id="BAz-93-jbj" customClass="LaunchSceneViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WzZ-hX-Lre" customClass="BackgroundImageView" customModule="DoddleDo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="BX7-oK-QDs">
+                                <rect key="frame" x="164.5" y="140" width="567" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="0Dm-U0-0xX"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="launchMain" customClass="CustomSegue" customModule="DoddleDo" customModuleProvider="target" id="A9P-RV-n4S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PZa-RD-ZCy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-742" y="41"/>
         </scene>
     </scenes>
     <resources>
