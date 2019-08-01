@@ -24,25 +24,6 @@ class HelpSceneViewController: UIViewController {
         }
     }
     
-    @IBAction func unwindToGoBack(_ unwindSegue: UIStoryboardSegue) {
-//        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
-    }
+    @IBAction func unwindToGoBack(_ unwindSegue: UIStoryboardSegue) { }
     
-//    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue) {
-//
-//    }
-//
-//    override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue? {
-//        if let id = identifier{
-//            if id == "customUnwindSegue" {
-//                let unwindSegue = CustomUnwindSegue(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
-//
-//                })
-//                return unwindSegue
-//            }
-//        }
-//
-//        return super.segueForUnwinding(to: toViewController, from: fromViewController, identifier: identifier)
-//    }
 }

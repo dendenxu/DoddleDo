@@ -30,11 +30,8 @@ class MainSceneViewController: UIViewController {
         }
     }
 
-    @IBAction func unwindToMainScene(_ unwindSegue: UIStoryboardSegue) {
-        //        let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
-    }
-    
+    @IBAction func unwindToMainScene(_ unwindSegue: UIStoryboardSegue) { }
+
     private func configureBottomLine() {
         if let text = bottomLine.text {
             let font = UIFont.preferredFont(forTextStyle: .caption2).withSize(25.0)
@@ -90,25 +87,10 @@ extension UIViewController {
                     completion: {
                         finished in
                         self.performSegue(withIdentifier: buttonName, sender: buttonView)
-//                        if finished {
-//                            if buttonName.contains("Back") {
-//                                self.dismiss(animated: true, completion: nil)
-//                            } else if let destination = self.storyboard?.instantiateViewController(withIdentifier: buttonName) {
-//                                self.present(destination, animated: true, completion: nil)
-//                            }
-//                        }
-//                        if finished {
-//                            if buttonName.contains("Back") {
-//                                self.modalTransitionStyle = .flipHorizontal
-//                                self.dismiss(animated: true, completion: nil)
-//                            } else {
-//                                self.performSegue(withIdentifier: buttonName, sender: buttonView)
-//                            }
-//                    }
-                }
-            )
-        }
+                    }
+                )
+            }
         default: break
+        }
     }
-}
 }
