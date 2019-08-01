@@ -29,9 +29,9 @@ class ShadowedImageView: UIImageView {
     }
     private func initializationWork() {
         layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        layer.shadowOffset = CGSize(width: 4.0, height: 3.0)
+        layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
         layer.shadowOpacity = 0.9
-        layer.shadowRadius = 3.0
+        layer.shadowRadius = 4.0
         clipsToBounds = false
         contentMode = .scaleToFill
     }

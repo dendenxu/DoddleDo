@@ -39,8 +39,8 @@ class ScrollingImageView: UIView {
     private func initializationWork() {
         backgroundColor = UIColor.clear
         layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        layer.shadowOffset = CGSize(width: 15.0, height: 15)
-        layer.shadowOpacity = 0.9
+        layer.shadowOffset = CGSize(width: 15.0, height: 15.0)
+        layer.shadowOpacity = 1.0
         layer.shadowRadius = 7.0
         clipsToBounds = false
         contentMode = .scaleToFill

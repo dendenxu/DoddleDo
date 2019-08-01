@@ -43,11 +43,11 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JwU-Ta-fyb">
-                                <rect key="frame" x="506" y="0.0" width="390" height="414"/>
+                                <rect key="frame" x="456" y="0.0" width="440" height="414"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7kS-1r-VG8">
-                                        <rect key="frame" x="17" y="29" width="338" height="680"/>
+                                        <rect key="frame" x="77" y="29" width="338" height="680"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMV-kd-4ag" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
