@@ -10,6 +10,9 @@
 		72527D9922EDFA24002FA387 /* BackgroundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72527D9822EDFA24002FA387 /* BackgroundImageView.swift */; };
 		7285F09822E75A4E0019F232 /* SettingsSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */; };
 		7285F09B22E75A620019F232 /* HelpSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09A22E75A620019F232 /* HelpSceneViewController.swift */; };
+		72C9E5CD22F28CA300AAEC90 /* DoddleBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5CC22F28CA300AAEC90 /* DoddleBoardViewController.swift */; };
+		72C9E5CF22F28EB100AAEC90 /* CustomSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5CE22F28EB100AAEC90 /* CustomSegue.swift */; };
+		72C9E5D122F2AF7100AAEC90 /* CustomUnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5D022F2AF7100AAEC90 /* CustomUnwindSegue.swift */; };
 		72D60B1C22E72E7B00B630CD /* ShadowedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */; };
 		72FC9E4F22E6F4BE00A920DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */; };
 		72FC9E5122E6F4BE00A920DA /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */; };
@@ -22,6 +25,9 @@
 		72527D9822EDFA24002FA387 /* BackgroundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageView.swift; sourceTree = "<group>"; };
 		7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSceneViewController.swift; sourceTree = "<group>"; };
 		7285F09A22E75A620019F232 /* HelpSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSceneViewController.swift; sourceTree = "<group>"; };
+		72C9E5CC22F28CA300AAEC90 /* DoddleBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoddleBoardViewController.swift; sourceTree = "<group>"; };
+		72C9E5CE22F28EB100AAEC90 /* CustomSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegue.swift; sourceTree = "<group>"; };
+		72C9E5D022F2AF7100AAEC90 /* CustomUnwindSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUnwindSegue.swift; sourceTree = "<group>"; };
 		72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowedImageView.swift; sourceTree = "<group>"; };
 		72FC9E4B22E6F4BE00A920DA /* DoddleDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoddleDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 				7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */,
 				7285F09A22E75A620019F232 /* HelpSceneViewController.swift */,
 				72527D9822EDFA24002FA387 /* BackgroundImageView.swift */,
+				72C9E5CC22F28CA300AAEC90 /* DoddleBoardViewController.swift */,
+				72C9E5CE22F28EB100AAEC90 /* CustomSegue.swift */,
+				72C9E5D022F2AF7100AAEC90 /* CustomUnwindSegue.swift */,
 			);
 			path = DoddleDo;
 			sourceTree = "<group>";
@@ -147,7 +156,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72C9E5CF22F28EB100AAEC90 /* CustomSegue.swift in Sources */,
+				72C9E5D122F2AF7100AAEC90 /* CustomUnwindSegue.swift in Sources */,
 				72527D9922EDFA24002FA387 /* BackgroundImageView.swift in Sources */,
+				72C9E5CD22F28CA300AAEC90 /* DoddleBoardViewController.swift in Sources */,
 				72FC9E5122E6F4BE00A920DA /* MainSceneViewController.swift in Sources */,
 				7285F09B22E75A620019F232 /* HelpSceneViewController.swift in Sources */,
 				72FC9E4F22E6F4BE00A920DA /* AppDelegate.swift in Sources */,

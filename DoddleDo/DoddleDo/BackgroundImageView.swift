@@ -20,7 +20,7 @@ class BackgroundImageView: UIView {
         }
     }
     override func awakeFromNib() {
-        bounds = UIScreen.main.bounds
+//        bounds = UIScreen.main.bounds
         backgroundColor = UIColor.clear
     }
 
