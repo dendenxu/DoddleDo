@@ -39,7 +39,6 @@ class CustomUnwindSegue: UIStoryboardSegue {
                     self.source.dismiss(animated: false, completion: nil)
                 }
             )
-//            self.source.dismiss(animated: false, completion: nil)
         }
 
     }

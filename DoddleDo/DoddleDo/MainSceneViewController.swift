@@ -8,9 +8,7 @@
 
 import UIKit
 
-
 @IBDesignable
-//class MainSceneViewController: UIViewController, UIScrollViewDelegate {
 class MainSceneViewController: UIViewController {
     @IBOutlet weak var settings: ShadowedImageView! {
         didSet {
@@ -47,7 +45,6 @@ class MainSceneViewController: UIViewController {
 
     @IBOutlet weak var scroller: UIScrollView! {
         didSet {
-//            scroller.delegate = self
             scroller.canCancelContentTouches = true
             if let subView = scroller.subviews.first {
                 scroller.contentSize = subView.frame.size
@@ -63,53 +60,10 @@ class MainSceneViewController: UIViewController {
     @IBAction func unwindToMainScene(_ unwindSegue: UIStoryboardSegue) { }
 }
 
-//extension ScrollingImageView {
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        UIView.animate(
-//            withDuration: 0.02,
-//            delay: 0,
-//            usingSpringWithDamping: 0.2,
-//            initialSpringVelocity: 0,
-//            options: [],
-//            animations: {
-//                self.transform = CGAffineTransform.identity.scaledBy(x: 1.1, y: 1.1)
-//            }
-//        )
-//    }
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        UIView.animate(
-//            withDuration: 0.02,
-//            delay: 0,
-//            usingSpringWithDamping: 0.2,
-//            initialSpringVelocity: 0,
-//            options: [],
-//            animations: {
-//                self.transform = CGAffineTransform.identity
-//            }
-//        )
-//    }
-    
-//}
-
-extension UIViewController: CAAnimationDelegate, UIGestureRecognizerDelegate {
-
-//    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        if (otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.self)) && gestureRecognizer.isKind(of: UILongPressGestureRecognizer.self) {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
-//
-//    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        return true
-//    }
+extension UIViewController {
 
     func addLongPressGesture(to view: UIView) {
         let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
-//        tapOrPress.delegate = self
-//        tapOrPress.cancelsTouchesInView = false
-//        tapOrPress.allowableMovement = 3
         tapOrPress.minimumPressDuration = 0
         view.addGestureRecognizer(tapOrPress)
         view.isUserInteractionEnabled = true
@@ -118,64 +72,27 @@ extension UIViewController: CAAnimationDelegate, UIGestureRecognizerDelegate {
     func addTapGesture(to view: UIView) {
         let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
         view.addGestureRecognizer(tap)
-//        let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
-//        tapOrPress.minimumPressDuration = 0
-//        view.addGestureRecognizer(tapOrPress)
-//        view.isUserInteractionEnabled = true
     }
 
     @objc func imageTapped(recognizer: UIGestureRecognizer) {
         switch recognizer.state {
-//        case .began:
-//            let pulse = CABasicAnimation(keyPath: "transform.scale")
-//            pulse.fromValue = 1
-//            pulse.toValue = 1.1
-//            pulse.duration = 0.02
-//            pulse.isRemovedOnCompletion = false
-//            pulse.fillMode = .backwards
-//            recognizer.view?.layer.add(pulse, forKey: nil)
-        case .began: fallthrough
-        case .possible:
-            UIView.animate(
-                withDuration: 0.02,
-                delay: 0,
-                usingSpringWithDamping: 0.2,
-                initialSpringVelocity: 0,
-                options: [],
-                animations: {
-                    recognizer.view?.transform = CGAffineTransform.identity.scaledBy(x: 1.1, y: 1.1)
-                }
-            )
-        case .cancelled: fallthrough
-        case .failed:
-            UIView.animate(
-                withDuration: 0.02,
-                delay: 0,
-                usingSpringWithDamping: 0.2,
-                initialSpringVelocity: 0,
-                options: [],
-                animations: {
-                    recognizer.view?.transform = CGAffineTransform.identity
-                }
-            )
         case .ended:
-//            recognizer.view?.layer.transform = CATransform3DMakeScale(1.1, 1.1, 1)
-//            recognizer.view?.layer.removeAllAnimations()
-            UIView.animate(
-                withDuration: 0.02,
+            UIView.animateKeyframes(
+                withDuration: 0.1,
                 delay: 0,
-                usingSpringWithDamping: 0.2,
-                initialSpringVelocity: 0,
                 options: [],
                 animations: {
-                    recognizer.view?.transform = CGAffineTransform.identity
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5){
+                        recognizer.view?.transform = CGAffineTransform.identity.scaledBy(x: 1.1, y: 1.1)
+                    }
+                    UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5){
+                        recognizer.view?.transform = CGAffineTransform.identity
+                    }
                 },
                 completion: { finished in
                     self.performSegue(withIdentifier: "doddleBoard", sender: recognizer.view)
                 }
             )
-
-//            recognizer.view?.layer.transform = CATransform3DIdentity
         default: break
         }
     }
@@ -185,9 +102,8 @@ extension UIViewController: CAAnimationDelegate, UIGestureRecognizerDelegate {
         case .changed: fallthrough
         case .cancelled: fallthrough
         case .failed:
-//            print("Cancelled or failed")
             UIView.animate(
-                withDuration: 0.02,
+                withDuration: 0.06,
                 delay: 0,
                 usingSpringWithDamping: 0.2,
                 initialSpringVelocity: 0,
@@ -197,7 +113,6 @@ extension UIViewController: CAAnimationDelegate, UIGestureRecognizerDelegate {
                 }
             )
         case .began:
-//            print("Began")
             if let buttonView = recognizer.view {
                 if let buttonImageView = buttonView as? ShadowedImageView, let buttonName = buttonImageView.identifier, buttonName == "settings" {
                     let rotation = CABasicAnimation(keyPath: "transform.rotation")
@@ -207,7 +122,7 @@ extension UIViewController: CAAnimationDelegate, UIGestureRecognizerDelegate {
                     buttonImageView.layer.add(rotation, forKey: nil)
                 }
                 UIView.animate(
-                    withDuration: 0.02,
+                    withDuration: 0.06,
                     delay: 0,
                     usingSpringWithDamping: 0.2,
                     initialSpringVelocity: 0,
@@ -218,7 +133,6 @@ extension UIViewController: CAAnimationDelegate, UIGestureRecognizerDelegate {
                 )
             }
         case .ended:
-//            print("Ended")
             var name: String?
             var view: UIView?
             if let buttonView = recognizer.view as? ShadowedImageView, let buttonName = buttonView.identifier {
@@ -230,7 +144,7 @@ extension UIViewController: CAAnimationDelegate, UIGestureRecognizerDelegate {
             }
             if let name = name, let view = view {
                 UIView.animate(
-                    withDuration: 0.02,
+                    withDuration: 0.06,
                     delay: 0,
                     usingSpringWithDamping: 0.2,
                     initialSpringVelocity: 0,

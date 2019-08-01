@@ -42,7 +42,6 @@ class CustomSegue: UIStoryboardSegue {
                     self.source.present(self.destination, animated: false, completion: nil)
                 }
             )
-//            self.source.present(self.destination, animated: false, completion: nil)
         }
     }
 }
