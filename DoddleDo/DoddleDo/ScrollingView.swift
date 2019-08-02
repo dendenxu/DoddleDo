@@ -37,11 +37,18 @@ class ScrollingView: UIView {
         initializationWork()
     }
     private func initializationWork() {
+//        let shadowOffsetX: CGFloat = 2000
+//        let shadowPath = UIBezierPath()
+//        shadowPath.move(to: CGPoint(x: 0, y: frame.height))
+//        shadowPath.addLine(to: CGPoint(x: frame.width, y: 0))
+//        shadowPath.addLine(to: CGPoint(x: frame.width + shadowOffsetX, y: 2000))
+//        shadowPath.addLine(to: CGPoint(x: shadowOffsetX, y: 2000))
         backgroundColor = UIColor.clear
         layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         layer.shadowOffset = CGSize(width: contants.shadowOffsetX, height: contants.shadowOffsetY)
         layer.shadowOpacity = contants.shadowOpacity
         layer.shadowRadius = contants.shadowRadius
+//        layer.shadowPath = shadowPath.cgPath
         clipsToBounds = false
         contentMode = .scaleToFill
     }
@@ -49,9 +56,9 @@ class ScrollingView: UIView {
 
 extension ScrollingView {
     private struct contants {
-        static let shadowOffsetX: CGFloat = 15
-        static let shadowOffsetY: CGFloat = 15
+        static let shadowOffsetX: CGFloat = 10
+        static let shadowOffsetY: CGFloat = 10
         static let shadowOpacity: Float = 1
-        static let shadowRadius: CGFloat = 7
+        static let shadowRadius: CGFloat = 6
     }
 }
