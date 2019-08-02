@@ -17,5 +17,12 @@ class SettingsSceneViewController: UIViewController {
             addButtonTappedOrPressedGestureRecognizer(to: back)
         }
     }
-    
+
+    var backPoint = CGPoint()
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
+            bouncyUnwindSegue.desinationZoomPoint = backPoint
+        }
+    }
 }

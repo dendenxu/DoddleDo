@@ -18,7 +18,7 @@ class DoddleBoardViewController: UIViewController {
     var backPoint = CGPoint()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue, let identifier = bouncyUnwindSegue.identifier, identifier == "boardBack" {
+        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue{
             bouncyUnwindSegue.desinationZoomPoint = backPoint
         }
     }

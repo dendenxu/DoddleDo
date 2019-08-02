@@ -66,15 +66,16 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
 
 
     @IBAction func unwindToMainScene(_ unwindSegue: UIStoryboardSegue) { }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let bouncySegue = segue as? BouncySegue, let identifier = bouncySegue.identifier, identifier == "doddleBoard" {
-//            if let recognizer = sender as? UITapGestureRecognizer {
-//                bouncySegue.desinationZoomPoint = recognizer.location(in: nil)
-//            }
-            if let location = sender as? CGPoint, let doddleBoard = segue.destination as? DoddleBoardViewController {
-                bouncySegue.desinationZoomPoint = location
+        if let bouncySegue = segue as? BouncySegue, let location = sender as? CGPoint {
+            bouncySegue.desinationZoomPoint = location
+            if let doddleBoard = segue.destination as? DoddleBoardViewController {
                 doddleBoard.backPoint = location
+            } else if let settings = segue.destination as? SettingsSceneViewController {
+                settings.backPoint = location
+            } else if let help = segue.destination as? HelpSceneViewController {
+                help.backPoint = location
             }
         }
     }
@@ -168,6 +169,7 @@ extension UIViewController {
 //            name = (view as? ScrollingImageView)?.identifier ?? name
 
             if let name = name, let view = view {
+                let tempLocation = recognizer.location(in: self.view)
                 UIView.animate(
                     withDuration: constants.buttonTappedOrPressedAnimationDuration,
                     delay: 0,
@@ -179,7 +181,7 @@ extension UIViewController {
                     },
                     completion: {
                         finished in
-                        self.performSegue(withIdentifier: name, sender: recognizer)
+                        self.performSegue(withIdentifier: name, sender: tempLocation)
                     }
                 )
             }
@@ -196,7 +198,7 @@ extension UIViewController {
         static let buttonTappedOrPressedAnimationDuration: Double = 0.06
         static let buttonTappedOrPressedSpringDamping: CGFloat = 0.2
         static let buttonTappedOrPressedTransformScale: CGFloat = 1.2
-        static let settingsRotationAngle = CGFloat.pi/4
+        static let settingsRotationAngle = CGFloat.pi / 4
         static let settingsRotationDuration: Double = 0.5
     }
 }

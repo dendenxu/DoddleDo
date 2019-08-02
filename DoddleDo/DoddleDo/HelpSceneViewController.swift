@@ -17,13 +17,25 @@ class HelpSceneViewController: UIViewController {
             addButtonTappedOrPressedGestureRecognizer(to: back)
         }
     }
-    
+
     @IBOutlet weak var helpTest: ShadowedImageView! {
         didSet {
             addButtonTappedOrPressedGestureRecognizer(to: helpTest)
         }
     }
-    
+
     @IBAction func unwindToGoBack(_ unwindSegue: UIStoryboardSegue) { }
-    
+
+    var backPoint = CGPoint()
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
+            bouncyUnwindSegue.desinationZoomPoint = backPoint
+        } else if let bouncySegue = segue as? BouncySegue, let location = sender as? CGPoint {
+            bouncySegue.desinationZoomPoint = location
+            if let help = segue.destination as? HelpSceneViewController {
+                help.backPoint = location
+            }
+        }
+    }
 }
