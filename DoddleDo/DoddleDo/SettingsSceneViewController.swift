@@ -14,7 +14,7 @@ class SettingsSceneViewController: UIViewController {
 
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {
-            addLongPressGesture(to: back)
+            addButtonTappedOrPressedGestureRecognizer(to: back)
         }
     }
     

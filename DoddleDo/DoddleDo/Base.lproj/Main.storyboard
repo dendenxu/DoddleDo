@@ -14,7 +14,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainSceneViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="BackgroundImageView" customModule="DoddleDo" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="BackgroundView" customModule="DoddleDo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -50,28 +50,28 @@
                                         <rect key="frame" x="77" y="29" width="338" height="680"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMV-kd-4ag" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMV-kd-4ag" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="155"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRL-hL-Nhd" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRL-hL-Nhd" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="175" width="338" height="155"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KxA-fE-PQd" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KxA-fE-PQd" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="350" width="338" height="155"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-ft-tEi" customClass="ScrollingImageView" customModule="DoddleDo" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-ft-tEi" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="525" width="338" height="155"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
@@ -85,15 +85,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="bottomLine" destination="7ve-6b-q5j" id="XIz-gS-80S"/>
                         <outlet property="help" destination="v7C-nd-rc2" id="iVg-lu-EuH"/>
                         <outlet property="scroller" destination="JwU-Ta-fyb" id="I7M-sp-aot"/>
                         <outlet property="settings" destination="hxJ-0D-gp7" id="P4y-lr-v2F"/>
-                        <segue destination="9WV-92-tHv" kind="custom" identifier="help" customClass="CustomSegue" customModule="DoddleDo" customModuleProvider="target" id="SUf-Gm-N8G"/>
-                        <segue destination="6Hn-Md-Dfb" kind="custom" identifier="settings" customClass="CustomSegue" customModule="DoddleDo" customModuleProvider="target" id="m2h-as-al6"/>
-                        <segue destination="Mdh-fR-e29" kind="custom" identifier="doddleBoard" customClass="CustomSegue" customModule="DoddleDo" customModuleProvider="target" id="jIC-4L-tiT"/>
+                        <segue destination="9WV-92-tHv" kind="custom" identifier="help" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="SUf-Gm-N8G"/>
+                        <segue destination="6Hn-Md-Dfb" kind="custom" identifier="settings" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="m2h-as-al6"/>
+                        <segue destination="Mdh-fR-e29" kind="custom" identifier="doddleBoard" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="jIC-4L-tiT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -104,7 +107,7 @@
         <scene sceneID="jU7-iJ-ZTw">
             <objects>
                 <viewController storyboardIdentifier="settings" id="6Hn-Md-Dfb" customClass="SettingsSceneViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sOU-Zw-PAM" customClass="BackgroundImageView" customModule="DoddleDo" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="sOU-Zw-PAM" customClass="BackgroundView" customModule="DoddleDo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -118,11 +121,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="662-1h-e8Z"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="xq9-Aj-WCZ"/>
                     <connections>
                         <outlet property="back" destination="71b-zH-wCl" id="QcN-DJ-FZx"/>
-                        <segue destination="cR4-gL-sQZ" kind="unwind" identifier="settingsBack" customClass="CustomUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="7xh-OV-sc9"/>
+                        <segue destination="cR4-gL-sQZ" kind="unwind" identifier="settingsBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="7xh-OV-sc9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zMz-g2-WSc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -134,7 +140,7 @@
         <scene sceneID="r4Q-FA-Ylv">
             <objects>
                 <viewController id="Mdh-fR-e29" customClass="DoddleBoardViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oom-1y-glO">
+                    <view key="view" contentMode="scaleToFill" id="oom-1y-glO" customClass="BackgroundView" customModule="DoddleDo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -148,10 +154,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="e6u-mN-NmT"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="back" destination="wcG-hU-mlj" id="Mfw-qo-69M"/>
-                        <segue destination="x26-mu-irf" kind="unwind" identifier="boardBack" customClass="CustomUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kWx-Kc-r3h"/>
+                        <segue destination="x26-mu-irf" kind="unwind" identifier="boardBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kWx-Kc-r3h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcx-dv-BBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -163,7 +172,7 @@
         <scene sceneID="rFz-7v-Dmt">
             <objects>
                 <viewController storyboardIdentifier="help" id="9WV-92-tHv" customClass="HelpSceneViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="oTO-Qb-iFS" customClass="BackgroundImageView" customModule="DoddleDo" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="oTO-Qb-iFS" customClass="BackgroundView" customModule="DoddleDo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -184,12 +193,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8Xh-35-uTl"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="back" destination="1ig-8c-bdI" id="sqf-ut-Mtj"/>
                         <outlet property="helpTest" destination="qSs-wF-sdn" id="pqe-fG-IPP"/>
-                        <segue destination="FLR-yf-KVY" kind="custom" identifier="helpTest" customClass="CustomSegue" customModule="DoddleDo" customModuleProvider="target" id="VfD-Jq-xlv"/>
-                        <segue destination="O1B-Ia-6qn" kind="unwind" identifier="helpBack" customClass="CustomUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kjM-25-mnt"/>
+                        <segue destination="FLR-yf-KVY" kind="custom" identifier="helpTest" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="VfD-Jq-xlv"/>
+                        <segue destination="O1B-Ia-6qn" kind="unwind" identifier="helpBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kjM-25-mnt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZn-c2-E8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -201,7 +213,7 @@
         <scene sceneID="sVj-Bw-fxg">
             <objects>
                 <viewController storyboardIdentifier="helpTest" id="FLR-yf-KVY" customClass="HelpSceneViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mVN-0R-PQL" customClass="BackgroundImageView" customModule="DoddleDo" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="mVN-0R-PQL" customClass="BackgroundView" customModule="DoddleDo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -215,10 +227,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="F1s-in-RaN"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="back" destination="Br2-uz-CHE" id="tQx-CJ-7Bk"/>
-                        <segue destination="rLo-tE-xOm" kind="unwind" identifier="helpTestBack" customClass="CustomUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToGoBack:" id="ISj-Ti-Ppm"/>
+                        <segue destination="rLo-tE-xOm" kind="unwind" identifier="helpTestBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToGoBack:" id="ISj-Ti-Ppm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8JE-gW-gYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -230,7 +245,7 @@
         <scene sceneID="6SY-VZ-OPs">
             <objects>
                 <viewController id="BAz-93-jbj" customClass="LaunchSceneViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WzZ-hX-Lre" customClass="BackgroundImageView" customModule="DoddleDo" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="WzZ-hX-Lre" customClass="BackgroundView" customModule="DoddleDo" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -241,9 +256,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="0Dm-U0-0xX"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="custom" identifier="launchMain" customClass="CustomSegue" customModule="DoddleDo" customModuleProvider="target" id="A9P-RV-n4S"/>
+                        <segue destination="BYZ-38-t0r" kind="custom" identifier="launchMain" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="A9P-RV-n4S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZa-RD-ZCy" userLabel="First Responder" sceneMemberID="firstResponder"/>

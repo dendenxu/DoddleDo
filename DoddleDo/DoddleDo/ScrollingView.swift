@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class ScrollingImageView: UIView {
+class ScrollingView: UIView {
     @IBInspectable
     var identifier: String!
     
@@ -39,11 +39,19 @@ class ScrollingImageView: UIView {
     private func initializationWork() {
         backgroundColor = UIColor.clear
         layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        layer.shadowOffset = CGSize(width: 15.0, height: 15.0)
-        layer.shadowOpacity = 1.0
-        layer.shadowRadius = 7.0
+        layer.shadowOffset = CGSize(width: contants.shadowOffsetX, height: contants.shadowOffsetY)
+        layer.shadowOpacity = contants.shadowOpacity
+        layer.shadowRadius = contants.shadowRadius
         clipsToBounds = false
         contentMode = .scaleToFill
     }
+}
 
+extension ScrollingView {
+    private struct contants {
+        static let shadowOffsetX: CGFloat = 15
+        static let shadowOffsetY: CGFloat = 15
+        static let shadowOpacity: Float = 1
+        static let shadowRadius: CGFloat = 7
+    }
 }

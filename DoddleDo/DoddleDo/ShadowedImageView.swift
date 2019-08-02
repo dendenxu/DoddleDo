@@ -14,7 +14,7 @@ class ShadowedImageView: UIImageView {
 
     @IBInspectable
     var identifier: String?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializationWork()
@@ -29,11 +29,19 @@ class ShadowedImageView: UIImageView {
     }
     private func initializationWork() {
         layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        layer.shadowOpacity = 0.9
-        layer.shadowRadius = 4.0
+        layer.shadowOffset = CGSize(width: contants.shadowOffsetX, height: contants.shadowOffsetY)
+        layer.shadowOpacity = contants.shadowOpacity
+        layer.shadowRadius = contants.shadowRadius
         clipsToBounds = false
         contentMode = .scaleToFill
     }
-    
+}
+
+extension ShadowedImageView {
+    private struct contants {
+        static let shadowOffsetX: CGFloat = 4
+        static let shadowOffsetY: CGFloat = 4
+        static let shadowOpacity: Float = 0.9
+        static let shadowRadius: CGFloat = 4
+    }
 }

@@ -11,7 +11,15 @@ import UIKit
 class DoddleBoardViewController: UIViewController {
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {
-            addLongPressGesture(to: back)
+            addButtonTappedOrPressedGestureRecognizer(to: back)
+        }
+    }
+    
+    var backPoint = CGPoint()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue, let identifier = bouncyUnwindSegue.identifier, identifier == "boardBack" {
+            bouncyUnwindSegue.desinationZoomPoint = backPoint
         }
     }
 }

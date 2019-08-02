@@ -9,12 +9,15 @@
 import UIKit
 
 @IBDesignable
-class BackgroundImageView: UIView {
+class BackgroundView: UIView {
 
+    @IBInspectable
+    var identifier: String?
+    
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath(roundedRect: bounds, cornerRadius: 40)
         path.addClip()
-        if let image = UIImage(named: "mainBackground", in: Bundle(for: classForCoder), compatibleWith: traitCollection) {
+        if let id = identifier, let image = UIImage(named: id, in: Bundle(for: classForCoder), compatibleWith: traitCollection) {
             image.draw(in: bounds)
         }
     }

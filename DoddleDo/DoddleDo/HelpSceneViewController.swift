@@ -14,13 +14,13 @@ class HelpSceneViewController: UIViewController {
 
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {
-            addLongPressGesture(to: back)
+            addButtonTappedOrPressedGestureRecognizer(to: back)
         }
     }
     
     @IBOutlet weak var helpTest: ShadowedImageView! {
         didSet {
-            addLongPressGesture(to: helpTest)
+            addButtonTappedOrPressedGestureRecognizer(to: helpTest)
         }
     }
     
