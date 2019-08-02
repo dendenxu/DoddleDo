@@ -186,7 +186,11 @@ extension UIViewController {
                     },
                     completion: {
                         finished in
-                        self.performSegue(withIdentifier: name, sender: tempLocation)
+                        if name != "finish" {
+                            self.performSegue(withIdentifier: name, sender: tempLocation)
+                        } else if let me = self as? DoddleBoardViewController {
+                            me.tempImages.popLast()
+                        }
                     }
                 )
             }
@@ -197,7 +201,7 @@ extension UIViewController {
 
 
 extension UIViewController {
-    private struct constants {
+    struct constants {
         static let imageTappedAnimationDuration: Double = 0.1
         static let imageTappedTransformScale: CGFloat = 1.1
         static let buttonTappedOrPressedAnimationDuration: Double = 0.06
