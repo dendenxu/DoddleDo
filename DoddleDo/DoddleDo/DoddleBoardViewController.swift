@@ -32,7 +32,7 @@ class DoddleBoardViewController: UIViewController {
     }
 
     @objc func doubleTapped(recognizer: UITapGestureRecognizer) {
-
+        tempImages.popLast()
     }
 
     @objc func longPressed(recognizer: UILongPressGestureRecognizer) {
@@ -43,7 +43,6 @@ class DoddleBoardViewController: UIViewController {
 
     @IBOutlet weak var tempImageView: UIImageView!
 
-    // TEMPORARILY USING FINISH AS UNDO
     @IBOutlet weak var finish: ShadowedImageView! {
         didSet {
             let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
@@ -73,6 +72,7 @@ class DoddleBoardViewController: UIViewController {
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
     private var points = [CGPoint]()
+    private var swipe = false
 
     func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
         UIGraphicsBeginImageContext(view.frame.size)
@@ -94,22 +94,28 @@ class DoddleBoardViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
 
+        swipe = false
         lastPoint = touch.location(in: view)
         points.append(lastPoint)
 
-        drawLine(from: lastPoint, to: lastPoint)
-
     }
 
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        swipe = false
+        tempImageView.image = nil
+        points = [CGPoint]()
+    }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+
         guard let touch = touches.first else { return }
-
         let currentPoint = touch.location(in: view)
+
+        swipe = true
         points.append(currentPoint)
-
         drawLine(from: lastPoint, to: currentPoint)
-
         lastPoint = currentPoint
+        
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -117,33 +123,36 @@ class DoddleBoardViewController: UIViewController {
         let currentPoint = touch.location(in: view)
         points.append(currentPoint)
 
-        drawLine(from: lastPoint, to: lastPoint)
-        tempImageView.image = nil
-
-        let tempImage = AttributedImage()
-        UIGraphicsBeginImageContext(view.frame.size)
-//        mainImageView.image?.draw(in: view.bounds)
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        context.addPath(computePath(of: points, with: 6))
-        if points.count > 2 {
-            context.move(to: points[points.count - 2])
-            context.addLine(to: points[points.count - 1])
-            context.move(to: points[0])
-            context.addLine(to: points[1])
+        if swipe {
+            drawLine(from: lastPoint, to: lastPoint)
+            let tempImage = AttributedImage()
+            UIGraphicsBeginImageContext(view.frame.size)
+            guard let context = UIGraphicsGetCurrentContext() else { return }
+            context.addPath(computePath(of: points, with: 6))
+            if points.count >= 2 {
+                context.move(to: points[points.count - 2])
+                context.addLine(to: points[points.count - 1])
+                context.move(to: points[0])
+                context.addLine(to: points[1])
+            } else {
+                points = [CGPoint]()
+                tempImageView.image = nil
+                return
+            }
+            context.setStrokeColor(color.cgColor)
+            context.setLineWidth(brushWidth)
+            context.setLineCap(.round)
+            context.setBlendMode(.normal)
+            context.strokePath()
+            tempImage.image = UIGraphicsGetImageFromCurrentImageContext()
+            tempImage.opacity = opacity
+            tempImage.blendMode = .normal
+            UIGraphicsEndImageContext()
+            tempImages.append(tempImage)
         }
-        context.setStrokeColor(color.cgColor)
-        context.setLineWidth(brushWidth)
-        context.setLineCap(.round)
-        context.setBlendMode(.normal)
-        context.strokePath()
-//        mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-//        mainImageView.alpha = opacity
-        tempImage.image = UIGraphicsGetImageFromCurrentImageContext()
-        tempImage.opacity = opacity
-        tempImage.blendMode = .normal
-        UIGraphicsEndImageContext()
-        tempImages.append(tempImage)
+
         points = [CGPoint]()
+        tempImageView.image = nil
     }
 
     private func computePath(of points: [CGPoint], with factor: CGFloat) -> CGPath {
@@ -162,6 +171,10 @@ class DoddleBoardViewController: UIViewController {
 extension CGPoint {
     static func mid(of point1: CGPoint, and point2: CGPoint) -> CGPoint {
         return CGPoint(x: (point1.x + point2.x) / 2, y: (point1.y + point2.y) / 2)
+    }
+
+    func rectDistance(between point: CGPoint) -> CGFloat {
+        return abs(self.x - point.x) + abs(self.y - point.y)
     }
 }
 
