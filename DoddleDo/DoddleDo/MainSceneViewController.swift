@@ -64,7 +64,6 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
 
     }
 
-
     @IBAction func unwindToMainScene(_ unwindSegue: UIStoryboardSegue) { }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -147,9 +146,17 @@ extension UIViewController {
                     let rotation = CABasicAnimation(keyPath: "transform.rotation")
                     rotation.fromValue = 0
                     rotation.toValue = constants.settingsRotationAngle
-                    rotation.duration = constants.settingsRotationDuration
-                    rotation.autoreverses = true
-                    view.layer.add(rotation, forKey: nil)
+                    let shadowWidth = CAKeyframeAnimation(keyPath: "shadowOffset.width")
+                    shadowWidth.values = [4, 5.6, 4, 0, -4]
+                    shadowWidth.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+                    let shadowHeight = CAKeyframeAnimation(keyPath: "shadowOffset.height")
+                    shadowHeight.values = [4, 0, -4, -5.6, -4]
+                    shadowHeight.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+                    let group = CAAnimationGroup()
+                    group.animations = [rotation, shadowWidth, shadowHeight]
+                    group.duration = constants.settingsRotationDuration
+                    group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                    view.layer.add(group, forKey: nil)
                 }
                 UIView.animate(
                     withDuration: constants.buttonTappedOrPressedAnimationDuration,
@@ -164,9 +171,7 @@ extension UIViewController {
             }
         case .ended:
             let view: UIView? = recognizer.view as? ShadowedImageView
-//            view = recognizer.view as? ScrollingImageView ?? view
             let name: String? = (view as? ShadowedImageView)?.identifier
-//            name = (view as? ScrollingImageView)?.identifier ?? name
 
             if let name = name, let view = view {
                 let tempLocation = recognizer.location(in: self.view)
@@ -198,7 +203,7 @@ extension UIViewController {
         static let buttonTappedOrPressedAnimationDuration: Double = 0.06
         static let buttonTappedOrPressedSpringDamping: CGFloat = 0.2
         static let buttonTappedOrPressedTransformScale: CGFloat = 1.2
-        static let settingsRotationAngle = CGFloat.pi / 4
-        static let settingsRotationDuration: Double = 0.5
+        static let settingsRotationAngle = CGFloat.pi
+        static let settingsRotationDuration: Double = 0.8
     }
 }

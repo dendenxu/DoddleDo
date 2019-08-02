@@ -32,6 +32,7 @@ class ScrollingView: UIView {
         initializationWork()
     }
     
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializationWork()
