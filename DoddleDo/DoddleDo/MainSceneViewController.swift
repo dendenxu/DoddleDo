@@ -188,8 +188,8 @@ extension UIViewController {
                         finished in
                         if name != "finish" {
                             self.performSegue(withIdentifier: name, sender: tempLocation)
-//                        } else if let me = self as? DoddleBoardViewController {
-//                            me.tempImages.popLast()
+                        } else if let me = self as? DoddleBoardViewController {
+                            me.mainImageView.image = me.aiPainting(image: me.mainImageView.image)
                         }
                     }
                 )

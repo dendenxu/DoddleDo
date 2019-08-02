@@ -9,6 +9,13 @@
 import UIKit
 
 class DoddleBoardViewController: UIViewController {
+
+    func aiPainting(image original: UIImage?) -> UIImage? {
+        let data = Data(base64Encoded: aString.string2)
+        let aiPainted = UIImage(data: data!)
+        return aiPainted
+    }
+
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {
             addButtonTappedOrPressedGestureRecognizer(to: back)
@@ -105,7 +112,7 @@ class DoddleBoardViewController: UIViewController {
         tempImageView.image = nil
         points = [CGPoint]()
     }
-    
+
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 
         guard let touch = touches.first else { return }
@@ -115,7 +122,7 @@ class DoddleBoardViewController: UIViewController {
         points.append(currentPoint)
         drawLine(from: lastPoint, to: currentPoint)
         lastPoint = currentPoint
-        
+
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -171,10 +178,6 @@ class DoddleBoardViewController: UIViewController {
 extension CGPoint {
     static func mid(of point1: CGPoint, and point2: CGPoint) -> CGPoint {
         return CGPoint(x: (point1.x + point2.x) / 2, y: (point1.y + point2.y) / 2)
-    }
-
-    func rectDistance(between point: CGPoint) -> CGFloat {
-        return abs(self.x - point.x) + abs(self.y - point.y)
     }
 }
 
