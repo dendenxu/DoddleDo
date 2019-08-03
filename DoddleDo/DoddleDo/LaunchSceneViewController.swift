@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class LaunchSceneViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {

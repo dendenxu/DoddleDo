@@ -12,12 +12,6 @@ import UIKit
 @IBDesignable
 class SettingsSceneViewController: UIViewController {
 
-    @IBOutlet weak var back: ShadowedImageView! {
-        didSet {
-            addButtonTappedOrPressedGestureRecognizer(to: back)
-        }
-    }
-
     var backPoint = CGPoint()
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -25,4 +19,11 @@ class SettingsSceneViewController: UIViewController {
             bouncyUnwindSegue.desinationZoomPoint = backPoint
         }
     }
+
+    @IBOutlet weak var back: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: back)
+        }
+    }
+
 }

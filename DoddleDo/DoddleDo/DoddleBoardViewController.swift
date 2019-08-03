@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class AttributedImage {
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
@@ -19,10 +20,10 @@ extension UIColor {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
+
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
-    
+
     convenience init(rgb: Int) {
         self.init(
             red: (rgb >> 16) & 0xFF,
@@ -32,12 +33,13 @@ extension UIColor {
     }
 }
 
+@IBDesignable
 class DoddleBoardViewController: UIViewController {
 
-    @IBAction func unwindToBoard(_ unwindSegue: UIStoryboardSegue) { }
-    
     var backPoint = CGPoint()
-    
+
+    @IBAction func unwindToBoard(_ unwindSegue: UIStoryboardSegue) { }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
             bouncyUnwindSegue.desinationZoomPoint = backPoint
@@ -50,14 +52,6 @@ class DoddleBoardViewController: UIViewController {
         }
     }
 
-
-    @IBOutlet weak var back: ShadowedImageView! {
-        didSet {
-            addButtonTappedOrPressedGestureRecognizer(to: back)
-        }
-    }
-
-
     override func viewDidLoad() {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped(recognizer:)))
         doubleTap.numberOfTapsRequired = 2
@@ -66,17 +60,21 @@ class DoddleBoardViewController: UIViewController {
         view.addGestureRecognizer(longPress)
     }
 
+    // TODO: Implement color selector
     @objc func doubleTapped(recognizer: UITapGestureRecognizer) {
         tempImages.popLast()
     }
 
+    // TODO: Get rid of the buttons
     @objc func longPressed(recognizer: UILongPressGestureRecognizer) {
 
     }
 
-    @IBOutlet weak var mainImageView: UIImageView!
-
-    @IBOutlet weak var tempImageView: UIImageView!
+    @IBOutlet weak var back: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: back)
+        }
+    }
 
     @IBOutlet weak var finish: ShadowedImageView! {
         didSet {
@@ -87,6 +85,24 @@ class DoddleBoardViewController: UIViewController {
         }
     }
 
+
+    // MARK: Doddle board implementation
+    @IBOutlet weak var mainImageView: UIImageView!
+
+    @IBOutlet weak var tempImageView: UIImageView!
+
+    /*
+     var color_mountain = '#c3ae95';
+     var color_grass = '#88c23f';
+     var color_tree = '#078d83';
+     var color_house = '#b387b3';
+     var color_sky = '#6cc0ff';
+     var color_river = '#649eeb';
+     var color_road = '#c6c61d';
+     var color_stone = '#c5d8c5';
+     */
+
+    // TODO: Limit history length
     var tempImages = [AttributedImage]() {
         didSet {
             UIGraphicsBeginImageContext(view.frame.size)
@@ -100,43 +116,16 @@ class DoddleBoardViewController: UIViewController {
             UIGraphicsEndImageContext()
         }
     }
-    
-    /*
-     //画笔线条和颜色定义
-     var color_mountain = '#c3ae95';
-     var color_grass = '#88c23f';
-     var color_tree = '#078d83';
-     var color_house = '#b387b3';
-     var color_sky = '#6cc0ff';
-     var color_river = '#649eeb';
-     var color_road = '#c6c61d';
-     var color_stone = '#c5d8c5';
-     */
-    
+
+    // Initializing UIColor using hex number defined in UIColor extension
     var color = UIColor(rgb: 0x88c23f)
+    // TODO: Add "brush" feature
     var brushWidth: CGFloat = 30.0
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
     private var lastPoint = CGPoint.zero
     private var points = [CGPoint]()
     private var swipe = false
-
-    func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
-        UIGraphicsBeginImageContext(view.frame.size)
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        tempImageView.image?.draw(in: view.bounds)
-        context.move(to: fromPoint)
-        context.addLine(to: toPoint)
-        context.setLineCap(.round)
-        context.setBlendMode(.normal)
-        context.setStrokeColor(color.cgColor)
-        context.setLineWidth(brushWidth)
-        context.strokePath()
-        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        tempImageView.alpha = opacity
-        UIGraphicsEndImageContext()
-    }
-
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
@@ -154,7 +143,6 @@ class DoddleBoardViewController: UIViewController {
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-
         guard let touch = touches.first else { return }
         let currentPoint = touch.location(in: view)
 
@@ -168,6 +156,7 @@ class DoddleBoardViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let currentPoint = touch.location(in: view)
+
         points.append(currentPoint)
 
         if swipe {
@@ -202,6 +191,24 @@ class DoddleBoardViewController: UIViewController {
         tempImageView.image = nil
     }
 
+    private func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        tempImageView.image?.draw(in: view.bounds)
+        context.move(to: fromPoint)
+        context.addLine(to: toPoint)
+        context.setLineCap(.round)
+        context.setBlendMode(.normal)
+        context.setStrokeColor(color.cgColor)
+        context.setLineWidth(brushWidth)
+        context.strokePath()
+        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        tempImageView.alpha = opacity
+        UIGraphicsEndImageContext()
+    }
+
+    // FIXME: Certain point may not be drawn on device
+    // Already added some boundary test in touch event handling part. Maybe the smoothen algorithm below needs augmentation
     private func computePath(of points: [CGPoint], with factor: CGFloat) -> CGPath {
         let path = UIBezierPath()
         let tempPoints = [points[1]] + points + [points[points.count - 1]]
@@ -213,5 +220,6 @@ class DoddleBoardViewController: UIViewController {
         }
         return path.cgPath
     }
+
 }
 

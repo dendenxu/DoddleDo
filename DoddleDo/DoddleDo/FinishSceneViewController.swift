@@ -29,10 +29,21 @@ extension UIImage {
     }
 }
 
-
-
-
 class FinishSceneViewController: UIViewController {
+
+    var backPoint = CGPoint()
+
+    @IBOutlet weak var finishBack: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: finishBack)
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
+            bouncyUnwindSegue.desinationZoomPoint = backPoint
+        }
+    }
 
     @IBOutlet weak var mainImageView: UIImageView!
     var image: UIImage?
@@ -42,12 +53,12 @@ class FinishSceneViewController: UIViewController {
         aiPainting(image: image, to: mainImageView)
     }
 
-    func aiPainting(image original: UIImage?, to aiPainted: UIImageView?) {
+    private func aiPainting(image original: UIImage?, to aiPainted: UIImageView?) {
         if let url = URL(string: "http://painting.nhcilab.com/ajax_dict"), let imageString = original?.resize(to: CGSize(width: 1024, height: 512))?.pngData()?.base64EncodedString() {
-            
+
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
-            
+
             let boundary = "Boundary-\(NSUUID().uuidString)"
             request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             request.setValue("keep-alive", forHTTPHeaderField: "Proxy-Connection")
@@ -92,17 +103,4 @@ class FinishSceneViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var finishBack: ShadowedImageView! {
-        didSet {
-            addButtonTappedOrPressedGestureRecognizer(to: finishBack)
-        }
-    }
-
-    var backPoint = CGPoint()
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
-            bouncyUnwindSegue.desinationZoomPoint = backPoint
-        }
-    }
 }

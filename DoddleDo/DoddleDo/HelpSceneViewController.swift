@@ -12,6 +12,21 @@ import UIKit
 @IBDesignable
 class HelpSceneViewController: UIViewController {
 
+    var backPoint = CGPoint()
+
+    @IBAction func unwindToGoBack(_ unwindSegue: UIStoryboardSegue) { }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
+            bouncyUnwindSegue.desinationZoomPoint = backPoint
+        } else if let bouncySegue = segue as? BouncySegue, let location = sender as? CGPoint {
+            bouncySegue.desinationZoomPoint = location
+            if let help = segue.destination as? HelpSceneViewController {
+                help.backPoint = location
+            }
+        }
+    }
+    
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {
             addButtonTappedOrPressedGestureRecognizer(to: back)
@@ -24,18 +39,5 @@ class HelpSceneViewController: UIViewController {
         }
     }
 
-    @IBAction func unwindToGoBack(_ unwindSegue: UIStoryboardSegue) { }
 
-    var backPoint = CGPoint()
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
-            bouncyUnwindSegue.desinationZoomPoint = backPoint
-        } else if let bouncySegue = segue as? BouncySegue, let location = sender as? CGPoint {
-            bouncySegue.desinationZoomPoint = location
-            if let help = segue.destination as? HelpSceneViewController {
-                help.backPoint = location
-            }
-        }
-    }
 }

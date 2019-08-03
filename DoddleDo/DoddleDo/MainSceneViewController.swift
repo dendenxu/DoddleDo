@@ -8,8 +8,25 @@
 
 import UIKit
 
+
 @IBDesignable
 class MainSceneViewController: UIViewController, UIScrollViewDelegate {
+    
+    @IBAction func unwindToMainScene(_ unwindSegue: UIStoryboardSegue) { }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bouncySegue = segue as? BouncySegue, let location = sender as? CGPoint {
+            bouncySegue.desinationZoomPoint = location
+            if let doddleBoard = segue.destination as? DoddleBoardViewController {
+                doddleBoard.backPoint = location
+            } else if let settings = segue.destination as? SettingsSceneViewController {
+                settings.backPoint = location
+            } else if let help = segue.destination as? HelpSceneViewController {
+                help.backPoint = location
+            }
+        }
+    }
+    
     @IBOutlet weak var settings: ShadowedImageView! {
         didSet {
             addButtonTappedOrPressedGestureRecognizer(to: settings)
@@ -59,26 +76,6 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    // TODO: Add scrolling effect
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-    }
-
-    @IBAction func unwindToMainScene(_ unwindSegue: UIStoryboardSegue) { }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let bouncySegue = segue as? BouncySegue, let location = sender as? CGPoint {
-            bouncySegue.desinationZoomPoint = location
-            if let doddleBoard = segue.destination as? DoddleBoardViewController {
-                doddleBoard.backPoint = location
-            } else if let settings = segue.destination as? SettingsSceneViewController {
-                settings.backPoint = location
-            } else if let help = segue.destination as? HelpSceneViewController {
-                help.backPoint = location
-            }
-        }
-    }
-
     func addImageTappedGestureRecognizer(to view: ScrollingView) {
         let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
         view.addGestureRecognizer(tap)
@@ -106,6 +103,11 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
             )
         default: break
         }
+    }
+    
+    // TODO: Add scrolling effect
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
     }
 }
 
@@ -187,21 +189,13 @@ extension UIViewController {
                     completion: {
                         finished in
                         self.performSegue(withIdentifier: name, sender: tempLocation)
-//                        if name != "finish" {
-//                            self.performSegue(withIdentifier: name, sender: tempLocation)
-//                        } else if let me = self as? DoddleBoardViewController {
-//                            me.mainImageView.image = me.aiPainting(image: me.mainImageView.image)
-//                        }
                     }
                 )
             }
         default: break
         }
     }
-}
-
-
-extension UIViewController {
+    
     struct constants {
         static let imageTappedAnimationDuration: Double = 0.1
         static let imageTappedTransformScale: CGFloat = 1.1
@@ -212,3 +206,4 @@ extension UIViewController {
         static let settingsRotationDuration: Double = 0.8
     }
 }
+
