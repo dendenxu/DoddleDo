@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		723BA53822F49F7900BE3BF1 /* aString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BA53722F49F7900BE3BF1 /* aString.swift */; };
+		723BA53A22F5796700BE3BF1 /* FinishSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 723BA53922F5796700BE3BF1 /* FinishSceneViewController.swift */; };
 		72554FC522F3D7D500283400 /* BouncySegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72554FC322F3D7D500283400 /* BouncySegue.swift */; };
 		72554FC622F3D7D500283400 /* BouncyUnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72554FC422F3D7D500283400 /* BouncyUnwindSegue.swift */; };
 		72554FC822F3D8FF00283400 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72554FC722F3D8FF00283400 /* BackgroundView.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		723BA53722F49F7900BE3BF1 /* aString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = aString.swift; sourceTree = "<group>"; };
+		723BA53922F5796700BE3BF1 /* FinishSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishSceneViewController.swift; sourceTree = "<group>"; };
 		72554FC322F3D7D500283400 /* BouncySegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BouncySegue.swift; sourceTree = "<group>"; };
 		72554FC422F3D7D500283400 /* BouncyUnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BouncyUnwindSegue.swift; sourceTree = "<group>"; };
 		72554FC722F3D8FF00283400 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
@@ -79,12 +81,13 @@
 				72FC9E5722E6F4C700A920DA /* LaunchScreen.storyboard */,
 				72FC9E5A22E6F4C700A920DA /* Info.plist */,
 				72FC9E5222E6F4BE00A920DA /* Main.storyboard */,
-				72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */,
 				72D60B1B22E72E7B00B630CD /* ShadowedImageView.swift */,
+				72C9E5D222F2BD5500AAEC90 /* LaunchSceneViewController.swift */,
+				72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */,
 				7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */,
 				7285F09A22E75A620019F232 /* HelpSceneViewController.swift */,
 				72C9E5CC22F28CA300AAEC90 /* DoddleBoardViewController.swift */,
-				72C9E5D222F2BD5500AAEC90 /* LaunchSceneViewController.swift */,
+				723BA53922F5796700BE3BF1 /* FinishSceneViewController.swift */,
 				72C9E5D422F2CE3800AAEC90 /* ScrollingView.swift */,
 				72554FC722F3D8FF00283400 /* BackgroundView.swift */,
 				72554FC322F3D7D500283400 /* BouncySegue.swift */,
@@ -169,6 +172,7 @@
 				72C9E5D322F2BD5500AAEC90 /* LaunchSceneViewController.swift in Sources */,
 				72554FC822F3D8FF00283400 /* BackgroundView.swift in Sources */,
 				72FC9E5122E6F4BE00A920DA /* MainSceneViewController.swift in Sources */,
+				723BA53A22F5796700BE3BF1 /* FinishSceneViewController.swift in Sources */,
 				7285F09B22E75A620019F232 /* HelpSceneViewController.swift in Sources */,
 				72FC9E4F22E6F4BE00A920DA /* AppDelegate.swift in Sources */,
 				72554FC622F3D7D500283400 /* BouncyUnwindSegue.swift in Sources */,

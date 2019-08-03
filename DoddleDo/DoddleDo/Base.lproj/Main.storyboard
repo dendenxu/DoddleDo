@@ -179,12 +179,50 @@
                         <outlet property="mainImageView" destination="5NB-hA-siT" id="fWT-u9-pT5"/>
                         <outlet property="tempImageView" destination="WCj-q2-FMj" id="njY-Jp-egy"/>
                         <segue destination="x26-mu-irf" kind="unwind" identifier="boardBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kWx-Kc-r3h"/>
+                        <segue destination="GKh-xE-yfu" kind="custom" identifier="finish" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="R2D-M1-QIl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jcx-dv-BBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="x26-mu-irf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="926.78571428571422" y="40.579710144927539"/>
+            <point key="canvasLocation" x="801" y="41"/>
+        </scene>
+        <!--Finish Scene View Controller-->
+        <scene sceneID="iY6-qf-vee">
+            <objects>
+                <viewController id="GKh-xE-yfu" customClass="FinishSceneViewController" customModule="DoddleDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L13-Eu-Kyx" customClass="BackgroundView" customModule="DoddleDo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="epN-Jn-8hh">
+                                <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="bXM-8b-GjE" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="30" y="20" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finishBack"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="I06-c9-8jC"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="finishBack" destination="bXM-8b-GjE" id="v9K-ce-f28"/>
+                        <outlet property="mainImageView" destination="epN-Jn-8hh" id="U2H-MW-3L7"/>
+                        <segue destination="i0X-SM-Yxz" kind="unwind" identifier="finishBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToBoard:" id="Wrh-dC-d1t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gKU-UE-G5Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="i0X-SM-Yxz" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1019" y="983"/>
         </scene>
         <!--Help Scene View Controller-->
         <scene sceneID="rFz-7v-Dmt">

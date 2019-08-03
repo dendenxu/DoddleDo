@@ -8,13 +8,48 @@
 
 import UIKit
 
+class AttributedImage {
+    var opacity: CGFloat = 1.0
+    var blendMode = CGBlendMode.normal
+    var image: UIImage?
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
+}
+
 class DoddleBoardViewController: UIViewController {
 
-    func aiPainting(image original: UIImage?) -> UIImage? {
-        let data = Data(base64Encoded: aString.string2)
-        let aiPainted = UIImage(data: data!)
-        return aiPainted
+    @IBAction func unwindToBoard(_ unwindSegue: UIStoryboardSegue) { }
+    
+    var backPoint = CGPoint()
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
+            bouncyUnwindSegue.desinationZoomPoint = backPoint
+        } else if let bouncySegue = segue as? BouncySegue, let location = sender as? CGPoint {
+            bouncySegue.desinationZoomPoint = location
+            if let finish = segue.destination as? FinishSceneViewController {
+                finish.backPoint = location
+                finish.image = mainImageView.image
+            }
+        }
     }
+
 
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {
@@ -22,13 +57,6 @@ class DoddleBoardViewController: UIViewController {
         }
     }
 
-    var backPoint = CGPoint()
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let bouncyUnwindSegue = segue as? BouncyUnwindSegue {
-            bouncyUnwindSegue.desinationZoomPoint = backPoint
-        }
-    }
 
     override func viewDidLoad() {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped(recognizer:)))
@@ -72,12 +100,24 @@ class DoddleBoardViewController: UIViewController {
             UIGraphicsEndImageContext()
         }
     }
-
-    var lastPoint = CGPoint.zero
-    var color = UIColor.blue
+    
+    /*
+     //画笔线条和颜色定义
+     var color_mountain = '#c3ae95';
+     var color_grass = '#88c23f';
+     var color_tree = '#078d83';
+     var color_house = '#b387b3';
+     var color_sky = '#6cc0ff';
+     var color_river = '#649eeb';
+     var color_road = '#c6c61d';
+     var color_stone = '#c5d8c5';
+     */
+    
+    var color = UIColor(rgb: 0x88c23f)
     var brushWidth: CGFloat = 30.0
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
+    private var lastPoint = CGPoint.zero
     private var points = [CGPoint]()
     private var swipe = false
 
@@ -175,15 +215,3 @@ class DoddleBoardViewController: UIViewController {
     }
 }
 
-extension CGPoint {
-    static func mid(of point1: CGPoint, and point2: CGPoint) -> CGPoint {
-        return CGPoint(x: (point1.x + point2.x) / 2, y: (point1.y + point2.y) / 2)
-    }
-}
-
-
-class AttributedImage {
-    var opacity: CGFloat = 1.0
-    var blendMode = CGBlendMode.normal
-    var image: UIImage?
-}

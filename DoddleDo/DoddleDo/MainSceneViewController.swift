@@ -78,23 +78,6 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
-}
-
-extension MainSceneViewController {
-    private struct constants {
-        static let bottomLineFontSize: CGFloat = 25
-        static let bottomLineKern: CGFloat = 2
-    }
-}
-
-extension UIViewController {
-
-    func addButtonTappedOrPressedGestureRecognizer(to view: ShadowedImageView) {
-        let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
-        tapOrPress.minimumPressDuration = 0
-        view.addGestureRecognizer(tapOrPress)
-        view.isUserInteractionEnabled = true
-    }
 
     func addImageTappedGestureRecognizer(to view: ScrollingView) {
         let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
@@ -123,6 +106,23 @@ extension UIViewController {
             )
         default: break
         }
+    }
+}
+
+extension MainSceneViewController {
+    private struct constants {
+        static let bottomLineFontSize: CGFloat = 25
+        static let bottomLineKern: CGFloat = 2
+    }
+}
+
+extension UIViewController {
+
+    func addButtonTappedOrPressedGestureRecognizer(to view: ShadowedImageView) {
+        let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
+        tapOrPress.minimumPressDuration = 0
+        view.addGestureRecognizer(tapOrPress)
+        view.isUserInteractionEnabled = true
     }
 
     @objc func buttonTappedOrPressed(recognizer: UILongPressGestureRecognizer) {
@@ -186,11 +186,12 @@ extension UIViewController {
                     },
                     completion: {
                         finished in
-                        if name != "finish" {
-                            self.performSegue(withIdentifier: name, sender: tempLocation)
-                        } else if let me = self as? DoddleBoardViewController {
-                            me.mainImageView.image = me.aiPainting(image: me.mainImageView.image)
-                        }
+                        self.performSegue(withIdentifier: name, sender: tempLocation)
+//                        if name != "finish" {
+//                            self.performSegue(withIdentifier: name, sender: tempLocation)
+//                        } else if let me = self as? DoddleBoardViewController {
+//                            me.mainImageView.image = me.aiPainting(image: me.mainImageView.image)
+//                        }
                     }
                 )
             }
