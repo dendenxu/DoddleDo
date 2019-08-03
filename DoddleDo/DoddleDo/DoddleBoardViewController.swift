@@ -36,6 +36,7 @@ extension UIColor {
 @IBDesignable
 class DoddleBoardViewController: UIViewController {
 
+    // MARK: Navigation
     var backPoint = CGPoint()
 
     @IBAction func unwindToBoard(_ unwindSegue: UIStoryboardSegue) { }
@@ -52,16 +53,25 @@ class DoddleBoardViewController: UIViewController {
         }
     }
 
+    // MARK: Initialization
     override func viewDidLoad() {
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped(recognizer:)))
         doubleTap.numberOfTapsRequired = 2
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(recognizer:)))
         view.addGestureRecognizer(doubleTap)
         view.addGestureRecognizer(longPress)
-        
+
         tempImageView.frame = view.frame
         mainImageView.frame = view.frame
 
+        colorPalette[.mountain] = UIColor(rgb: 0xc3ae95)
+        colorPalette[.grass] = UIColor(rgb: 0x88c23f)
+        colorPalette[.tree] = UIColor(rgb: 0x078d83)
+        colorPalette[.house] = UIColor(rgb: 0xb387b3)
+        colorPalette[.sky] = UIColor(rgb: 0x6cc0ff)
+        colorPalette[.river] = UIColor(rgb: 0x649eeb)
+        colorPalette[.road] = UIColor(rgb: 0xc6c61d)
+        colorPalette[.stone] = UIColor(rgb: 0xc5d8c5)
     }
 
     // TODO: Implement color selector
@@ -94,23 +104,10 @@ class DoddleBoardViewController: UIViewController {
     @IBOutlet weak var mainImageView: UIImageView!
 
     @IBOutlet weak var tempImageView: UIImageView!
-    
+
     private var framedImage: UIImage?
-    
 
-    /*
-     var color_mountain = '#c3ae95';
-     var color_grass = '#88c23f';
-     var color_tree = '#078d83';
-     var color_house = '#b387b3';
-     var color_sky = '#6cc0ff';
-     var color_river = '#649eeb';
-     var color_road = '#c6c61d';
-     var color_stone = '#c5d8c5';
-     */
-
-    // TODO: Limit history length
-    var bufferNumber:Int = 5
+    var bufferNumber: Int = 50
     var tempImages = [AttributedImage]() {
         didSet {
             if tempImages.count > bufferNumber {
@@ -119,7 +116,7 @@ class DoddleBoardViewController: UIViewController {
                 tempImages[0].image?.draw(in: view.bounds)
                 framedImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
-                
+
                 UIGraphicsBeginImageContext(view.frame.size)
                 framedImage?.draw(in: view.bounds)
                 for i in 1..<tempImages.count {
@@ -128,7 +125,7 @@ class DoddleBoardViewController: UIViewController {
                 }
                 mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
-                
+
                 tempImages = [AttributedImage](tempImages.dropFirst())
             } else {
                 UIGraphicsBeginImageContext(view.frame.size)
@@ -144,7 +141,26 @@ class DoddleBoardViewController: UIViewController {
     }
 
     // Initializing UIColor using hex number defined in UIColor extension
-    var color = UIColor(rgb: 0x88c23f)
+    var colorPalette = [colors: UIColor]()
+//    colorPalette["mountain"] = UIColor(rgb: 0xc3ae95)
+//    colorPalette["grass"] = UIColor(rgb: 0x88c23f)
+//    colorPalette["tree"] = UIColor(rgb: 0x078d83)
+//    colorPalette["house"] = UIColor(rgb: 0xb387b3)
+//    colorPalette["sky"] = UIColor(rgb: 0x6cc0ff)
+//    colorPalette["river"] = UIColor(rgb: 0x649eeb)
+//    colorPalette["road"] = UIColor(rgb: 0xc6c61d)
+//    colorPalette["stone"] = UIColor(rgb: 0xc5d8c5)
+    enum colors {
+        case mountain
+        case grass
+        case tree
+        case house
+        case sky
+        case river
+        case road
+        case stone
+    }
+    lazy var color = self.colorPalette[.river] ?? UIColor(rgb:0xc3ae95)
     // TODO: Add "brush" feature
     var brushWidth: CGFloat = 30.0
     var opacity: CGFloat = 1.0
@@ -233,7 +249,7 @@ class DoddleBoardViewController: UIViewController {
         UIGraphicsEndImageContext()
     }
 
-    // FIXME: Certain point may not be drawn on device
+    // FIXME: Certain point may not be drawn
     // Already added some boundary test in touch event handling part. Maybe the smoothen algorithm below needs augmentation
     private func computePath(of points: [CGPoint], with factor: CGFloat) -> CGPath {
         let path = UIBezierPath()
