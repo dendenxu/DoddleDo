@@ -10,6 +10,7 @@ import UIKit
 
 
 class AttributedImage {
+    var brushWidth: CGFloat = 70.0
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
     var image: UIImage?
@@ -55,15 +56,17 @@ class DoddleBoardViewController: UIViewController {
 
     // MARK: Initialization
     override func viewDidLoad() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(recognizer:)))
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped(recognizer:)))
         doubleTap.numberOfTapsRequired = 2
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(recognizer:)))
+        view.addGestureRecognizer(tap)
         view.addGestureRecognizer(doubleTap)
         view.addGestureRecognizer(longPress)
 
         tempImageView.frame = view.frame
         mainImageView.frame = view.frame
-
+        
         colorPalette[.mountain] = UIColor(rgb: 0xc3ae95)
         colorPalette[.grass] = UIColor(rgb: 0x88c23f)
         colorPalette[.tree] = UIColor(rgb: 0x078d83)
@@ -72,8 +75,28 @@ class DoddleBoardViewController: UIViewController {
         colorPalette[.river] = UIColor(rgb: 0x649eeb)
         colorPalette[.road] = UIColor(rgb: 0xc6c61d)
         colorPalette[.stone] = UIColor(rgb: 0xc5d8c5)
+        colorPalette[.eraser] = UIColor.white
+        
+        UIGraphicsBeginImageContext(view.frame.size)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        context.setFillColor(colorPalette[.eraser]?.cgColor ?? UIColor.black.cgColor)
+        context.fill(view.bounds)
+        mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
     }
 
+    // MARK: Temporary: temporarily using finger as property selector
+    func fingerTapped() {
+        
+    }
+    
+    
+    // TODO: Implement cancelling selection
+    @objc func tapped(recognizer: UITapGestureRecognizer) {
+        
+    }
+    
     // TODO: Implement color selector
     @objc func doubleTapped(recognizer: UITapGestureRecognizer) {
         tempImages.popLast()
@@ -92,14 +115,59 @@ class DoddleBoardViewController: UIViewController {
 
     @IBOutlet weak var finish: ShadowedImageView! {
         didSet {
-            let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
-            tapOrPress.minimumPressDuration = 0
-            finish.addGestureRecognizer(tapOrPress)
-            finish.isUserInteractionEnabled = true
+            addButtonTappedOrPressedGestureRecognizer(to: finish)
         }
     }
 
-
+    @IBOutlet weak var finger: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: finger)
+        }
+    }
+    @IBOutlet weak var buttonsView: UIView!
+    
+    @IBOutlet weak var mountain: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: mountain)
+        }
+    }
+    @IBOutlet weak var grass: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: grass)
+        }
+    }
+    @IBOutlet weak var tree: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: tree)
+        }
+    }
+    @IBOutlet weak var house: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: house)
+        }
+    }
+    @IBOutlet weak var sky: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: sky)
+        }
+    }
+    @IBOutlet weak var river: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: river)
+        }
+    }
+    @IBOutlet weak var road: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: road)
+        }
+    }
+    @IBOutlet weak var eraser: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: eraser)
+        }
+    }
+    
+    
     // MARK: Doddle board implementation
     @IBOutlet weak var mainImageView: UIImageView!
 
@@ -118,6 +186,9 @@ class DoddleBoardViewController: UIViewController {
                 UIGraphicsEndImageContext()
 
                 UIGraphicsBeginImageContext(view.frame.size)
+                guard let context = UIGraphicsGetCurrentContext() else { return }
+                context.setFillColor(colorPalette[.eraser]?.cgColor ?? UIColor.black.cgColor)
+                context.fill(view.bounds)
                 framedImage?.draw(in: view.bounds)
                 for i in 1..<tempImages.count {
                     let tempImage = tempImages[i]
@@ -129,6 +200,9 @@ class DoddleBoardViewController: UIViewController {
                 tempImages = [AttributedImage](tempImages.dropFirst())
             } else {
                 UIGraphicsBeginImageContext(view.frame.size)
+                guard let context = UIGraphicsGetCurrentContext() else { return }
+                context.setFillColor(colorPalette[.eraser]?.cgColor ?? UIColor.black.cgColor)
+                context.fill(view.bounds)
                 framedImage?.draw(in: view.bounds)
                 for i in 0..<tempImages.count {
                     let tempImage = tempImages[i]
@@ -142,27 +216,20 @@ class DoddleBoardViewController: UIViewController {
 
     // Initializing UIColor using hex number defined in UIColor extension
     var colorPalette = [colors: UIColor]()
-//    colorPalette["mountain"] = UIColor(rgb: 0xc3ae95)
-//    colorPalette["grass"] = UIColor(rgb: 0x88c23f)
-//    colorPalette["tree"] = UIColor(rgb: 0x078d83)
-//    colorPalette["house"] = UIColor(rgb: 0xb387b3)
-//    colorPalette["sky"] = UIColor(rgb: 0x6cc0ff)
-//    colorPalette["river"] = UIColor(rgb: 0x649eeb)
-//    colorPalette["road"] = UIColor(rgb: 0xc6c61d)
-//    colorPalette["stone"] = UIColor(rgb: 0xc5d8c5)
-    enum colors {
-        case mountain
-        case grass
-        case tree
-        case house
-        case sky
-        case river
-        case road
-        case stone
+    enum colors: String {
+        case mountain = "mountain"
+        case grass = "grass"
+        case tree = "tree"
+        case house = "house"
+        case sky = "sky"
+        case river = "river"
+        case road = "road"
+        case stone = "stone"
+        case eraser = "eraser"
     }
-    lazy var color = self.colorPalette[.river] ?? UIColor(rgb:0xc3ae95)
+    lazy var color = self.colorPalette[.river] ?? UIColor(rgb: 0xc3ae95)
     // TODO: Add "brush" feature
-    var brushWidth: CGFloat = 30.0
+    var brushWidth: CGFloat = 70.0
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
     private var lastPoint = CGPoint.zero
@@ -206,7 +273,6 @@ class DoddleBoardViewController: UIViewController {
             let tempImage = AttributedImage()
             UIGraphicsBeginImageContext(view.frame.size)
             guard let context = UIGraphicsGetCurrentContext() else { return }
-            context.addPath(computePath(of: points, with: 6))
             if points.count >= 2 {
                 context.move(to: points[points.count - 2])
                 context.addLine(to: points[points.count - 1])
@@ -217,6 +283,7 @@ class DoddleBoardViewController: UIViewController {
                 tempImageView.image = nil
                 return
             }
+            context.addPath(computePath(of: points, with: 6))
             context.setStrokeColor(color.cgColor)
             context.setLineWidth(brushWidth)
             context.setLineCap(.round)
@@ -260,6 +327,10 @@ class DoddleBoardViewController: UIViewController {
             let control2 = CGPoint(x: tempPoints[i + 1].x - (tempPoints[i + 2].x - tempPoints[i].x) / factor, y: tempPoints[i + 1].y - (tempPoints[i + 2].y - tempPoints[i].y) / factor)
             path.addCurve(to: tempPoints[i + 1], controlPoint1: control1, controlPoint2: control2)
         }
+//        path.move(to: points[0])
+//        for i in 1..<points.count {
+//            path.addLine(to: points[i])
+//        }
         return path.cgPath
     }
 

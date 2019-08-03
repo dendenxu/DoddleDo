@@ -10,13 +10,19 @@ import UIKit
 
 @IBDesignable
 class ScrollingView: UIView {
+    
     @IBInspectable
-    var identifier: String!
+    var identifier: String?
+    
+    @IBInspectable
+    var image: UIImage?
     
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath(roundedRect: bounds, cornerRadius: 15)
         path.addClip()
-        if let image = UIImage(named: identifier, in: Bundle(for: classForCoder), compatibleWith: traitCollection) {
+        if let image = image {
+            image.draw(in: bounds)
+        } else if let identifier = identifier, let image = UIImage(named: identifier, in: Bundle(for: classForCoder), compatibleWith: traitCollection) {
             image.draw(in: bounds)
         }
     }

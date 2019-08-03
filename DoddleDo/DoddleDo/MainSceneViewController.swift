@@ -11,9 +11,9 @@ import UIKit
 
 @IBDesignable
 class MainSceneViewController: UIViewController, UIScrollViewDelegate {
-    
+
     @IBAction func unwindToMainScene(_ unwindSegue: UIStoryboardSegue) { }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let bouncySegue = segue as? BouncySegue, let location = sender as? CGPoint {
             bouncySegue.desinationZoomPoint = location
@@ -26,7 +26,7 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
-    
+
     @IBOutlet weak var settings: ShadowedImageView! {
         didSet {
             addButtonTappedOrPressedGestureRecognizer(to: settings)
@@ -104,10 +104,10 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
         default: break
         }
     }
-    
+
     // TODO: Add scrolling effect
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+
     }
 }
 
@@ -188,14 +188,31 @@ extension UIViewController {
                     },
                     completion: {
                         finished in
-                        self.performSegue(withIdentifier: name, sender: tempLocation)
+                        if let viewController = self as? DoddleBoardViewController, let id = (recognizer.view as? ShadowedImageView)?.identifier {
+                            switch id {
+                            case "boardBack": fallthrough
+                            case "finish": self.performSegue(withIdentifier: name, sender: tempLocation)
+                            case "finger": viewController.buttonsView.isHidden = !viewController.buttonsView.isHidden
+                            case "mountain": viewController.color = viewController.colorPalette[.mountain] ?? UIColor.black
+                            case "river": viewController.color = viewController.colorPalette[.river] ?? UIColor.black
+                            case "sky": viewController.color = viewController.colorPalette[.sky] ?? UIColor.black
+                            case "house": viewController.color = viewController.colorPalette[.house] ?? UIColor.black
+                            case "road": viewController.color = viewController.colorPalette[.road] ?? UIColor.black
+                            case "tree": viewController.color = viewController.colorPalette[.tree] ?? UIColor.black
+                            case "grass": viewController.color = viewController.colorPalette[.grass] ?? UIColor.black
+                            case "eraser": viewController.color = viewController.colorPalette[.eraser] ?? UIColor.black
+                            default: break
+                            }
+                        } else {
+                            self.performSegue(withIdentifier: name, sender: tempLocation)
+                        }
                     }
                 )
             }
         default: break
         }
     }
-    
+
     struct constants {
         static let imageTappedAnimationDuration: Double = 0.1
         static let imageTappedTransformScale: CGFloat = 1.1

@@ -18,6 +18,7 @@ extension Data {
 }
 
 extension UIImage {
+    
     func resize(to rect: CGSize) -> UIImage? {
 
         UIGraphicsBeginImageContext(rect)
@@ -27,6 +28,7 @@ extension UIImage {
 
         return newImage
     }
+    
 }
 
 class FinishSceneViewController: UIViewController {
@@ -45,15 +47,21 @@ class FinishSceneViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var loading: UIImageView!
+    
+    @IBOutlet weak var mainImageView: ScrollingView!
     var image: UIImage?
 
     override func viewDidLoad() {
         mainImageView.image = image
         aiPainting(image: image, to: mainImageView)
+        
+        if let image = UIImage.animatedImageNamed("loading", duration: 100) {
+            loading.image = image
+        }
     }
 
-    private func aiPainting(image original: UIImage?, to aiPainted: UIImageView?) {
+    private func aiPainting(image original: UIImage?, to aiPainted: ScrollingView?) {
         if let url = URL(string: "http://painting.nhcilab.com/ajax_dict"), let imageString = original?.resize(to: CGSize(width: 1024, height: 512))?.pngData()?.base64EncodedString() {
 
             var request = URLRequest(url: url)
@@ -94,7 +102,8 @@ class FinishSceneViewController: UIViewController {
                     temp.count = temp.count - 3
                     if let str = String(data: temp, encoding: .utf8), let tempData = Data(base64Encoded: str), let image = UIImage(data: tempData) {
                         DispatchQueue.main.async {
-                            aiPainted?.image = image
+                            aiPainted?.image = image.resize(to: CGSize(width: 1792, height: 828))
+                            aiPainted?.setNeedsDisplay()
                         }
                     }
                 }
