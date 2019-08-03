@@ -58,6 +58,10 @@ class DoddleBoardViewController: UIViewController {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(recognizer:)))
         view.addGestureRecognizer(doubleTap)
         view.addGestureRecognizer(longPress)
+        
+        tempImageView.frame = view.frame
+        mainImageView.frame = view.frame
+
     }
 
     // TODO: Implement color selector
@@ -90,6 +94,9 @@ class DoddleBoardViewController: UIViewController {
     @IBOutlet weak var mainImageView: UIImageView!
 
     @IBOutlet weak var tempImageView: UIImageView!
+    
+    private var framedImage: UIImage?
+    
 
     /*
      var color_mountain = '#c3ae95';
@@ -103,17 +110,36 @@ class DoddleBoardViewController: UIViewController {
      */
 
     // TODO: Limit history length
+    var bufferNumber:Int = 5
     var tempImages = [AttributedImage]() {
         didSet {
-            UIGraphicsBeginImageContext(view.frame.size)
-            mainImageView.image = nil
-            for i in 0..<tempImages.count {
-                let tempImage = tempImages[i]
-                tempImage.image?.draw(in: view.bounds, blendMode: tempImage.blendMode, alpha: tempImage.opacity)
+            if tempImages.count > bufferNumber {
+                UIGraphicsBeginImageContext(view.frame.size)
+                framedImage?.draw(in: view.bounds)
+                tempImages[0].image?.draw(in: view.bounds)
+                framedImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                UIGraphicsBeginImageContext(view.frame.size)
+                framedImage?.draw(in: view.bounds)
+                for i in 1..<tempImages.count {
+                    let tempImage = tempImages[i]
+                    tempImage.image?.draw(in: view.bounds, blendMode: tempImage.blendMode, alpha: tempImage.opacity)
+                }
+                mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                tempImages = [AttributedImage](tempImages.dropFirst())
+            } else {
+                UIGraphicsBeginImageContext(view.frame.size)
+                framedImage?.draw(in: view.bounds)
+                for i in 0..<tempImages.count {
+                    let tempImage = tempImages[i]
+                    tempImage.image?.draw(in: view.bounds, blendMode: tempImage.blendMode, alpha: tempImage.opacity)
+                }
+                mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
             }
-            mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-            mainImageView.alpha = 1.0
-            UIGraphicsEndImageContext()
         }
     }
 
