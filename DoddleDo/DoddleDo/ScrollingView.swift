@@ -40,16 +40,16 @@ class ScrollingView: UIView {
     private func initializationWork() {
         backgroundColor = UIColor.clear
         layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        layer.shadowOffset = CGSize(width: contants.shadowOffsetX, height: contants.shadowOffsetY)
-        layer.shadowOpacity = contants.shadowOpacity
-        layer.shadowRadius = contants.shadowRadius
+        layer.shadowOffset = CGSize(width: constants.shadowOffsetX, height: constants.shadowOffsetY)
+        layer.shadowOpacity = constants.shadowOpacity
+        layer.shadowRadius = constants.shadowRadius
         clipsToBounds = false
         contentMode = .scaleToFill
     }
 }
 
 extension ScrollingView {
-    private struct contants {
+    private struct constants {
         static let shadowOffsetX: CGFloat = 10
         static let shadowOffsetY: CGFloat = 10
         static let shadowOpacity: Float = 1
