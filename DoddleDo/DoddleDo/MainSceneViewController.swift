@@ -145,16 +145,16 @@ extension UIViewController {
         case .began:
             if let view = recognizer.view {
                 // MARK: helpTest is deprecated
-                if let view = view as? ShadowedImageView, let name = view.identifier, name == "settings" || name == "help" || name == "helpTest"{
+                if let view = view as? ShadowedImageView, let name = view.identifier, name == "settings" || name == "help" || name == "helpTest" {
                     let rotation = CABasicAnimation(keyPath: "transform.rotation")
                     rotation.fromValue = 0
                     rotation.toValue = constants.settingsRotationAngle
                     let shadowWidth = CAKeyframeAnimation(keyPath: "shadowOffset.width")
-                    shadowWidth.values = [4, 5.6, 4, 0, -4]
-                    shadowWidth.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+                    shadowWidth.values = [4, 5.6, 4, 0, -4, -5.6, -4, 0, 4]
+                    shadowWidth.keyTimes = [0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.825, 1.0]
                     let shadowHeight = CAKeyframeAnimation(keyPath: "shadowOffset.height")
-                    shadowHeight.values = [4, 0, -4, -5.6, -4]
-                    shadowHeight.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+                    shadowHeight.values = [4, 0, -4, -5.6, -4, 0, 4, 5.6, 4]
+                    shadowHeight.keyTimes = [0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.825, 1.0]
                     let group = CAAnimationGroup()
 //                    group.isRemovedOnCompletion = false
 //                    group.fillMode = .backwards
@@ -198,6 +198,7 @@ extension UIViewController {
                         finished in
                         if let viewController = self as? DoddleBoardViewController, viewController.colorPalette[name] != nil {
                             viewController.color = viewController.colorPalette[name]!
+                            viewController.brushWidth = viewController.brushWidthPalette[name]!
                         } else if let viewController = self as? DoddleBoardViewController, name == "finger" {
                             viewController.fingerTapped()
                         } else {

@@ -52,7 +52,7 @@ extension BouncyUnwindSegue {
         static let screenHeight = UIScreen.main.bounds.size.height
         static let screenWidth = UIScreen.main.bounds.size.width
         static let sharedZoomSize = CGSize(width: constants.screenWidth * scale, height: constants.screenHeight * scale)
-        static let scale: CGFloat = 0.01
+        static let scale: CGFloat = 0.001
         static let animationDuration: Double = 0.45
         static let animationSpringDamping:CGFloat = 0.7
     }

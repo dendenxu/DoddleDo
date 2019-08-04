@@ -35,7 +35,7 @@ extension UIColor {
 }
 
 @IBDesignable
-class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
+class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, CAAnimationDelegate {
 
     // MARK: Navigation
     var backPoint = CGPoint()
@@ -60,7 +60,6 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
 
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped(recognizer:)))
         doubleTap.numberOfTapsRequired = 2
-//        tap.require(toFail: doubleTap)
 
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(recognizer:)))
         tap.delegate = self
@@ -72,15 +71,6 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
         tempImageView.frame = view.frame
         mainImageView.frame = view.frame
 
-//        colorPalette[.mountain] = UIColor(rgb: 0xc3ae95)
-//        colorPalette[.grass] = UIColor(rgb: 0x88c23f)
-//        colorPalette[.tree] = UIColor(rgb: 0x078d83)
-//        colorPalette[.house] = UIColor(rgb: 0xb387b3)
-//        colorPalette[.sky] = UIColor(rgb: 0x6cc0ff)
-//        colorPalette[.river] = UIColor(rgb: 0x649eeb)
-//        colorPalette[.road] = UIColor(rgb: 0xc6c61d)
-//        colorPalette[.stone] = UIColor(rgb: 0xc5d8c5)
-//        colorPalette[.eraser] = UIColor.white
         colorPalette["mountain"] = UIColor(rgb: 0xc3ae95)
         colorPalette["grass"] = UIColor(rgb: 0x88c23f)
         colorPalette["tree"] = UIColor(rgb: 0x078d83)
@@ -90,6 +80,16 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
         colorPalette["road"] = UIColor(rgb: 0xc6c61d)
         colorPalette["stone"] = UIColor(rgb: 0xc5d8c5)
         colorPalette["eraser"] = UIColor.white
+
+        brushWidthPalette["mountain"] = 70
+        brushWidthPalette["grass"] = 70
+        brushWidthPalette["tree"] = 70
+        brushWidthPalette["house"] = 70
+        brushWidthPalette["sky"] = 70
+        brushWidthPalette["river"] = 70
+        brushWidthPalette["road"] = 70
+        brushWidthPalette["stone"] = 70
+        brushWidthPalette["eraser"] = 70
 
         // FIXME: The screen gets filled with white when seguing to board
         UIGraphicsBeginImageContext(view.frame.size)
@@ -122,14 +122,65 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        // TODO: Change buttonsView visibility
+    }
+
     @objc func tapped(recognizer: UITapGestureRecognizer) {
-        buttonsView.isHidden = true
+        if !buttonsView.isHidden {
+            var count: Double = 0
+            for view in buttonsView.subviews {
+                let alpha = CABasicAnimation(keyPath: "opacity")
+                alpha.fromValue = 1
+                alpha.toValue = 0
+                let flyX = CABasicAnimation(keyPath: "position.x")
+                flyX.toValue = recognizer.location(in: buttonsView).x
+                flyX.fromValue = view.center.x
+                let flyY = CABasicAnimation(keyPath: "position.y")
+                flyY.toValue = recognizer.location(in: buttonsView).y
+                flyY.fromValue = view.center.y
+                let group = CAAnimationGroup()
+                group.animations = [flyX, flyY, alpha]
+                group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                group.duration = 0.1
+                group.beginTime = 0.01 * count + CACurrentMediaTime()
+                count = count + 1
+                view.layer.add(group, forKey: nil)
+            }
+        }
     }
 
     @objc func doubleTapped(recognizer: UITapGestureRecognizer) {
-//        tempImages.popLast()
-        buttonsView.frame.origin = CGPoint(x: recognizer.location(in: view).x - buttonsView.frame.width / 2, y: recognizer.location(in: view).y - buttonsView.frame.height)
-        buttonsView.isHidden = !buttonsView.isHidden
+        buttonsView.center = CGPoint(x: recognizer.location(in: view).x, y: recognizer.location(in: view).y - 50)
+        if buttonsView.isHidden {
+            var count: Double = 0
+            for view in buttonsView.subviews {
+                // Magic animation. Don't touch. Toggled for an hour.
+                let alpha = CABasicAnimation(keyPath: "opacity")
+                alpha.fromValue = 0
+                alpha.toValue = 1
+                let flyX = CASpringAnimation(keyPath: "position.x")
+                flyX.damping = 20
+                flyX.stiffness = 400
+                flyX.initialVelocity = 0.0
+                flyX.fromValue = recognizer.location(in: buttonsView).x
+                flyX.toValue = view.center.x
+                let flyY = CASpringAnimation(keyPath: "position.y")
+                flyY.damping = 20
+                flyY.stiffness = 400
+                flyY.initialVelocity = 0.0
+                flyY.fromValue = recognizer.location(in: buttonsView).y
+                flyY.toValue = view.center.y
+                let group = CAAnimationGroup()
+                group.animations = [flyX, flyY, alpha]
+                group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                group.duration = 0.3
+                group.beginTime = 0.01 * count + CACurrentMediaTime()
+                count = count + 1
+                view.layer.add(group, forKey: nil)
+            }
+        }
+
     }
 
     // TODO: Get rid of the finger
@@ -158,14 +209,34 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var buttonsView: UIView! {
         didSet {
             for view in buttonsView.subviews {
-                addButtonTappedOrPressedGestureRecognizer(to: view as! ShadowedImageView)
-                let pan = UIPanGestureRecognizer(target: self, action: #selector(buttonPanned(recognizer:)))
+                if let view = view as? ShadowedImageView {
+                    addButtonTappedOrPressedGestureRecognizer(to: view)
+                    let pan = UIPanGestureRecognizer(target: self, action: #selector(buttonPanned(recognizer:)))
+                    pan.name = view.identifier
+                    view.addGestureRecognizer(pan)
+                }
             }
         }
     }
 
+    private var originPoint: CGPoint?
     @objc func buttonPanned(recognizer: UIPanGestureRecognizer) {
 
+        if let identifier = recognizer.name, colorPalette[identifier] != nil {
+            switch recognizer.state {
+            case .began:
+                originPoint = recognizer.translation(in: view)
+            case .changed:
+                if let originPoint = originPoint {
+                    let dy = recognizer.translation(in: view).y - originPoint.y
+                    brushWidthPalette[identifier]! = brushWidthPalette[identifier]! + dy
+                    brushWidth = brushWidthPalette[identifier]!
+                }
+
+            default: break
+            }
+
+        }
     }
 
     // MARK: Doddle board implementation
@@ -215,20 +286,10 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     // Initializing UIColor using hex number defined in UIColor extension
-//    var colorPalette = [colors: UIColor]()
     var colorPalette = [String: UIColor]()
-//    enum colors: String {
-//        case mountain = "mountain"
-//        case grass = "grass"
-//        case tree = "tree"
-//        case house = "house"
-//        case sky = "sky"
-//        case river = "river"
-//        case road = "road"
-//        case stone = "stone"
-//        case eraser = "eraser"
-//    }
+    var brushWidthPalette = [String: CGFloat]()
     lazy var color = self.colorPalette["tree"] ?? UIColor(rgb: 0xc3ae95)
+
     // TODO: Add "brush" feature using MaLiang
     var brushWidth: CGFloat = 70.0
     var opacity: CGFloat = 1.0
@@ -248,9 +309,6 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         swipe = false
-//        let tempImage = AttributedImage()
-//        tempImage.image = tempImageView.image
-//        tempImages.append(tempImage)
         tempImageView.image = nil
         points = [CGPoint]()
     }
@@ -336,10 +394,6 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
             let control2 = CGPoint(x: tempPoints[i + 1].x - (tempPoints[i + 2].x - tempPoints[i].x) / factor, y: tempPoints[i + 1].y - (tempPoints[i + 2].y - tempPoints[i].y) / factor)
             path.addCurve(to: tempPoints[i + 1], controlPoint1: control1, controlPoint2: control2)
         }
-//        path.move(to: points[0])
-//        for i in 1..<points.count {
-//            path.addLine(to: points[i])
-//        }
         return path.cgPath
     }
 

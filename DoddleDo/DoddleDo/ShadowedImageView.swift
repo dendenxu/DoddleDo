@@ -33,7 +33,7 @@ class ShadowedImageView: UIImageView {
         layer.shadowOpacity = constants.shadowOpacity
         layer.shadowRadius = constants.shadowRadius
         clipsToBounds = false
-        contentMode = .scaleToFill
+        contentMode = .scaleAspectFit
     }
 }
 

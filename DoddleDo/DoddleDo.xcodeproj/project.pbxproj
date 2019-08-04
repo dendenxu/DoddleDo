@@ -15,7 +15,6 @@
 		7285F09B22E75A620019F232 /* HelpSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09A22E75A620019F232 /* HelpSceneViewController.swift */; };
 		72B5C35B22F672F400D973B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72B5C35A22F672F400D973B4 /* Assets.xcassets */; };
 		72B5C35D22F6733400D973B4 /* Gif in Resources */ = {isa = PBXBuildFile; fileRef = 72B5C35C22F6733300D973B4 /* Gif */; };
-		72B5C36F22F6796400D973B4 /* SwiftyGif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B5C36922F6792900D973B4 /* SwiftyGif.framework */; };
 		72C9E5CD22F28CA300AAEC90 /* DoddleBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5CC22F28CA300AAEC90 /* DoddleBoardViewController.swift */; };
 		72C9E5D322F2BD5500AAEC90 /* LaunchSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5D222F2BD5500AAEC90 /* LaunchSceneViewController.swift */; };
 		72C9E5D522F2CE3800AAEC90 /* ScrollingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5D422F2CE3800AAEC90 /* ScrollingView.swift */; };
@@ -84,7 +83,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72B5C36F22F6796400D973B4 /* SwiftyGif.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
