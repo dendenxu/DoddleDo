@@ -53,7 +53,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="338" height="155"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-xg-WzM">
-                                                        <rect key="frame" x="117" y="30" width="95" height="95"/>
+                                                        <rect key="frame" x="134" y="42" width="70" height="70"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="plus"/>

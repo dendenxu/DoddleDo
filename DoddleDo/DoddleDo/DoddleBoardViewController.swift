@@ -10,6 +10,7 @@ import UIKit
 
 
 class AttributedImage {
+    var points = [CGPoint]()
     var brushWidth: CGFloat = 70.0
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
@@ -31,6 +32,12 @@ extension UIColor {
             green: (rgb >> 8) & 0xFF,
             blue: rgb & 0xFF
         )
+    }
+}
+
+extension CGPoint {
+    func rectDistance(between point: CGPoint) -> CGFloat {
+        return abs(self.x - point.x) + abs(self.y - point.y)
     }
 }
 
@@ -123,29 +130,51 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        // TODO: Change buttonsView visibility
+//        if let view = anim.value(forKey: "view") as? UIView, let isDoubleTapped = anim.value(forKey: "isDoubleTapped")as? Bool, !isDoubleTapped {
+//            view.isHidden = true
+//        }
+        if let isLast = anim.value(forKey: "isLast") as? Bool, isLast {
+            view.isUserInteractionEnabled = true
+        }
     }
 
+    func animationDidStart(_ anim: CAAnimation) {
+        if let view = anim.value(forKey: "view") as? UIView, let isDoubleTapped = anim.value(forKey: "isDoubleTapped")as? Bool, isDoubleTapped {
+            view.isHidden = false
+        }
+    }
+
+    var tempCount: Int = 0
     @objc func tapped(recognizer: UITapGestureRecognizer) {
         if !buttonsView.isHidden {
-            var count: Double = 0
+            view.isUserInteractionEnabled = false
+            var count: Int = 0
             for view in buttonsView.subviews {
-                let alpha = CABasicAnimation(keyPath: "opacity")
-                alpha.fromValue = 1
-                alpha.toValue = 0
-                let flyX = CABasicAnimation(keyPath: "position.x")
-                flyX.toValue = recognizer.location(in: buttonsView).x
-                flyX.fromValue = view.center.x
-                let flyY = CABasicAnimation(keyPath: "position.y")
-                flyY.toValue = recognizer.location(in: buttonsView).y
-                flyY.fromValue = view.center.y
-                let group = CAAnimationGroup()
-                group.animations = [flyX, flyY, alpha]
-                group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-                group.duration = 0.1
-                group.beginTime = 0.01 * count + CACurrentMediaTime()
-                count = count + 1
-                view.layer.add(group, forKey: nil)
+                let originalCenter = view.center
+                UIView.animate(
+                    withDuration: 0.3,
+//                    delay: 0.01 * Double(count),
+                    delay: 0,
+                    usingSpringWithDamping: 0.8,
+                    initialSpringVelocity: 0,
+                    options: .curveEaseInOut,
+                    animations: {
+                        view.alpha = 0
+                        view.center = recognizer.location(in: self.buttonsView)
+                    },
+                    completion: { finished in
+                        view.isHidden = true
+                        view.alpha = 1
+                        view.center = originalCenter
+                        if self.tempCount == self.buttonsView.subviews.count - 1 {
+                            self.buttonsView.isHidden = true
+                            self.view.isUserInteractionEnabled = true
+                            self.tempCount = 0
+                        }
+                        self.tempCount = self.tempCount + 1
+                    }
+                )
+                count = count == buttonsView.subviews.count - 1 ? count : count + 1
             }
         }
     }
@@ -153,8 +182,11 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     @objc func doubleTapped(recognizer: UITapGestureRecognizer) {
         buttonsView.center = CGPoint(x: recognizer.location(in: view).x, y: recognizer.location(in: view).y - 50)
         if buttonsView.isHidden {
-            var count: Double = 0
+            view.isUserInteractionEnabled = false
+            buttonsView.isHidden = false
+            var count: Int = 0
             for view in buttonsView.subviews {
+                view.isHidden = true
                 // Magic animation. Don't touch. Toggled for an hour.
                 let alpha = CABasicAnimation(keyPath: "opacity")
                 alpha.fromValue = 0
@@ -175,12 +207,17 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                 group.animations = [flyX, flyY, alpha]
                 group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
                 group.duration = 0.3
-                group.beginTime = 0.01 * count + CACurrentMediaTime()
-                count = count + 1
+//                group.beginTime = 0.01 * Double(count) + CACurrentMediaTime()
+                group.delegate = self
+                group.setValue(view, forKey: "view")
+                group.setValue(true, forKey: "isDoubleTapped")
+                if count == buttonsView.subviews.count - 1 {
+                    group.setValue(true, forKey: "isLast")
+                }
                 view.layer.add(group, forKey: nil)
+                count = count + 1
             }
         }
-
     }
 
     // TODO: Get rid of the finger
@@ -246,7 +283,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
     private var framedImage: UIImage?
 
-    var bufferNumber: Int = 50
+    var bufferNumber: Int = 100
     var tempImages = [AttributedImage]() {
         didSet {
             if tempImages.count > bufferNumber {
@@ -309,6 +346,15 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         swipe = false
+        if let image = tempImageView.image {
+            let tempImage = AttributedImage()
+            tempImage.image = image
+            tempImage.opacity = opacity
+            tempImage.brushWidth = brushWidth
+            tempImage.blendMode = .normal
+            tempImage.points = points
+            tempImages.append(tempImage)
+        }
         tempImageView.image = nil
         points = [CGPoint]()
     }
@@ -316,21 +362,19 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let currentPoint = touch.location(in: view)
-
-
         points.append(currentPoint)
-        if swipe {
+
+        if currentPoint.rectDistance(between: lastPoint) > 1 {
             drawLine(from: lastPoint, to: currentPoint)
+            swipe = true
         }
         lastPoint = currentPoint
-        swipe = true
 
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let currentPoint = touch.location(in: view)
-
         points.append(currentPoint)
 
         if swipe {
@@ -345,6 +389,10 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                 context.addLine(to: points[1])
             } else {
                 tempImage.image = tempImageView.image
+                tempImage.opacity = opacity
+                tempImage.brushWidth = brushWidth
+                tempImage.blendMode = .normal
+                tempImage.points = points
                 tempImages.append(tempImage)
                 tempImageView.image = nil
                 points = [CGPoint]()
@@ -358,7 +406,9 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
             context.strokePath()
             tempImage.image = UIGraphicsGetImageFromCurrentImageContext()
             tempImage.opacity = opacity
+            tempImage.brushWidth = brushWidth
             tempImage.blendMode = .normal
+            tempImage.points = points
             UIGraphicsEndImageContext()
             tempImages.append(tempImage)
         }
@@ -398,4 +448,3 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
 
 }
-
