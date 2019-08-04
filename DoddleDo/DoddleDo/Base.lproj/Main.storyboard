@@ -201,7 +201,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="eraser" translatesAutoresizingMaskIntoConstraints="NO" id="K84-AF-I7B" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                        <rect key="frame" x="369" y="44" width="40" height="40"/>
+                                        <rect key="frame" x="372" y="40" width="48" height="48"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="eraser"/>
@@ -255,18 +255,10 @@
                     <connections>
                         <outlet property="back" destination="wcG-hU-mlj" id="Mfw-qo-69M"/>
                         <outlet property="buttonsView" destination="bAs-vp-vM8" id="SBa-qk-08B"/>
-                        <outlet property="eraser" destination="K84-AF-I7B" id="27T-0o-efh"/>
                         <outlet property="finger" destination="UX2-1c-yLM" id="QF5-KP-dQW"/>
                         <outlet property="finish" destination="Hg7-Hj-NVm" id="5z4-Fw-MI4"/>
-                        <outlet property="grass" destination="edd-XQ-s4c" id="S4L-9M-Dlb"/>
-                        <outlet property="house" destination="ZaR-M2-Euq" id="7lV-Mw-LDc"/>
                         <outlet property="mainImageView" destination="5NB-hA-siT" id="fWT-u9-pT5"/>
-                        <outlet property="mountain" destination="uMd-nc-fgf" id="BY0-Xg-Vnm"/>
-                        <outlet property="river" destination="Vhi-tq-JPR" id="ArG-1V-D9c"/>
-                        <outlet property="road" destination="skY-rZ-7BP" id="Re5-GY-Ogc"/>
-                        <outlet property="sky" destination="AMJ-dn-xuy" id="avB-ii-PSu"/>
                         <outlet property="tempImageView" destination="WCj-q2-FMj" id="njY-Jp-egy"/>
-                        <outlet property="tree" destination="2t8-6v-lZl" id="DF8-D3-eI6"/>
                         <segue destination="x26-mu-irf" kind="unwind" identifier="boardBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kWx-Kc-r3h"/>
                         <segue destination="GKh-xE-yfu" kind="custom" identifier="finish" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="R2D-M1-QIl"/>
                     </connections>

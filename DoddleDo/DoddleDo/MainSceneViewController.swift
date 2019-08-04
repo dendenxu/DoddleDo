@@ -188,21 +188,10 @@ extension UIViewController {
                     },
                     completion: {
                         finished in
-                        if let viewController = self as? DoddleBoardViewController, let id = (recognizer.view as? ShadowedImageView)?.identifier {
-                            switch id {
-                            case "boardBack": fallthrough
-                            case "finish": self.performSegue(withIdentifier: name, sender: tempLocation)
-                            case "finger": viewController.buttonsView.isHidden = !viewController.buttonsView.isHidden
-                            case "mountain": viewController.color = viewController.colorPalette[.mountain] ?? UIColor.black
-                            case "river": viewController.color = viewController.colorPalette[.river] ?? UIColor.black
-                            case "sky": viewController.color = viewController.colorPalette[.sky] ?? UIColor.black
-                            case "house": viewController.color = viewController.colorPalette[.house] ?? UIColor.black
-                            case "road": viewController.color = viewController.colorPalette[.road] ?? UIColor.black
-                            case "tree": viewController.color = viewController.colorPalette[.tree] ?? UIColor.black
-                            case "grass": viewController.color = viewController.colorPalette[.grass] ?? UIColor.black
-                            case "eraser": viewController.color = viewController.colorPalette[.eraser] ?? UIColor.black
-                            default: break
-                            }
+                        if let viewController = self as? DoddleBoardViewController, viewController.colorPalette[name] != nil{
+                            viewController.color = viewController.colorPalette[name]!
+                        } else if let viewController = self as? DoddleBoardViewController, name == "finger"{
+                            viewController.buttonsView.isHidden = !viewController.buttonsView.isHidden
                         } else {
                             self.performSegue(withIdentifier: name, sender: tempLocation)
                         }
