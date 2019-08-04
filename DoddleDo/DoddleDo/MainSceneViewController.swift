@@ -144,7 +144,8 @@ extension UIViewController {
             )
         case .began:
             if let view = recognizer.view {
-                if let view = view as? ShadowedImageView, let name = view.identifier, name == "settings" {
+                // MARK: helpTest is deprecated
+                if let view = view as? ShadowedImageView, let name = view.identifier, name == "settings" || name == "help" || name == "helpTest"{
                     let rotation = CABasicAnimation(keyPath: "transform.rotation")
                     rotation.fromValue = 0
                     rotation.toValue = constants.settingsRotationAngle
@@ -155,10 +156,17 @@ extension UIViewController {
                     shadowHeight.values = [4, 0, -4, -5.6, -4]
                     shadowHeight.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
                     let group = CAAnimationGroup()
+//                    group.isRemovedOnCompletion = false
+//                    group.fillMode = .backwards
                     group.animations = [rotation, shadowWidth, shadowHeight]
                     group.duration = constants.settingsRotationDuration
                     group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
                     view.layer.add(group, forKey: nil)
+//                    UIView.animate(withDuration: constants.settingsRotationDuration, animations: { }) { finished in
+//                        view.transform = CGAffineTransform.identity.rotated(by: constants.settingsRotationAngle)
+//                        view.layer.shadowOffset = CGSize(width: -4, height: -4)
+//                        view.layer.shadowOffset = CGSize(width: 4, height: 4)
+//                    }
                 }
                 UIView.animate(
                     withDuration: constants.buttonTappedOrPressedAnimationDuration,
@@ -188,10 +196,10 @@ extension UIViewController {
                     },
                     completion: {
                         finished in
-                        if let viewController = self as? DoddleBoardViewController, viewController.colorPalette[name] != nil{
+                        if let viewController = self as? DoddleBoardViewController, viewController.colorPalette[name] != nil {
                             viewController.color = viewController.colorPalette[name]!
-                        } else if let viewController = self as? DoddleBoardViewController, name == "finger"{
-                            viewController.buttonsView.isHidden = !viewController.buttonsView.isHidden
+                        } else if let viewController = self as? DoddleBoardViewController, name == "finger" {
+                            viewController.fingerTapped()
                         } else {
                             self.performSegue(withIdentifier: name, sender: tempLocation)
                         }
@@ -208,7 +216,7 @@ extension UIViewController {
         static let buttonTappedOrPressedAnimationDuration: Double = 0.06
         static let buttonTappedOrPressedSpringDamping: CGFloat = 0.2
         static let buttonTappedOrPressedTransformScale: CGFloat = 1.2
-        static let settingsRotationAngle = CGFloat.pi
+        static let settingsRotationAngle = CGFloat.pi * 2
         static let settingsRotationDuration: Double = 0.8
     }
 }

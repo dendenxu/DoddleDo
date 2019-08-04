@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -175,8 +174,15 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finish"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="UX2-1c-yLM" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="796" y="329" width="119" height="85"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finger"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAs-vp-vM8">
-                                <rect key="frame" x="425" y="236" width="442" height="128"/>
+                                <rect key="frame" x="227" y="143" width="442" height="104"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sky" translatesAutoresizingMaskIntoConstraints="NO" id="AMJ-dn-xuy" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
@@ -238,13 +244,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="UX2-1c-yLM" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                <rect key="frame" x="796" y="329" width="119" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finger"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="e6u-mN-NmT"/>
@@ -287,7 +286,12 @@
                                 <rect key="frame" x="100" y="20" width="696" height="321"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="HI3-dP-Erk">
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJF-Fu-BI9" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="696" height="321"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HI3-dP-Erk">
                                         <rect key="frame" x="228" y="96" width="240" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -308,6 +312,7 @@
                         <outlet property="finishBack" destination="bXM-8b-GjE" id="v9K-ce-f28"/>
                         <outlet property="loading" destination="HI3-dP-Erk" id="lSO-Xe-jf5"/>
                         <outlet property="mainImageView" destination="hDg-VG-JGo" id="eUW-g1-xes"/>
+                        <outlet property="mask" destination="EJF-Fu-BI9" id="xWK-xb-IOI"/>
                         <segue destination="i0X-SM-Yxz" kind="unwind" identifier="finishBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToBoard:" id="Wrh-dC-d1t"/>
                     </connections>
                 </viewController>
@@ -425,7 +430,6 @@
         <image name="grass" width="150" height="150"/>
         <image name="help" width="90" height="90"/>
         <image name="house" width="150" height="150"/>
-        <image name="loading" width="16" height="16"/>
         <image name="mountain" width="150" height="150"/>
         <image name="name" width="1080" height="252"/>
         <image name="plus" width="165" height="165"/>

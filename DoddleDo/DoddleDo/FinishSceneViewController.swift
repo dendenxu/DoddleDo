@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftyGif
 
 extension Data {
     mutating func appendString(string: String) {
@@ -48,16 +48,41 @@ class FinishSceneViewController: UIViewController {
     }
 
     @IBOutlet weak var loading: UIImageView!
+    @IBOutlet weak var mask: ScrollingView!
     
     @IBOutlet weak var mainImageView: ScrollingView!
-    var image: UIImage?
+    var tempImage: UIImage?
 
     override func viewDidLoad() {
-        mainImageView.image = image
-        aiPainting(image: image, to: mainImageView)
         
-        if let image = UIImage.animatedImageNamed("loading", duration: 100) {
-            loading.image = image
+        mainImageView.image = tempImage
+        mainImageView.image = tintImage(mainImageView.image, with: UIColor.white.cgColor, with: 0.8)
+        do {
+            let gif = try UIImage(gifName: "Gif/loading.gif")
+            loading.setGifImage(gif)
+        } catch let error {
+            print(error)
+        }
+        aiPainting(image: tempImage, to: mainImageView)
+        
+    }
+    
+    private func tintImage(_ image: UIImage?, with color: CGColor, with alpha: CGFloat) -> UIImage? {
+        if let image = image {
+            let bounds = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+            var tinted: UIImage?
+            UIGraphicsBeginImageContext(image.size)
+            guard let context = UIGraphicsGetCurrentContext() else { return nil }
+            image.draw(in: bounds)
+            context.setAlpha(alpha)
+            context.setFillColor(color)
+            context.fill(bounds)
+            tinted = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return tinted
+        }
+        else {
+            return nil
         }
     }
 
@@ -104,6 +129,9 @@ class FinishSceneViewController: UIViewController {
                         DispatchQueue.main.async {
                             aiPainted?.image = image.resize(to: CGSize(width: 1792, height: 828))
                             aiPainted?.setNeedsDisplay()
+                            self.mask.isHidden = true
+                            self.loading.isHidden = true
+                            
                         }
                     }
                 }

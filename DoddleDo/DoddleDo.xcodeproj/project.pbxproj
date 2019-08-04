@@ -13,6 +13,9 @@
 		72554FC822F3D8FF00283400 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72554FC722F3D8FF00283400 /* BackgroundView.swift */; };
 		7285F09822E75A4E0019F232 /* SettingsSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */; };
 		7285F09B22E75A620019F232 /* HelpSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7285F09A22E75A620019F232 /* HelpSceneViewController.swift */; };
+		72B5C35B22F672F400D973B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72B5C35A22F672F400D973B4 /* Assets.xcassets */; };
+		72B5C35D22F6733400D973B4 /* Gif in Resources */ = {isa = PBXBuildFile; fileRef = 72B5C35C22F6733300D973B4 /* Gif */; };
+		72B5C36F22F6796400D973B4 /* SwiftyGif.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B5C36922F6792900D973B4 /* SwiftyGif.framework */; };
 		72C9E5CD22F28CA300AAEC90 /* DoddleBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5CC22F28CA300AAEC90 /* DoddleBoardViewController.swift */; };
 		72C9E5D322F2BD5500AAEC90 /* LaunchSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5D222F2BD5500AAEC90 /* LaunchSceneViewController.swift */; };
 		72C9E5D522F2CE3800AAEC90 /* ScrollingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C9E5D422F2CE3800AAEC90 /* ScrollingView.swift */; };
@@ -20,9 +23,39 @@
 		72FC9E4F22E6F4BE00A920DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */; };
 		72FC9E5122E6F4BE00A920DA /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */; };
 		72FC9E5422E6F4BE00A920DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5222E6F4BE00A920DA /* Main.storyboard */; };
-		72FC9E5622E6F4C700A920DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5522E6F4C700A920DA /* Assets.xcassets */; };
 		72FC9E5922E6F4C700A920DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72FC9E5722E6F4C700A920DA /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		72B5C36622F6792900D973B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72B5C36022F6792900D973B4 /* SwiftyGif.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FA29E9321CA9340E00E579D5;
+			remoteInfo = SwiftyGifExample;
+		};
+		72B5C36822F6792900D973B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72B5C36022F6792900D973B4 /* SwiftyGif.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3B18BAF41E289899009C125A;
+			remoteInfo = SwiftyGif;
+		};
+		72B5C36A22F6792900D973B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72B5C36022F6792900D973B4 /* SwiftyGif.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EF34CB4A22A51591002A6C92;
+			remoteInfo = SwiftyGifTests;
+		};
+		72B5C36C22F6794A00D973B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72B5C36022F6792900D973B4 /* SwiftyGif.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3B18BAF31E289899009C125A;
+			remoteInfo = SwiftyGif;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		723BA53922F5796700BE3BF1 /* FinishSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishSceneViewController.swift; sourceTree = "<group>"; };
@@ -31,6 +64,9 @@
 		72554FC722F3D8FF00283400 /* BackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		7285F09722E75A4E0019F232 /* SettingsSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSceneViewController.swift; sourceTree = "<group>"; };
 		7285F09A22E75A620019F232 /* HelpSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpSceneViewController.swift; sourceTree = "<group>"; };
+		72B5C35A22F672F400D973B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		72B5C35C22F6733300D973B4 /* Gif */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Gif; sourceTree = "<group>"; };
+		72B5C36022F6792900D973B4 /* SwiftyGif.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftyGif.xcodeproj; sourceTree = "<group>"; };
 		72C9E5CC22F28CA300AAEC90 /* DoddleBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoddleBoardViewController.swift; sourceTree = "<group>"; };
 		72C9E5D222F2BD5500AAEC90 /* LaunchSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSceneViewController.swift; sourceTree = "<group>"; };
 		72C9E5D422F2CE3800AAEC90 /* ScrollingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingView.swift; sourceTree = "<group>"; };
@@ -39,7 +75,6 @@
 		72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72FC9E5022E6F4BE00A920DA /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
 		72FC9E5322E6F4BE00A920DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		72FC9E5522E6F4C700A920DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72FC9E5822E6F4C700A920DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72FC9E5A22E6F4C700A920DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,17 +84,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B5C36F22F6796400D973B4 /* SwiftyGif.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		72B5C36122F6792900D973B4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				72B5C36722F6792900D973B4 /* SwiftyGifExample.app */,
+				72B5C36922F6792900D973B4 /* SwiftyGif.framework */,
+				72B5C36B22F6792900D973B4 /* SwiftyGifTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		72B5C36E22F6796400D973B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		72FC9E4222E6F4BE00A920DA = {
 			isa = PBXGroup;
 			children = (
 				72FC9E4D22E6F4BE00A920DA /* DoddleDo */,
 				72FC9E4C22E6F4BE00A920DA /* Products */,
+				72B5C36E22F6796400D973B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,7 +128,9 @@
 		72FC9E4D22E6F4BE00A920DA /* DoddleDo */ = {
 			isa = PBXGroup;
 			children = (
-				72FC9E5522E6F4C700A920DA /* Assets.xcassets */,
+				72B5C36022F6792900D973B4 /* SwiftyGif.xcodeproj */,
+				72B5C35A22F672F400D973B4 /* Assets.xcassets */,
+				72B5C35C22F6733300D973B4 /* Gif */,
 				72FC9E5A22E6F4C700A920DA /* Info.plist */,
 				72FC9E4E22E6F4BE00A920DA /* AppDelegate.swift */,
 				72FC9E5722E6F4C700A920DA /* LaunchScreen.storyboard */,
@@ -108,6 +164,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				72B5C36D22F6794A00D973B4 /* PBXTargetDependency */,
 			);
 			name = DoddleDo;
 			productName = DoddleDo;
@@ -140,6 +197,12 @@
 			mainGroup = 72FC9E4222E6F4BE00A920DA;
 			productRefGroup = 72FC9E4C22E6F4BE00A920DA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 72B5C36122F6792900D973B4 /* Products */;
+					ProjectRef = 72B5C36022F6792900D973B4 /* SwiftyGif.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				72FC9E4A22E6F4BE00A920DA /* DoddleDo */,
@@ -147,13 +210,38 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		72B5C36722F6792900D973B4 /* SwiftyGifExample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SwiftyGifExample.app;
+			remoteRef = 72B5C36622F6792900D973B4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		72B5C36922F6792900D973B4 /* SwiftyGif.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftyGif.framework;
+			remoteRef = 72B5C36822F6792900D973B4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		72B5C36B22F6792900D973B4 /* SwiftyGifTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftyGifTests.xctest;
+			remoteRef = 72B5C36A22F6792900D973B4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		72FC9E4922E6F4BE00A920DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				72FC9E5922E6F4C700A920DA /* LaunchScreen.storyboard in Resources */,
-				72FC9E5622E6F4C700A920DA /* Assets.xcassets in Resources */,
+				72B5C35D22F6733400D973B4 /* Gif in Resources */,
+				72B5C35B22F672F400D973B4 /* Assets.xcassets in Resources */,
 				72FC9E5422E6F4BE00A920DA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,6 +269,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		72B5C36D22F6794A00D973B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyGif;
+			targetProxy = 72B5C36C22F6794A00D973B4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		72FC9E5222E6F4BE00A920DA /* Main.storyboard */ = {
@@ -324,6 +420,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 28Y62P3CPJ;
+				"HEADER_SEARCH_PATHS[arch=*]" = "SwiftyGif/**";
 				INFOPLIST_FILE = DoddleDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -342,6 +439,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 28Y62P3CPJ;
+				"HEADER_SEARCH_PATHS[arch=*]" = "SwiftyGif/**";
 				INFOPLIST_FILE = DoddleDo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -17,8 +17,11 @@ class ScrollingView: UIView {
     @IBInspectable
     var image: UIImage?
     
+    @IBInspectable
+    var cornerRadius: CGFloat = 15
+    
     override func draw(_ rect: CGRect) {
-        let path = UIBezierPath(roundedRect: bounds, cornerRadius: 15)
+        let path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         path.addClip()
         if let image = image {
             image.draw(in: bounds)
