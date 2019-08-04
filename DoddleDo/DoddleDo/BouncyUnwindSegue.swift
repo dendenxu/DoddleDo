@@ -9,20 +9,20 @@
 import UIKit
 
 class BouncyUnwindSegue: UIStoryboardSegue {
-    
+
     var sourceZoomPoint = CGPoint(x: 0, y: 0)
     var desinationZoomPoint = CGPoint(x: 0, y: constants.screenHeight)
-    
+
     override func perform() {
         if let previousView = source.view, let backView = destination.view, let window = UIApplication.shared.keyWindow {
-            let screenHeight = UIScreen.main.bounds.size.height
-            let screenWidth = UIScreen.main.bounds.size.width
+
             window.insertSubview(backView, aboveSubview: previousView)
 
             for subView in backView.subviews {
                 subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
             }
             backView.frame = CGRect(origin: sourceZoomPoint, size: constants.sharedZoomSize)
+
             UIView.animate(
                 withDuration: constants.animationDuration,
                 delay: 0,
@@ -30,14 +30,17 @@ class BouncyUnwindSegue: UIStoryboardSegue {
                 initialSpringVelocity: 0,
                 options: [.curveEaseInOut, .allowUserInteraction, .allowAnimatedContent],
                 animations: {
+
                     previousView.frame = CGRect(origin: self.desinationZoomPoint, size: constants.sharedZoomSize)
                     for subView in previousView.subviews {
                         subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
                     }
-                    backView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+
+                    backView.frame = CGRect(x: 0, y: 0, width: constants.screenWidth, height: constants.screenHeight)
                     for subView in backView.subviews {
-                        subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1/constants.scale)
+                        subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1 / constants.scale)
                     }
+
                 },
                 completion: { finished in
                     self.source.dismiss(animated: false, completion: nil)
@@ -54,6 +57,6 @@ extension BouncyUnwindSegue {
         static let sharedZoomSize = CGSize(width: constants.screenWidth * scale, height: constants.screenHeight * scale)
         static let scale: CGFloat = 0.001
         static let animationDuration: Double = 0.45
-        static let animationSpringDamping:CGFloat = 0.7
+        static let animationSpringDamping: CGFloat = 0.7
     }
 }

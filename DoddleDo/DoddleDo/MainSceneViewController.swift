@@ -72,7 +72,6 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
                     }
                 }
             }
-
         }
     }
 
@@ -105,16 +104,9 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    // TODO: Add scrolling effect
+    // TODO: Add 3D effect
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-    }
-}
-
-extension MainSceneViewController {
-    private struct constants {
-        static let bottomLineFontSize: CGFloat = 25
-        static let bottomLineKern: CGFloat = 2
     }
 }
 
@@ -156,17 +148,10 @@ extension UIViewController {
                     shadowHeight.values = [4, 0, -4, -5.6, -4, 0, 4, 5.6, 4]
                     shadowHeight.keyTimes = [0.0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.825, 1.0]
                     let group = CAAnimationGroup()
-//                    group.isRemovedOnCompletion = false
-//                    group.fillMode = .backwards
                     group.animations = [rotation, shadowWidth, shadowHeight]
                     group.duration = constants.settingsRotationDuration
                     group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
                     view.layer.add(group, forKey: nil)
-//                    UIView.animate(withDuration: constants.settingsRotationDuration, animations: { }) { finished in
-//                        view.transform = CGAffineTransform.identity.rotated(by: constants.settingsRotationAngle)
-//                        view.layer.shadowOffset = CGSize(width: -4, height: -4)
-//                        view.layer.shadowOffset = CGSize(width: 4, height: 4)
-//                    }
                 }
                 UIView.animate(
                     withDuration: constants.buttonTappedOrPressedAnimationDuration,
@@ -222,3 +207,10 @@ extension UIViewController {
     }
 }
 
+
+extension MainSceneViewController {
+    private struct constants {
+        static let bottomLineFontSize: CGFloat = 25
+        static let bottomLineKern: CGFloat = 2
+    }
+}

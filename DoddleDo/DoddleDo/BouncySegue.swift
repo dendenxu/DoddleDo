@@ -15,43 +15,36 @@ class BouncySegue: UIStoryboardSegue {
 
     override func perform() {
         if let sourceView = source.view, let destinationView = destination.view, let window = UIApplication.shared.keyWindow {
+
             window.insertSubview(destinationView, aboveSubview: sourceView)
 
             for subView in destinationView.subviews {
                 subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
-//                for subView in subView.subviews {
-//                    subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
-//                }
             }
             destinationView.frame = CGRect(origin: desinationZoomPoint, size: constants.sharedZoomSize)
+
             UIView.animate(
                 withDuration: constants.animationDuration,
                 delay: 0,
                 usingSpringWithDamping: constants.animationSpringDamping,
                 initialSpringVelocity: 0,
-                options: [.curveEaseInOut,.allowUserInteraction],
+                options: [.curveEaseInOut, .allowUserInteraction],
                 animations: {
+
                     sourceView.frame = CGRect(origin: self.sourceZoomPoint, size: constants.sharedZoomSize)
                     for subView in sourceView.subviews {
                         subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
-//                        for subView in subView.subviews {
-//                            subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
-//                        }
                     }
+
                     destinationView.frame = CGRect(x: 0, y: 0, width: constants.screenWidth, height: constants.screenHeight)
                     for subView in destinationView.subviews {
                         subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1 / constants.scale)
-//                        for subView in subView.subviews {
-//                            subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1 / constants.scale)
-//                        }
                     }
+
                 },
                 completion: { finished in
                     for subView in sourceView.subviews {
                         subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1 / constants.scale)
-//                        for subView in subView.subviews {
-//                            subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1 / constants.scale)
-//                        }
                     }
                     self.source.present(self.destination, animated: false, completion: nil)
                 }

@@ -18,7 +18,7 @@ extension Data {
 }
 
 extension UIImage {
-    
+
     func resize(to rect: CGSize) -> UIImage? {
 
         UIGraphicsBeginImageContext(rect)
@@ -28,11 +28,12 @@ extension UIImage {
 
         return newImage
     }
-    
+
 }
 
 class FinishSceneViewController: UIViewController {
 
+    // MARK: Navigation
     var backPoint = CGPoint()
 
     @IBOutlet weak var finishBack: ShadowedImageView! {
@@ -47,14 +48,14 @@ class FinishSceneViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var loading: UIImageView!
-    @IBOutlet weak var mask: ScrollingView!
     
+    // MARK: Initialization
+    @IBOutlet weak var loading: UIImageView!
     @IBOutlet weak var mainImageView: ScrollingView!
     var tempImage: UIImage?
 
     override func viewDidLoad() {
-        
+
         mainImageView.image = tempImage
         mainImageView.image = tintImage(mainImageView.image, with: UIColor.white.cgColor, with: 0.8)
         do {
@@ -64,9 +65,9 @@ class FinishSceneViewController: UIViewController {
             print(error)
         }
         aiPainting(image: tempImage, to: mainImageView)
-        
+
     }
-    
+
     private func tintImage(_ image: UIImage?, with color: CGColor, with alpha: CGFloat) -> UIImage? {
         if let image = image {
             let bounds = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
@@ -129,9 +130,8 @@ class FinishSceneViewController: UIViewController {
                         DispatchQueue.main.async {
                             aiPainted?.image = image.resize(to: CGSize(width: 1792, height: 828))
                             aiPainted?.setNeedsDisplay()
-                            self.mask.isHidden = true
                             self.loading.isHidden = true
-                            
+
                         }
                     }
                 }

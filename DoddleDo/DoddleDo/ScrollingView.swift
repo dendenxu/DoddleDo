@@ -10,16 +10,16 @@ import UIKit
 
 @IBDesignable
 class ScrollingView: UIView {
-    
+
     @IBInspectable
     var identifier: String?
-    
+
     @IBInspectable
     var image: UIImage?
-    
+
     @IBInspectable
-    var cornerRadius: CGFloat = 15
-    
+    var cornerRadius = constants.cornerRadius
+
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath(roundedRect: bounds, cornerRadius: cornerRadius)
         path.addClip()
@@ -29,19 +29,19 @@ class ScrollingView: UIView {
             image.draw(in: bounds)
         }
     }
-    
+
     init(identifier: String, rect: CGRect) {
         super.init(frame: rect)
         self.identifier = identifier
         initializationWork()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initializationWork()
     }
-    
-    
+
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initializationWork()
@@ -63,5 +63,6 @@ extension ScrollingView {
         static let shadowOffsetY: CGFloat = 10
         static let shadowOpacity: Float = 1
         static let shadowRadius: CGFloat = 6
+        static let cornerRadius: CGFloat = 15
     }
 }
