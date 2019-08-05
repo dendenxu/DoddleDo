@@ -241,9 +241,18 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                             self.buttonsView.subviews[0].center.y = self.originalCenter!.y + constants.brushWidthUpperBound * 1.5 / 2 - self.brushWidth * 1.5
 
                         }
-                        self.buttonsView.subviews[0].alpha = 0
+
                     }
                 ) { finished in
+                    UIView.animate(
+                        withDuration: 0.05,
+                        delay: 0.05,
+                        options: .curveLinear,
+                        animations: {
+                            self.buttonsView.subviews[0].alpha = 0
+                        },
+                        completion: nil
+                    )
                     self.buttonsView.subviews[0].removeFromSuperview()
                 }
 
