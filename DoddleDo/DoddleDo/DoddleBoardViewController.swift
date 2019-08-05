@@ -132,9 +132,27 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         }
     }
 
+    @IBOutlet weak var recycleFinger: ShadowedImageView! {
+        didSet {
+            addButtonTappedOrPressedGestureRecognizer(to: recycleFinger)
+        }
+    }
+
     // MARK: Temporary: temporarily using finger as undo gesture recognizer
     func fingerTapped() {
-        tempImages.popLast()
+        if let image = tempImages.popLast() {
+            recycleBin.append(image)
+            caller = "undo"
+        }
+    }
+    private var caller: String?
+
+
+    func recycleFingerTapped() {
+        if let image = recycleBin.popLast() {
+            tempImages.append(image)
+            caller = "redo"
+        }
     }
 
     // MARK: Buttons: animations and gesture recognizers
@@ -203,7 +221,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         }
     }
 
-    var tempCount: Int = 0
+    private var tempCount: Int = 0
     @objc func tapped(recognizer: UITapGestureRecognizer) {
         if !buttonsView.isHidden {
             view.isUserInteractionEnabled = false
@@ -306,8 +324,17 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
             } else {
                 updateMain(from: 0)
             }
+            
+            if let caller = caller, caller == "undo"||caller == "redo" {
+                self.caller = nil
+            } else {
+                caller = nil
+                recycleBin = [AttributedImage]()
+            }
         }
     }
+
+    var recycleBin = [AttributedImage]()
 
     private func updateMain(from: Int) {
         UIGraphicsBeginImageContext(view.frame.size)
@@ -380,7 +407,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         let currentPoint = touch.location(in: view)
         points.append(currentPoint)
         let tempImage = AttributedImage()
-        
+
         if swipe, points.count >= 2 {
             drawLine(from: lastPoint, to: lastPoint)
 

@@ -174,13 +174,6 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finish"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="UX2-1c-yLM" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                <rect key="frame" x="796" y="329" width="119" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finger"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAs-vp-vM8">
                                 <rect key="frame" x="227" y="113" width="442" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -244,6 +237,20 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="UX2-1c-yLM" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="713" y="349" width="119" height="85"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finger"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="fEO-AZ-F4v" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="783" y="329" width="119" height="85"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="recycleFinger"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="e6u-mN-NmT"/>
@@ -257,6 +264,7 @@
                         <outlet property="finger" destination="UX2-1c-yLM" id="QF5-KP-dQW"/>
                         <outlet property="finish" destination="Hg7-Hj-NVm" id="5z4-Fw-MI4"/>
                         <outlet property="mainImageView" destination="5NB-hA-siT" id="fWT-u9-pT5"/>
+                        <outlet property="recycleFinger" destination="fEO-AZ-F4v" id="zIP-G1-BBc"/>
                         <outlet property="tempImageView" destination="WCj-q2-FMj" id="njY-Jp-egy"/>
                         <segue destination="x26-mu-irf" kind="unwind" identifier="boardBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kWx-Kc-r3h"/>
                         <segue destination="GKh-xE-yfu" kind="custom" identifier="finish" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="R2D-M1-QIl"/>

@@ -181,11 +181,15 @@ extension UIViewController {
                     },
                     completion: {
                         finished in
-                        if let viewController = self as? DoddleBoardViewController, viewController.colorPalette[name] != nil {
-                            viewController.color = viewController.colorPalette[name]!
-                            viewController.brushWidth = viewController.brushWidthPalette[name]!
-                        } else if let viewController = self as? DoddleBoardViewController, name == "finger" {
-                            viewController.fingerTapped()
+                        if let viewController = self as? DoddleBoardViewController {
+                            if viewController.colorPalette[name] != nil {
+                                viewController.color = viewController.colorPalette[name]!
+                                viewController.brushWidth = viewController.brushWidthPalette[name]!
+                            } else if name == "finger" {
+                                viewController.fingerTapped()
+                            } else if name == "recycleFinger" {
+                                viewController.recycleFingerTapped()
+                            }
                         } else {
                             self.performSegue(withIdentifier: name, sender: tempLocation)
                         }
