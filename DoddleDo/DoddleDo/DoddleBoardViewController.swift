@@ -41,6 +41,12 @@ extension CGPoint {
     }
 }
 
+extension CGSize {
+    func zoom(by scale: CGFloat) -> CGSize {
+        return CGSize(width: self.width * scale, height: self.width * scale)
+    }
+}
+
 @IBDesignable
 class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, CAAnimationDelegate {
 
@@ -89,15 +95,17 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         colorPalette["stone"] = UIColor(rgb: 0xc5d8c5)
         colorPalette["eraser"] = UIColor.white
 
-        brushWidthPalette["mountain"] = 70
-        brushWidthPalette["grass"] = 70
-        brushWidthPalette["tree"] = 70
-        brushWidthPalette["house"] = 70
-        brushWidthPalette["sky"] = 70
-        brushWidthPalette["river"] = 70
-        brushWidthPalette["road"] = 70
-        brushWidthPalette["stone"] = 70
-        brushWidthPalette["eraser"] = 70
+        brushWidthPalette["mountain"] = constants.initialBrushWidth
+        brushWidthPalette["grass"] = constants.initialBrushWidth
+        brushWidthPalette["tree"] = constants.initialBrushWidth
+        brushWidthPalette["house"] = constants.initialBrushWidth
+        brushWidthPalette["sky"] = constants.initialBrushWidth
+        brushWidthPalette["river"] = constants.initialBrushWidth
+        brushWidthPalette["road"] = constants.initialBrushWidth
+        brushWidthPalette["stone"] = constants.initialBrushWidth
+        brushWidthPalette["eraser"] = constants.initialEraserWidth
+
+
 
         // FIXME: The whole screen rect gets filled with white when seguing to board
         UIGraphicsBeginImageContext(view.frame.size)
@@ -143,8 +151,8 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     func fingerTapped() {
         if let image = tempImages.popLast() {
             recycleBin.append(image)
-            caller = "undo"
         }
+        caller = "undo"
     }
     private var caller: String?
 
@@ -191,30 +199,55 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                 brushWidth = brushWidthPalette[identifier]!
                 originalBrushWidth = brushWidth
                 originalCenter = recognizer.view?.center
+                let width = UIImageView()
+                guard let name = (recognizer.view as? ShadowedImageView)?.identifier else { return }
+                brush = name
+                if name == "eraser" {
+                    width.image = UIImage(named: "eraserWidth")
+                    width.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: constants.eraserWidthUpperBound, height: constants.eraserWidthUpperBound * 1.5))
+                    width.center = originalCenter!
+                    width.center.y = originalCenter!.y + constants.eraserWidthUpperBound * 1.5 / 2 - originalBrushWidth! * 1.5
+                } else {
+                    width.image = UIImage(named: "width")
+                    width.frame = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: constants.brushWidthUpperBound, height: constants.brushWidthUpperBound * 1.5))
+                    width.center = originalCenter!
+                    width.center.y = originalCenter!.y + constants.brushWidthUpperBound * 1.5 / 2 - originalBrushWidth! * 1.5
+                }
+                width.contentMode = .scaleAspectFit
+                buttonsView.insertSubview(width, at: 0)
+
             case .changed:
-                if let originalCenter = originalCenter {
-                    let dy = recognizer.translation(in: view.superview!).y
-                    brushWidth = originalBrushWidth! + dy
-                    brushWidthPalette[identifier]! = brushWidth
-                    if brushWidthPalette[identifier]! > 5 && brushWidthPalette[identifier]! < 100 {
-                        recognizer.view?.center.y = originalCenter.y + dy
-                    } else if brushWidthPalette[identifier]! > 5 && brushWidthPalette[identifier]! < 150 && identifier == "eraser" {
-                        recognizer.view?.center.y = originalCenter.y + dy
-                    }
+                let dy = recognizer.translation(in: view.superview!).y
+                brushWidth = originalBrushWidth! + dy / 1.5
+                brushWidthPalette[identifier]! = brushWidth
+
+                if brushWidthPalette[identifier]! > constants.brushWidthLowerBound && brushWidthPalette[identifier]! < constants.brushWidthUpperBound {
+                    recognizer.view?.center.y = originalCenter!.y + dy
+                } else if brushWidthPalette[identifier]! > constants.eraserWidthLowerBound && brushWidthPalette[identifier]! < constants.eraserWidthUpperBound && identifier == "eraser" {
+                    recognizer.view?.center.y = originalCenter!.y + dy
                 }
 
             case .ended:
-                if let originalCenter = originalCenter {
-                    UIView.animate(
-                        withDuration: 0.05,
-                        delay: 0,
-                        options: .curveEaseInOut,
-                        animations: {
-                            recognizer.view?.center = originalCenter
-                        },
-                        completion: nil
-                    )
+                UIView.animate(
+                    withDuration: 0.1,
+                    delay: 0,
+                    options: .curveEaseInOut,
+                    animations: {
+                        recognizer.view?.center = self.originalCenter!
+                        if let name = (recognizer.view as? ShadowedImageView)?.identifier, name == "eraser" {
+                            self.buttonsView.subviews[0].center.y = self.originalCenter!.y + constants.eraserWidthUpperBound * 1.5 / 2 - self.brushWidth * 1.5
+
+                        } else {
+                            self.buttonsView.subviews[0].center.y = self.originalCenter!.y + constants.brushWidthUpperBound * 1.5 / 2 - self.brushWidth * 1.5
+
+                        }
+                        self.buttonsView.subviews[0].alpha = 0
+                    }
+                ) { finished in
+                    self.buttonsView.subviews[0].removeFromSuperview()
                 }
+
+
             default: break
             }
 
@@ -379,18 +412,20 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     lazy var color = self.colorPalette[brush] ?? UIColor(rgb: 0x6cc0ff)
     var brush = "sky"
     // TODO: Add "brush" feature using MaLiang
-    private var realBrushWidth: CGFloat = 70
+    private var realBrushWidth: CGFloat = constants.initialBrushWidth
     var brushWidth: CGFloat {
         get {
             return realBrushWidth
         }
         set {
-            if newValue > 100 && brush != "eraser" {
-                realBrushWidth = 100
-            } else if newValue < 5 {
-                realBrushWidth = 5
-            } else if newValue > 150 {
-                realBrushWidth = 150
+            if newValue > constants.brushWidthUpperBound && brush != "eraser" {
+                realBrushWidth = constants.brushWidthUpperBound
+            } else if newValue < constants.brushWidthLowerBound && brush != "eraser" {
+                realBrushWidth = constants.brushWidthLowerBound
+            } else if newValue > constants.eraserWidthUpperBound {
+                realBrushWidth = constants.eraserWidthUpperBound
+            } else if newValue < constants.eraserWidthLowerBound {
+                realBrushWidth = constants.eraserWidthLowerBound
             } else {
                 realBrushWidth = newValue
             }
@@ -411,23 +446,6 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
     }
 
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-
-
-        if let image = tempImageView.image, swipe {
-            let tempImage = AttributedImage()
-            tempImage.image = image
-            tempImage.opacity = opacity
-            tempImage.brushWidth = brushWidth
-            tempImage.blendMode = .normal
-            tempImage.points = points
-            tempImages.append(tempImage)
-        }
-        swipe = false
-        tempImageView.image = nil
-        points = [CGPoint]()
-    }
-
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let currentPoint = touch.location(in: view)
@@ -441,10 +459,51 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
     }
 
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let currentPoint = touch.location(in: view)
+        thisDrawFinished(at: currentPoint)
+    }
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let currentPoint = touch.location(in: view)
-        points.append(currentPoint)
+        thisDrawFinished(at: currentPoint)
+    }
+
+    private func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        tempImageView.image?.draw(in: view.bounds)
+        context.move(to: fromPoint)
+        context.addLine(to: toPoint)
+        context.setLineCap(.round)
+        context.setBlendMode(.normal)
+        context.setStrokeColor(color.cgColor)
+        context.setLineWidth(brushWidth)
+        context.strokePath()
+        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        tempImageView.alpha = opacity
+        UIGraphicsEndImageContext()
+    }
+
+    // FIXME: Certain point may not be drawn
+    // Already added some boundary test in touch event handling part. Maybe the smoothen algorithm below needs augmentation
+    private func computePath(of points: [CGPoint], with factor: CGFloat) -> CGPath {
+        let path = UIBezierPath()
+        let tempPoints = [points[1]] + points + [points[points.count - 1]]
+        path.move(to: points[0])
+        for i in 1..<tempPoints.count - 2 {
+            let control1 = CGPoint(x: tempPoints[i].x + (tempPoints[i + 1].x - tempPoints[i - 1].x) / factor, y: tempPoints[i].y + (tempPoints[i + 1].y - tempPoints[i - 1].y) / factor)
+            let control2 = CGPoint(x: tempPoints[i + 1].x - (tempPoints[i + 2].x - tempPoints[i].x) / factor, y: tempPoints[i + 1].y - (tempPoints[i + 2].y - tempPoints[i].y) / factor)
+            path.addCurve(to: tempPoints[i + 1], controlPoint1: control1, controlPoint2: control2)
+        }
+        return path.cgPath
+    }
+
+    private func thisDrawFinished(at point: CGPoint) {
+
+        points.append(point)
         let tempImage = AttributedImage()
 
         if swipe, points.count >= 2 {
@@ -478,34 +537,16 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         tempImageView.image = nil
     }
 
-    private func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
-        UIGraphicsBeginImageContext(view.frame.size)
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        tempImageView.image?.draw(in: view.bounds)
-        context.move(to: fromPoint)
-        context.addLine(to: toPoint)
-        context.setLineCap(.round)
-        context.setBlendMode(.normal)
-        context.setStrokeColor(color.cgColor)
-        context.setLineWidth(brushWidth)
-        context.strokePath()
-        tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        tempImageView.alpha = opacity
-        UIGraphicsEndImageContext()
-    }
 
-    // FIXME: Certain point may not be drawn
-    // Already added some boundary test in touch event handling part. Maybe the smoothen algorithm below needs augmentation
-    private func computePath(of points: [CGPoint], with factor: CGFloat) -> CGPath {
-        let path = UIBezierPath()
-        let tempPoints = [points[1]] + points + [points[points.count - 1]]
-        path.move(to: points[0])
-        for i in 1..<tempPoints.count - 2 {
-            let control1 = CGPoint(x: tempPoints[i].x + (tempPoints[i + 1].x - tempPoints[i - 1].x) / factor, y: tempPoints[i].y + (tempPoints[i + 1].y - tempPoints[i - 1].y) / factor)
-            let control2 = CGPoint(x: tempPoints[i + 1].x - (tempPoints[i + 2].x - tempPoints[i].x) / factor, y: tempPoints[i + 1].y - (tempPoints[i + 2].y - tempPoints[i].y) / factor)
-            path.addCurve(to: tempPoints[i + 1], controlPoint1: control1, controlPoint2: control2)
-        }
-        return path.cgPath
-    }
+}
 
+extension DoddleBoardViewController {
+    private struct constants {
+        static let initialBrushWidth: CGFloat = 40
+        static let initialEraserWidth: CGFloat = 60
+        static let brushWidthLowerBound: CGFloat = 5
+        static let eraserWidthLowerBound: CGFloat = 5
+        static let brushWidthUpperBound: CGFloat = 140
+        static let eraserWidthUpperBound: CGFloat = 200
+    }
 }

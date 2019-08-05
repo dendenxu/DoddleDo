@@ -228,7 +228,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="eraser" translatesAutoresizingMaskIntoConstraints="NO" id="K84-AF-I7B" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                        <rect key="frame" x="367" y="84" width="48" height="48"/>
+                                        <rect key="frame" x="369" y="78" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="eraser"/>
@@ -237,18 +237,18 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="UX2-1c-yLM" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                <rect key="frame" x="713" y="349" width="119" height="85"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finger"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finger" translatesAutoresizingMaskIntoConstraints="NO" id="fEO-AZ-F4v" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                <rect key="frame" x="783" y="329" width="119" height="85"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redo" translatesAutoresizingMaskIntoConstraints="NO" id="fEO-AZ-F4v" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="817" y="343" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="recycleFinger"/>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="undo" translatesAutoresizingMaskIntoConstraints="NO" id="UX2-1c-yLM" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="759" y="343" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finger"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
@@ -427,7 +427,6 @@
     <resources>
         <image name="back" width="87" height="93"/>
         <image name="eraser" width="150" height="150"/>
-        <image name="finger" width="546" height="393"/>
         <image name="finish" width="108" height="108"/>
         <image name="grass" width="150" height="150"/>
         <image name="help" width="90" height="90"/>
@@ -435,10 +434,12 @@
         <image name="mountain" width="150" height="150"/>
         <image name="name" width="1080" height="252"/>
         <image name="plus" width="165" height="165"/>
+        <image name="redo" width="216" height="216"/>
         <image name="river" width="150" height="150"/>
         <image name="road" width="150" height="150"/>
         <image name="settings" width="90" height="90"/>
         <image name="sky" width="150" height="150"/>
         <image name="tree" width="150" height="150"/>
+        <image name="undo" width="216" height="216"/>
     </resources>
 </document>
