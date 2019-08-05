@@ -115,13 +115,13 @@ extension UIViewController {
     func addButtonTappedOrPressedGestureRecognizer(to view: ShadowedImageView) {
         let tapOrPress = UILongPressGestureRecognizer(target: self, action: #selector(buttonTappedOrPressed(recognizer:)))
         tapOrPress.minimumPressDuration = 0
+        tapOrPress.delegate = self as? UIGestureRecognizerDelegate
         view.addGestureRecognizer(tapOrPress)
         view.isUserInteractionEnabled = true
     }
 
     @objc func buttonTappedOrPressed(recognizer: UILongPressGestureRecognizer) {
         switch recognizer.state {
-        case .changed: fallthrough
         case .cancelled: fallthrough
         case .failed:
             UIView.animate(
@@ -134,6 +134,7 @@ extension UIViewController {
                     recognizer.view?.transform = CGAffineTransform.identity
                 }
             )
+            return
         case .began:
             if let view = recognizer.view {
                 // MARK: helpTest is deprecated
@@ -183,12 +184,17 @@ extension UIViewController {
                         finished in
                         if let viewController = self as? DoddleBoardViewController {
                             if viewController.colorPalette[name] != nil {
+                                viewController.brush = name
                                 viewController.color = viewController.colorPalette[name]!
                                 viewController.brushWidth = viewController.brushWidthPalette[name]!
                             } else if name == "finger" {
                                 viewController.fingerTapped()
                             } else if name == "recycleFinger" {
                                 viewController.recycleFingerTapped()
+                            } else if name == "finish" {
+                                self.performSegue(withIdentifier: name, sender: tempLocation)
+                            } else if name == "boardBack" {
+                                self.performSegue(withIdentifier: name, sender: tempLocation)
                             }
                         } else {
                             self.performSegue(withIdentifier: name, sender: tempLocation)

@@ -11,7 +11,7 @@ import UIKit
 
 class AttributedImage {
     var points = [CGPoint]()
-    var brushWidth: CGFloat = 70.0
+    var brushWidth: CGFloat = 70
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
     var image: UIImage?
@@ -64,13 +64,14 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     // MARK: Initialization
     override func viewDidLoad() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(recognizer:)))
-
+        tap.delegate = self
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped(recognizer:)))
         doubleTap.numberOfTapsRequired = 2
-
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(recognizer:)))
-        tap.delegate = self
         doubleTap.delegate = self
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(recognizer:)))
+        longPress.allowableMovement = 2
+
+
         view.addGestureRecognizer(tap)
         view.addGestureRecognizer(doubleTap)
         view.addGestureRecognizer(longPress)
@@ -149,9 +150,11 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
 
     func recycleFingerTapped() {
-        if let image = recycleBin.popLast() {
+        if let image = recycleBin.popLast(), let caller = caller, caller == "undo" || caller == "redo" {
             tempImages.append(image)
-            caller = "redo"
+            self.caller = "redo"
+        } else {
+            recycleBin = [AttributedImage]()
         }
     }
 
@@ -163,27 +166,55 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                     addButtonTappedOrPressedGestureRecognizer(to: view)
                     let pan = UIPanGestureRecognizer(target: self, action: #selector(buttonPanned(recognizer:)))
                     pan.name = view.identifier
+                    pan.delegate = self
                     view.addGestureRecognizer(pan)
+                    view.isUserInteractionEnabled = true
                 }
             }
         }
     }
 
-    private var originPoint: CGPoint?
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let recognizerView = gestureRecognizer.view, let otherView = otherGestureRecognizer.view, recognizerView.isEqual(otherView) {
+            return true
+        }
+        return false
+    }
+
+    private var originalCenter: CGPoint?
+    private var originalBrushWidth: CGFloat?
     @objc func buttonPanned(recognizer: UIPanGestureRecognizer) {
 
         if let identifier = recognizer.name, colorPalette[identifier] != nil {
             switch recognizer.state {
             case .began:
-                originPoint = recognizer.translation(in: view)
-
+                brushWidth = brushWidthPalette[identifier]!
+                originalBrushWidth = brushWidth
+                originalCenter = recognizer.view?.center
             case .changed:
-                if let originPoint = originPoint {
-                    let dy = recognizer.translation(in: view).y - originPoint.y
-                    brushWidthPalette[identifier]! = brushWidthPalette[identifier]! + dy
-                    brushWidth = brushWidthPalette[identifier]!
+                if let originalCenter = originalCenter {
+                    let dy = recognizer.translation(in: view.superview!).y
+                    brushWidth = originalBrushWidth! + dy
+                    brushWidthPalette[identifier]! = brushWidth
+                    if brushWidthPalette[identifier]! > 5 && brushWidthPalette[identifier]! < 100 {
+                        recognizer.view?.center.y = originalCenter.y + dy
+                    } else if brushWidthPalette[identifier]! > 5 && brushWidthPalette[identifier]! < 150 && identifier == "eraser" {
+                        recognizer.view?.center.y = originalCenter.y + dy
+                    }
                 }
 
+            case .ended:
+                if let originalCenter = originalCenter {
+                    UIView.animate(
+                        withDuration: 0.05,
+                        delay: 0,
+                        options: .curveEaseInOut,
+                        animations: {
+                            recognizer.view?.center = originalCenter
+                        },
+                        completion: nil
+                    )
+                }
             default: break
             }
 
@@ -207,9 +238,6 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
 
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-//        if let view = anim.value(forKey: "view") as? UIView, let isDoubleTapped = anim.value(forKey: "isDoubleTapped")as? Bool, !isDoubleTapped {
-//            view.isHidden = true
-//        }
         if let isLast = anim.value(forKey: "isLast") as? Bool, isLast {
             view.isUserInteractionEnabled = true
         }
@@ -232,11 +260,11 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                     withDuration: 0.3,
                     // MARK: Delayed buttons fading out animation
                     // Uncomment next line and comment the line after it to enable
-                    delay: 0.01 * Double(count),
-//                    delay: 0,
+//                    delay: 0.01 * Double(count),
+                    delay: 0,
                     usingSpringWithDamping: 0.8,
                     initialSpringVelocity: 0,
-                    options: .curveEaseInOut,
+                    options: [.curveEaseInOut, .preferredFramesPerSecond60],
                     animations: {
                         view.alpha = 0
                         view.center = recognizer.location(in: self.buttonsView)
@@ -291,7 +319,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                 group.duration = 0.3
                 // MARK: Delayed buttons fading in animation
                 // Uncomment this line to enable
-                group.beginTime = 0.01 * Double(count) + CACurrentMediaTime()
+//                group.beginTime = 0.01 * Double(count) + CACurrentMediaTime()
                 group.delegate = self
                 group.setValue(view, forKey: "view")
                 group.setValue(true, forKey: "isDoubleTapped")
@@ -324,13 +352,8 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
             } else {
                 updateMain(from: 0)
             }
-            
-            if let caller = caller, caller == "undo"||caller == "redo" {
-                self.caller = nil
-            } else {
-                caller = nil
-                recycleBin = [AttributedImage]()
-            }
+
+            caller = nil
         }
     }
 
@@ -353,16 +376,32 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     // Initializing UIColor using hex number defined in UIColor extension
     var colorPalette = [String: UIColor]()
     var brushWidthPalette = [String: CGFloat]()
-    lazy var color = self.colorPalette["tree"] ?? UIColor(rgb: 0xc3ae95)
-
+    lazy var color = self.colorPalette[brush] ?? UIColor(rgb: 0x6cc0ff)
+    var brush = "sky"
     // TODO: Add "brush" feature using MaLiang
-    var brushWidth: CGFloat = 70.0
+    private var realBrushWidth: CGFloat = 70
+    var brushWidth: CGFloat {
+        get {
+            return realBrushWidth
+        }
+        set {
+            if newValue > 100 && brush != "eraser" {
+                realBrushWidth = 100
+            } else if newValue < 5 {
+                realBrushWidth = 5
+            } else if newValue > 150 {
+                realBrushWidth = 150
+            } else {
+                realBrushWidth = newValue
+            }
+        }
+    }
     var opacity: CGFloat = 1.0
     var blendMode = CGBlendMode.normal
     private var lastPoint = CGPoint.zero
     private var points = [CGPoint]()
     private var swipe = false
-
+    private var firstTouch = CGPoint.zero
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
 
@@ -374,8 +413,8 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
 
-        swipe = false
-        if let image = tempImageView.image {
+
+        if let image = tempImageView.image, swipe {
             let tempImage = AttributedImage()
             tempImage.image = image
             tempImage.opacity = opacity
@@ -384,7 +423,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
             tempImage.points = points
             tempImages.append(tempImage)
         }
-
+        swipe = false
         tempImageView.image = nil
         points = [CGPoint]()
     }
@@ -394,7 +433,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         let currentPoint = touch.location(in: view)
         points.append(currentPoint)
 
-        if currentPoint.rectDistance(between: lastPoint) > 1 {
+        if currentPoint.rectDistance(between: firstTouch) > 2 {
             drawLine(from: lastPoint, to: currentPoint)
             swipe = true
         }
