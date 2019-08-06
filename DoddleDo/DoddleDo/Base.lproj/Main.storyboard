@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -167,13 +168,6 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="boardBack"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finish" translatesAutoresizingMaskIntoConstraints="NO" id="Hg7-Hj-NVm" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                <rect key="frame" x="817" y="20" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finish"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bAs-vp-vM8">
                                 <rect key="frame" x="227" y="113" width="442" height="216"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -237,20 +231,34 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redo" translatesAutoresizingMaskIntoConstraints="NO" id="fEO-AZ-F4v" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                <rect key="frame" x="817" y="343" width="50" height="50"/>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ef8-EV-btd">
+                                <rect key="frame" x="328" y="20" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="recycleFinger"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="undo" translatesAutoresizingMaskIntoConstraints="NO" id="UX2-1c-yLM" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
-                                <rect key="frame" x="759" y="343" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finger"/>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="undo" translatesAutoresizingMaskIntoConstraints="NO" id="hga-Aa-sml" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                        <rect key="frame" x="42" y="63" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finger"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="redo" translatesAutoresizingMaskIntoConstraints="NO" id="Mvn-7b-W16" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                        <rect key="frame" x="159" y="63" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="recycleFinger"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finish" translatesAutoresizingMaskIntoConstraints="NO" id="4vd-hC-vCe" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                                        <rect key="frame" x="100" y="8" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finish"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="e6u-mN-NmT"/>
@@ -261,10 +269,8 @@
                     <connections>
                         <outlet property="back" destination="wcG-hU-mlj" id="Mfw-qo-69M"/>
                         <outlet property="buttonsView" destination="bAs-vp-vM8" id="SBa-qk-08B"/>
-                        <outlet property="finger" destination="UX2-1c-yLM" id="QF5-KP-dQW"/>
-                        <outlet property="finish" destination="Hg7-Hj-NVm" id="5z4-Fw-MI4"/>
+                        <outlet property="editButtonsView" destination="ef8-EV-btd" id="PTY-sr-cup"/>
                         <outlet property="mainImageView" destination="5NB-hA-siT" id="fWT-u9-pT5"/>
-                        <outlet property="recycleFinger" destination="fEO-AZ-F4v" id="zIP-G1-BBc"/>
                         <outlet property="tempImageView" destination="WCj-q2-FMj" id="njY-Jp-egy"/>
                         <segue destination="x26-mu-irf" kind="unwind" identifier="boardBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToMainScene:" id="kWx-Kc-r3h"/>
                         <segue destination="GKh-xE-yfu" kind="custom" identifier="finish" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="R2D-M1-QIl"/>
@@ -426,20 +432,20 @@
     </scenes>
     <resources>
         <image name="back" width="87" height="93"/>
-        <image name="eraser" width="350" height="350"/>
+        <image name="eraser" width="230" height="230"/>
         <image name="finish" width="108" height="108"/>
-        <image name="grass" width="250" height="250"/>
+        <image name="grass" width="230" height="230"/>
         <image name="help" width="90" height="90"/>
-        <image name="house" width="250" height="250"/>
-        <image name="mountain" width="250" height="250"/>
+        <image name="house" width="230" height="230"/>
+        <image name="mountain" width="230" height="230"/>
         <image name="name" width="1080" height="252"/>
         <image name="plus" width="165" height="165"/>
-        <image name="redo" width="216" height="216"/>
-        <image name="river" width="250" height="255"/>
-        <image name="road" width="250" height="250"/>
+        <image name="redo" width="144" height="148"/>
+        <image name="river" width="230" height="235"/>
+        <image name="road" width="230" height="230"/>
         <image name="settings" width="90" height="90"/>
-        <image name="sky" width="250" height="255"/>
-        <image name="tree" width="250" height="250"/>
-        <image name="undo" width="216" height="216"/>
+        <image name="sky" width="230" height="235"/>
+        <image name="tree" width="230" height="230"/>
+        <image name="undo" width="144" height="144"/>
     </resources>
 </document>

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyGif
 
 extension Data {
     mutating func appendString(string: String) {
@@ -60,7 +59,7 @@ class FinishSceneViewController: UIViewController {
         mainImageView.image = tintImage(mainImageView.image, with: UIColor.white.cgColor, with: 0.8)
         do {
             let gif = try UIImage(gifName: "Gif/loading.gif")
-            loading.setGifImage(gif)
+            loading.setGifImage(gif, manager: .defaultManager, loopCount: -1)
         } catch let error {
             print(error)
         }

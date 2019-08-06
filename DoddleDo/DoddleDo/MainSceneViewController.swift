@@ -187,12 +187,6 @@ extension UIViewController {
                                 viewController.brush = name
                                 viewController.color = viewController.colorPalette[name]!
                                 viewController.brushWidth = viewController.brushWidthPalette[name]!
-                            } else if name == "finger" {
-                                viewController.fingerTapped()
-                            } else if name == "recycleFinger" {
-                                viewController.recycleFingerTapped()
-                            } else if name == "finish" {
-                                self.performSegue(withIdentifier: name, sender: tempLocation)
                             } else if name == "boardBack" {
                                 self.performSegue(withIdentifier: name, sender: tempLocation)
                             }

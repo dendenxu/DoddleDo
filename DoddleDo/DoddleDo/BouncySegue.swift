@@ -18,38 +18,49 @@ class BouncySegue: UIStoryboardSegue {
 
             window.insertSubview(destinationView, aboveSubview: sourceView)
 
-            for subView in destinationView.subviews {
-                subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
-            }
-            destinationView.frame = CGRect(origin: desinationZoomPoint, size: constants.sharedZoomSize)
+            let sourceSnapshot = UIImageView(image: takeSnapShotOf(view: sourceView))
+            let destinationSnapshot = UIImageView(image: takeSnapShotOf(view: destinationView))
+            destinationSnapshot.frame = CGRect(origin: desinationZoomPoint, size: constants.sharedZoomSize)
+            sourceView.isHidden = true
+            destinationView.isHidden = true
+            window.addSubview(sourceSnapshot)
+            window.addSubview(destinationSnapshot)
 
             UIView.animate(
                 withDuration: constants.animationDuration,
                 delay: 0,
                 usingSpringWithDamping: constants.animationSpringDamping,
                 initialSpringVelocity: 0,
-                options: [.curveEaseInOut, .allowUserInteraction],
+                options: [.curveEaseInOut, .allowAnimatedContent],
                 animations: {
+                    sourceSnapshot.frame = CGRect(origin: self.sourceZoomPoint, size: constants.sharedZoomSize)
 
-                    sourceView.frame = CGRect(origin: self.sourceZoomPoint, size: constants.sharedZoomSize)
-                    for subView in sourceView.subviews {
-                        subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
-                    }
-
-                    destinationView.frame = CGRect(x: 0, y: 0, width: constants.screenWidth, height: constants.screenHeight)
-                    for subView in destinationView.subviews {
-                        subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1 / constants.scale)
-                    }
+                    destinationSnapshot.frame = CGRect(x: 0, y: 0, width: constants.screenWidth, height: constants.screenHeight)
 
                 },
                 completion: { finished in
-                    for subView in sourceView.subviews {
-                        subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1 / constants.scale)
-                    }
+
+                    sourceView.isHidden = false
+                    destinationView.isHidden = false
+                    sourceSnapshot.removeFromSuperview()
+                    destinationSnapshot.removeFromSuperview()
                     self.source.present(self.destination, animated: false, completion: nil)
                 }
             )
         }
+    }
+
+}
+
+extension UIStoryboardSegue {
+    func takeSnapShotOf(view: UIView?) -> UIImage? {
+        guard let view = view else { return nil }
+
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, 0.0)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let snapShot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return snapShot
     }
 }
 
@@ -59,7 +70,7 @@ extension BouncySegue {
         static let screenWidth = UIScreen.main.bounds.size.width
         static let sharedZoomSize = CGSize(width: constants.screenWidth * scale, height: constants.screenHeight * scale)
         static let scale: CGFloat = 0.001
-        static let animationDuration: Double = 0.65
+        static let animationDuration: Double = 0.45
         static let animationSpringDamping: CGFloat = 0.7
     }
 }

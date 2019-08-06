@@ -39,6 +39,9 @@ extension CGPoint {
     func rectDistance(between point: CGPoint) -> CGFloat {
         return abs(self.x - point.x) + abs(self.y - point.y)
     }
+    func circleDistance(between point: CGPoint) -> CGFloat {
+        return sqrt(pow(abs(self.x - point.x), 2) + pow(abs(self.y - point.y), 2))
+    }
 }
 
 extension CGSize {
@@ -71,16 +74,25 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     override func viewDidLoad() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(recognizer:)))
         tap.delegate = self
+
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped(recognizer:)))
         doubleTap.numberOfTapsRequired = 2
         doubleTap.delegate = self
+
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(recognizer:)))
         longPress.allowableMovement = 2
+        longPress.minimumPressDuration = 0.1
+        longPress.delegate = self
+        longPress.name = "mainLongPress"
 
+//        let pan = UIPanGestureRecognizer(target: self, action: #selector(panned(recognizer:)))
+//        pan.delegate = self
+//        pan.name = "editButtonsPanned"
 
         view.addGestureRecognizer(tap)
         view.addGestureRecognizer(doubleTap)
         view.addGestureRecognizer(longPress)
+//        view.addGestureRecognizer(pan)
 
         tempImageView.frame = view.frame
         mainImageView.frame = view.frame
@@ -117,33 +129,9 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
     }
 
-    // TODO: Get rid of the finger
-    @objc func longPressed(recognizer: UILongPressGestureRecognizer) {
-
-    }
-
-
     @IBOutlet weak var back: ShadowedImageView! {
         didSet {
             addButtonTappedOrPressedGestureRecognizer(to: back)
-        }
-    }
-
-    @IBOutlet weak var finish: ShadowedImageView! {
-        didSet {
-            addButtonTappedOrPressedGestureRecognizer(to: finish)
-        }
-    }
-
-    @IBOutlet weak var finger: ShadowedImageView! {
-        didSet {
-            addButtonTappedOrPressedGestureRecognizer(to: finger)
-        }
-    }
-
-    @IBOutlet weak var recycleFinger: ShadowedImageView! {
-        didSet {
-            addButtonTappedOrPressedGestureRecognizer(to: recycleFinger)
         }
     }
 
@@ -183,10 +171,13 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let recognizerView = gestureRecognizer.view, let otherView = otherGestureRecognizer.view, recognizerView.isEqual(otherView) {
+        if let recognizerView = gestureRecognizer.view, let otherView = otherGestureRecognizer.view, recognizerView.isEqual(otherView), gestureRecognizer.isKind(of: UILongPressGestureRecognizer.self) && otherGestureRecognizer.isKind(of: UIPanGestureRecognizer.self) || otherGestureRecognizer.isKind(of: UILongPressGestureRecognizer.self) && gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) {
             return true
+        } else if let nameOfFirst = gestureRecognizer.name, let nameOfSecond = otherGestureRecognizer.name, nameOfFirst == "mainLongPress" && nameOfSecond == "editButtonsPanned" || nameOfSecond == "mainLongPress" && nameOfFirst == "editButtonsPanned" {
+            return true
+        } else {
+            return false
         }
-        return false
     }
 
     private var originalCenter: CGPoint?
@@ -241,7 +232,6 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                             self.buttonsView.subviews[0].center.y = self.originalCenter!.y + constants.brushWidthUpperBound * 1.5 / 2 - self.brushWidth * 1.5
 
                         }
-
                     }
                 ) { finished in
                     UIView.animate(
@@ -263,6 +253,15 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         }
     }
 
+//    private var shouldRecognizeEditButtonsPan = false
+//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        if !shouldRecognizeEditButtonsPan && gestureRecognizer.name == "editButtonsPanned" {
+//            return false
+//        } else {
+//            return true
+//        }
+//    }
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if let single = gestureRecognizer as? UITapGestureRecognizer, let double = otherGestureRecognizer as? UITapGestureRecognizer, double.numberOfTapsRequired == 2 && single.numberOfTapsRequired == 1 && buttonsView.isHidden {
             return true
@@ -274,53 +273,65 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if let single = gestureRecognizer as? UITapGestureRecognizer, let double = otherGestureRecognizer as? UITapGestureRecognizer, double.numberOfTapsRequired == 2 && single.numberOfTapsRequired == 1 {
             return true
+        } else if gestureRecognizer.isKind(of: UILongPressGestureRecognizer.self), let second = otherGestureRecognizer as? UITapGestureRecognizer, second.numberOfTapsRequired == 2 {
+            return true
+        } else if let name = gestureRecognizer.name, name == "editButtonsPanned", gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) {
+            if let other = otherGestureRecognizer as? UILongPressGestureRecognizer, other.name == "mainLongPress" {
+                return false
+            } else {
+                return true
+            }
         } else {
             return false
         }
+
     }
 
+    var editButtonsAnimationFinished = false
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if let isLast = anim.value(forKey: "isLast") as? Bool, isLast {
             view.isUserInteractionEnabled = true
         }
+        if let _ = anim.value(forKey: "view") as? UIView, let isDoubleTappedOrLongPressed = anim.value(forKey: "isDoubleTappedOrLongPressed")as? Bool, isDoubleTappedOrLongPressed {
+            if flag {
+                editButtonsAnimationFinished = true
+            }
+        }
     }
 
     func animationDidStart(_ anim: CAAnimation) {
-        if let view = anim.value(forKey: "view") as? UIView, let isDoubleTapped = anim.value(forKey: "isDoubleTapped")as? Bool, isDoubleTapped {
+        if let view = anim.value(forKey: "view") as? UIView, let isDoubleTappedOrLongPressed = anim.value(forKey: "isDoubleTappedOrLongPressed")as? Bool, isDoubleTappedOrLongPressed {
             view.isHidden = false
         }
     }
 
-    private var tempCount: Int = 0
     @objc func tapped(recognizer: UITapGestureRecognizer) {
         if !buttonsView.isHidden {
             view.isUserInteractionEnabled = false
             var count: Int = 0
+            delay(seconds: constants.buttonsDisappearAnimationDuration + Double(buttonsView.subviews.count - 1) * constants.buttonsAnimationDelay) {
+                self.buttonsView.isHidden = true
+                self.view.isUserInteractionEnabled = true
+            }
             for view in buttonsView.subviews {
                 let originalCenter = view.center
                 UIView.animate(
-                    withDuration: 0.3,
-                    // MARK: Delayed buttons fading out animation
-                    // Uncomment next line and comment the line after it to enable
-//                    delay: 0.01 * Double(count),
-                    delay: 0,
+                    withDuration: constants.buttonsDisappearAnimationDuration,
+                    delay: constants.buttonsAnimationDelay * Double(count),
                     usingSpringWithDamping: 0.8,
                     initialSpringVelocity: 0,
-                    options: [.curveEaseInOut, .preferredFramesPerSecond60],
+                    options: .curveEaseInOut,
                     animations: {
                         view.alpha = 0
+//                        view.center = self.buttonsView.subviews[0].center
+//                        view.center = self.buttonsOriginalPosition!
                         view.center = recognizer.location(in: self.buttonsView)
+
                     },
                     completion: { finished in
                         view.isHidden = true
                         view.alpha = 1
                         view.center = originalCenter
-                        if self.tempCount == self.buttonsView.subviews.count - 1 {
-                            self.buttonsView.isHidden = true
-                            self.view.isUserInteractionEnabled = true
-                            self.tempCount = 0
-                        }
-                        self.tempCount = self.tempCount + 1
                     }
                 )
                 count = count == buttonsView.subviews.count - 1 ? count : count + 1
@@ -328,11 +339,14 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         }
     }
 
+//    private var buttonsOriginalPosition: CGPoint?
     @objc func doubleTapped(recognizer: UITapGestureRecognizer) {
-        buttonsView.center = CGPoint(x: recognizer.location(in: view).x, y: recognizer.location(in: view).y - 50)
+
         if buttonsView.isHidden {
+            buttonsView.center = CGPoint(x: recognizer.location(in: view).x, y: recognizer.location(in: view).y - 50)
             view.isUserInteractionEnabled = false
             buttonsView.isHidden = false
+//            buttonsOriginalPosition = recognizer.location(in: buttonsView)
             var count: Int = 0
             for view in buttonsView.subviews {
                 view.isHidden = true
@@ -358,20 +372,161 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
                 let group = CAAnimationGroup()
                 group.animations = [flyX, flyY, alpha]
                 group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-                group.duration = 0.3
-                // MARK: Delayed buttons fading in animation
-                // Uncomment this line to enable
-//                group.beginTime = 0.01 * Double(count) + CACurrentMediaTime()
+                group.duration = constants.buttonsAppearAnimationDuration
+                group.beginTime = constants.buttonsAnimationDelay * Double(count) + CACurrentMediaTime()
                 group.delegate = self
                 group.setValue(view, forKey: "view")
-                group.setValue(true, forKey: "isDoubleTapped")
+                group.setValue(true, forKey: "isDoubleTappedOrLongPressed")
 
                 if count == buttonsView.subviews.count - 1 {
                     group.setValue(true, forKey: "isLast")
                 }
                 view.layer.add(group, forKey: nil)
-                count = count + 1
+                count += 1
             }
+        }
+    }
+
+
+    private func delay(seconds: Double, completion: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: completion)
+    }
+
+    private var editButtonsAnimationStartTime: CFTimeInterval?
+    @IBOutlet weak var editButtonsView: UIView! {
+        didSet {
+            for view in editButtonsView.subviews {
+//                addButtonTappedOrPressedGestureRecognizer(to: view as! ShadowedImageView)
+                view.isUserInteractionEnabled = true
+            }
+        }
+    }
+    // TODO: Get rid of the finger
+
+//    @objc func panned(recognizer: UIPanGestureRecognizer) {
+//        switch recognizer.state {
+//        case .ended:
+//            shouldRecognizeEditButtonsPan = false
+//        default: break
+//        }
+//    }
+
+    @objc func longPressed(recognizer: UILongPressGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+//                shouldRecognizeEditButtonsPan = true
+            editButtonsView.center = CGPoint(x: recognizer.location(in: view).x, y: recognizer.location(in: view).y - 20)
+            editButtonsView.isHidden = false
+            editButtonsAnimationStartTime = CACurrentMediaTime()
+            var count: Int = 0
+            for view in editButtonsView.subviews {
+                view.isHidden = true
+                // Magic animation. Don't touch. Toggled for an hour.
+                let alpha = CABasicAnimation(keyPath: "opacity")
+                alpha.fromValue = 0
+                alpha.toValue = 1
+
+                let flyX = CASpringAnimation(keyPath: "position.x")
+                flyX.damping = 20
+                flyX.stiffness = 400
+                flyX.initialVelocity = 0.0
+                flyX.fromValue = recognizer.location(in: editButtonsView).x
+                flyX.toValue = view.center.x
+
+                let flyY = CASpringAnimation(keyPath: "position.y")
+                flyY.damping = 20
+                flyY.stiffness = 400
+                flyY.initialVelocity = 0.0
+                flyY.fromValue = recognizer.location(in: editButtonsView).y
+                flyY.toValue = view.center.y
+
+                let group = CAAnimationGroup()
+                group.animations = [flyX, flyY, alpha]
+                group.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+                group.duration = 0.3
+                // MARK: Delayed buttons fading in animation
+                // Uncomment this line to enable
+                group.beginTime = constants.buttonsAnimationDelay * Double(count) + CACurrentMediaTime()
+                group.delegate = self
+                group.setValue(view, forKey: "view")
+                group.setValue(true, forKey: "isDoubleTappedOrLongPressed")
+
+                if count == editButtonsView.subviews.count - 1 {
+                    group.setValue(true, forKey: "isLast")
+                }
+                view.layer.add(group, forKey: nil)
+                count += 1
+            }
+            editButtonsAnimationFinished = false
+
+        case .changed:
+            if let view = editButtonsView.hitTest(recognizer.location(in: editButtonsView), with: nil) as? ShadowedImageView {
+                UIView.animate(
+                    withDuration: constants.buttonTappedOrPressedAnimationDuration,
+                    delay: 0,
+                    usingSpringWithDamping: constants.buttonTappedOrPressedSpringDamping,
+                    initialSpringVelocity: 0,
+                    options: [],
+                    animations: {
+                        view.transform = CGAffineTransform.identity.scaledBy(x: constants.buttonTappedOrPressedTransformScale, y: constants.buttonTappedOrPressedTransformScale)
+                    }
+                )
+            }
+
+        case .ended:
+            if let view = editButtonsView.hitTest(recognizer.location(in: editButtonsView), with: nil) as? ShadowedImageView, let name = view.identifier {
+                UIView.animate(
+                    withDuration: constants.buttonTappedOrPressedAnimationDuration,
+                    delay: 0,
+                    usingSpringWithDamping: constants.buttonTappedOrPressedSpringDamping,
+                    initialSpringVelocity: 0,
+                    options: [],
+                    animations: {
+                        view.transform = CGAffineTransform.identity
+                    }
+                ){ finished in
+                    if name == "finish" {
+                        let tempLocation = recognizer.location(in: self.view)
+                        self.performSegue(withIdentifier: name, sender: tempLocation)
+                    } else if name == "finger" {
+                        self.fingerTapped()
+                    } else if name == "recycleFinger" {
+                        self.recycleFingerTapped()
+                    }
+                }
+            }
+
+            var count: Int = 0
+            let location = recognizer.location(in: self.editButtonsView)
+            delay(seconds: constants.buttonsDisappearAnimationDuration + (editButtonsAnimationFinished ? 0 : constants.buttonsAppearAnimationDuration - CACurrentMediaTime() + editButtonsAnimationStartTime! + 0.01) + Double(editButtonsView.subviews.count - 1) * constants.buttonsAnimationDelay) {
+                self.editButtonsView.isHidden = true
+                self.view.isUserInteractionEnabled = true
+            }
+            for view in editButtonsView.subviews {
+                let originalCenter = view.center
+                self.view.isUserInteractionEnabled = false
+                delay(seconds: editButtonsAnimationFinished ? 0 : (constants.buttonsAppearAnimationDuration - CACurrentMediaTime() + editButtonsAnimationStartTime!) + 0.01 + Double(count) * constants.buttonsAnimationDelay) {
+                    UIView.animate(
+                        withDuration: constants.buttonsDisappearAnimationDuration,
+                        delay: 0,
+                        usingSpringWithDamping: 0.8,
+                        initialSpringVelocity: 0,
+                        options: .curveEaseInOut,
+                        animations: {
+                            view.alpha = 0
+                            view.center = location
+                        },
+                        completion: { finished in
+                            view.isHidden = true
+                            view.alpha = 1
+                            view.center = originalCenter
+                        }
+                    )
+                }
+                count = count == editButtonsView.subviews.count - 1 ? count : count + 1
+            }
+
+        default: break
         }
     }
 
@@ -446,11 +601,12 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     private var points = [CGPoint]()
     private var swipe = false
     private var firstTouch = CGPoint.zero
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
-
         swipe = false
         lastPoint = touch.location(in: view)
+        firstTouch = lastPoint
         points.append(lastPoint)
 
     }
@@ -460,9 +616,11 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         let currentPoint = touch.location(in: view)
         points.append(currentPoint)
 
-        if currentPoint.rectDistance(between: firstTouch) > 2 {
+        if !swipe && currentPoint.circleDistance(between: firstTouch) > 2 {
             drawLine(from: lastPoint, to: currentPoint)
             swipe = true
+        } else if swipe {
+            drawLine(from: lastPoint, to: currentPoint)
         }
         lastPoint = currentPoint
 
@@ -557,5 +715,8 @@ extension DoddleBoardViewController {
         static let eraserWidthLowerBound: CGFloat = 5
         static let brushWidthUpperBound: CGFloat = 140
         static let eraserWidthUpperBound: CGFloat = 200
+        static let buttonsAppearAnimationDuration: Double = 0.3
+        static let buttonsDisappearAnimationDuration: Double = 0.3
+        static let buttonsAnimationDelay: Double = 0
     }
 }

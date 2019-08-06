@@ -14,35 +14,33 @@ class BouncyUnwindSegue: UIStoryboardSegue {
     var desinationZoomPoint = CGPoint(x: 0, y: constants.screenHeight)
 
     override func perform() {
-        if let previousView = source.view, let backView = destination.view, let window = UIApplication.shared.keyWindow {
+        if let currentView = source.view, let backView = destination.view, let window = UIApplication.shared.keyWindow {
 
-            window.insertSubview(backView, aboveSubview: previousView)
-
-            for subView in backView.subviews {
-                subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
-            }
-            backView.frame = CGRect(origin: sourceZoomPoint, size: constants.sharedZoomSize)
+            window.insertSubview(backView, aboveSubview: currentView)
+            
+            let currentSnapshot = UIImageView(image: takeSnapShotOf(view: currentView))
+            let backSnapshot = UIImageView(image: takeSnapShotOf(view: backView))
+            backSnapshot.frame = CGRect(origin: sourceZoomPoint, size: constants.sharedZoomSize)
+            currentView.isHidden = true
+            backView.isHidden = true
+            window.addSubview(backSnapshot)
+            window.addSubview(currentSnapshot)
 
             UIView.animate(
                 withDuration: constants.animationDuration,
                 delay: 0,
                 usingSpringWithDamping: constants.animationSpringDamping,
                 initialSpringVelocity: 0,
-                options: [.curveEaseInOut, .allowUserInteraction, .allowAnimatedContent],
+                options: [.curveEaseInOut, .allowAnimatedContent],
                 animations: {
 
-                    previousView.frame = CGRect(origin: self.desinationZoomPoint, size: constants.sharedZoomSize)
-                    for subView in previousView.subviews {
-                        subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: constants.scale)
-                    }
-
-                    backView.frame = CGRect(x: 0, y: 0, width: constants.screenWidth, height: constants.screenHeight)
-                    for subView in backView.subviews {
-                        subView.frame = subView.frame.zoom(about: CGPoint(x: 0, y: 0), by: 1 / constants.scale)
-                    }
-
+                    currentSnapshot.frame = CGRect(origin: self.desinationZoomPoint, size: constants.sharedZoomSize)
+                    backSnapshot.frame = CGRect(x: 0, y: 0, width: constants.screenWidth, height: constants.screenHeight)
                 },
                 completion: { finished in
+                    currentSnapshot.removeFromSuperview()
+                    backSnapshot.removeFromSuperview()
+                    backView.isHidden = false
                     self.source.dismiss(animated: false, completion: nil)
                 }
             )
