@@ -1,4 +1,4 @@
-# DoddleDo
+# Doddle Do
 
 人工智能辅助绘画生成应用
 
