@@ -20,7 +20,7 @@ extension UIImage {
 
     func resize(to rect: CGSize) -> UIImage? {
 
-        UIGraphicsBeginImageContext(rect)
+        UIGraphicsBeginImageContextWithOptions(rect, true, 0.0)
         self.draw(in: CGRect(x: 0, y: 0, width: rect.width, height: rect.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -47,14 +47,19 @@ class FinishSceneViewController: UIViewController {
         }
     }
 
-    
+
     // MARK: Initialization
     @IBOutlet weak var loading: UIImageView!
     @IBOutlet weak var mainImageView: ScrollingView!
+    @IBOutlet weak var mainImageViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var mainImageViewWidth: NSLayoutConstraint!
     var tempImage: UIImage?
 
     override func viewDidLoad() {
 
+        super.viewDidLoad()
+        mainImageViewWidth.constant = UIView.constants.screenWidth * constants.finishMainImageViewScale
+        mainImageViewHeight.constant = UIView.constants.screenHeight * constants.finishMainImageViewScale
         mainImageView.image = tempImage
         mainImageView.image = tintImage(mainImageView.image, with: UIColor.white.cgColor, with: 0.8)
         do {
@@ -66,12 +71,12 @@ class FinishSceneViewController: UIViewController {
         aiPainting(image: tempImage, to: mainImageView)
 
     }
-
+    
     private func tintImage(_ image: UIImage?, with color: CGColor, with alpha: CGFloat) -> UIImage? {
         if let image = image {
             let bounds = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
             var tinted: UIImage?
-            UIGraphicsBeginImageContext(image.size)
+            UIGraphicsBeginImageContextWithOptions(image.size, true, 0.0)
             guard let context = UIGraphicsGetCurrentContext() else { return nil }
             image.draw(in: bounds)
             context.setAlpha(alpha)
@@ -139,4 +144,11 @@ class FinishSceneViewController: UIViewController {
         }
     }
 
+}
+
+
+extension FinishSceneViewController {
+    private struct constants {
+        static let finishMainImageViewScale: CGFloat = 0.777
+    }
 }

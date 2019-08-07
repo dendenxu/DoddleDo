@@ -72,6 +72,9 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
     // MARK: Initialization
     override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapped(recognizer:)))
         tap.delegate = self
 
@@ -120,7 +123,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
 
 
         // FIXME: The whole screen rect gets filled with white when seguing to board
-        UIGraphicsBeginImageContext(view.frame.size)
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.setFillColor(colorPalette["eraser"]?.cgColor ?? UIColor.black.cgColor)
         context.fill(view.bounds)
@@ -539,7 +542,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     var tempImages = [AttributedImage]() {
         didSet {
             if tempImages.count > bufferNumber {
-                UIGraphicsBeginImageContext(view.frame.size)
+                UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0.0)
                 framedImage?.draw(in: view.bounds)
                 tempImages[0].image?.draw(in: view.bounds)
                 framedImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -557,7 +560,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     var recycleBin = [AttributedImage]()
 
     private func updateMain(from: Int) {
-        UIGraphicsBeginImageContext(view.frame.size)
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0.0)
         guard let context = UIGraphicsGetCurrentContext() else { return }
         context.setFillColor(colorPalette["eraser"]?.cgColor ?? UIColor.black.cgColor)
         context.fill(view.bounds)
@@ -639,7 +642,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
     }
 
     private func drawLine(from fromPoint: CGPoint, to toPoint: CGPoint) {
-        UIGraphicsBeginImageContext(view.frame.size)
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1.0)
         guard let context = UIGraphicsGetCurrentContext() else { return }
         tempImageView.image?.draw(in: view.bounds)
         context.move(to: fromPoint)
@@ -676,7 +679,7 @@ class DoddleBoardViewController: UIViewController, UIGestureRecognizerDelegate, 
         if swipe, points.count >= 2 {
             drawLine(from: lastPoint, to: lastPoint)
 
-            UIGraphicsBeginImageContext(view.frame.size)
+            UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 0.0)
             guard let context = UIGraphicsGetCurrentContext() else { return }
             context.move(to: points[points.count - 2])
             context.addLine(to: points[points.count - 1])

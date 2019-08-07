@@ -18,81 +18,127 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="settings" translatesAutoresizingMaskIntoConstraints="NO" id="hxJ-0D-gp7" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings" translatesAutoresizingMaskIntoConstraints="NO" id="hxJ-0D-gp7" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
                                 <rect key="frame" x="64" y="329" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="gfD-ep-s3S"/>
+                                    <constraint firstAttribute="height" constant="50" id="qHC-mk-W74"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="settings"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="help" translatesAutoresizingMaskIntoConstraints="NO" id="v7C-nd-rc2" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help" translatesAutoresizingMaskIntoConstraints="NO" id="v7C-nd-rc2" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
                                 <rect key="frame" x="129" y="329" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="HMw-Fc-chP"/>
+                                    <constraint firstAttribute="height" constant="50" id="hcn-Yq-K9W"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="help"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="h9J-L9-2Cx" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="h9J-L9-2Cx" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
                                 <rect key="frame" x="64" y="52" width="384" height="89"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="h9J-L9-2Cx" secondAttribute="height" multiplier="384:89" id="35g-Bx-bMS"/>
+                                    <constraint firstAttribute="height" priority="998" constant="89" id="dAL-Gb-Ksb"/>
+                                    <constraint firstAttribute="width" priority="998" constant="384" id="zc0-8u-ZST"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Doddle makes you do it" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-6b-q5j">
-                                <rect key="frame" x="198" y="340" width="280" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doddle makes you do it" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-6b-q5j">
+                                <rect key="frame" x="198" y="340.5" width="265.5" height="29.5"/>
                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="25"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JwU-Ta-fyb">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JwU-Ta-fyb">
                                 <rect key="frame" x="456" y="0.0" width="440" height="414"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7kS-1r-VG8">
-                                        <rect key="frame" x="77" y="29" width="338" height="740"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="7kS-1r-VG8">
+                                        <rect key="frame" x="77" y="40" width="338" height="744"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RMV-kd-4ag" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="338" height="155"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RMV-kd-4ag" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="338" height="156"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-xg-WzM">
-                                                        <rect key="frame" x="134" y="42" width="70" height="70"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="Dip-xg-WzM">
+                                                        <rect key="frame" x="134" y="43" width="70" height="70"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="70" id="LZq-4F-nFl"/>
+                                                            <constraint firstAttribute="width" constant="70" id="OTd-6E-9kA"/>
+                                                        </constraints>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="plus"/>
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="156" id="W9Z-uu-TWS"/>
+                                                    <constraint firstItem="Dip-xg-WzM" firstAttribute="centerX" secondItem="RMV-kd-4ag" secondAttribute="centerX" id="fk3-9A-dSn"/>
+                                                    <constraint firstAttribute="width" constant="338" id="gTM-AI-txA"/>
+                                                    <constraint firstItem="Dip-xg-WzM" firstAttribute="centerY" secondItem="RMV-kd-4ag" secondAttribute="centerY" id="n2A-SZ-QfS"/>
+                                                </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GRL-hL-Nhd" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="195" width="338" height="155"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRL-hL-Nhd" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="196" width="338" height="156"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KxA-fE-PQd" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="390" width="338" height="155"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KxA-fE-PQd" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="392" width="338" height="156"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-ft-tEi" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="585" width="338" height="155"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-ft-tEi" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="588" width="338" height="156"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="0XM-ft-tEi" firstAttribute="height" secondItem="RMV-kd-4ag" secondAttribute="height" id="2Pr-Dy-6FZ"/>
+                                            <constraint firstItem="GRL-hL-Nhd" firstAttribute="width" secondItem="RMV-kd-4ag" secondAttribute="width" id="FgJ-Ow-Upj"/>
+                                            <constraint firstItem="KxA-fE-PQd" firstAttribute="height" secondItem="RMV-kd-4ag" secondAttribute="height" id="Kpz-8E-S0t"/>
+                                            <constraint firstItem="GRL-hL-Nhd" firstAttribute="height" secondItem="RMV-kd-4ag" secondAttribute="height" id="M6f-OY-b6f"/>
+                                            <constraint firstItem="0XM-ft-tEi" firstAttribute="width" secondItem="RMV-kd-4ag" secondAttribute="width" id="NYs-E2-DcZ"/>
+                                            <constraint firstItem="KxA-fE-PQd" firstAttribute="width" secondItem="RMV-kd-4ag" secondAttribute="width" id="kXI-8n-iGC"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="7kS-1r-VG8" secondAttribute="trailing" constant="25" id="2El-Zk-5L8"/>
+                                    <constraint firstItem="7kS-1r-VG8" firstAttribute="leading" secondItem="JwU-Ta-fyb" secondAttribute="leading" constant="77" id="IpJ-AV-KIT"/>
+                                    <constraint firstItem="7kS-1r-VG8" firstAttribute="top" secondItem="JwU-Ta-fyb" secondAttribute="top" constant="40" id="JMw-Im-A5l"/>
+                                    <constraint firstAttribute="bottom" secondItem="7kS-1r-VG8" secondAttribute="bottom" id="qYf-g3-Ba2"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="JwU-Ta-fyb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="centerX" priority="999" constant="8" id="2ZU-Mu-Frr"/>
+                            <constraint firstItem="v7C-nd-rc2" firstAttribute="leading" secondItem="hxJ-0D-gp7" secondAttribute="trailing" constant="15" id="8ue-gb-dC7"/>
+                            <constraint firstItem="JwU-Ta-fyb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="LMx-dx-xYE"/>
+                            <constraint firstAttribute="bottom" secondItem="v7C-nd-rc2" secondAttribute="bottom" constant="35" id="NYT-jr-aqN"/>
+                            <constraint firstItem="h9J-L9-2Cx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="64" id="Pmb-Q2-1qm"/>
+                            <constraint firstAttribute="bottom" secondItem="7ve-6b-q5j" secondAttribute="bottom" constant="44" id="QdG-At-VuC"/>
+                            <constraint firstAttribute="bottom" secondItem="hxJ-0D-gp7" secondAttribute="bottom" constant="35" id="Yun-GS-rAI"/>
+                            <constraint firstItem="h9J-L9-2Cx" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="52" id="ZTy-Qs-9RJ"/>
+                            <constraint firstItem="JwU-Ta-fyb" firstAttribute="leading" secondItem="h9J-L9-2Cx" secondAttribute="trailing" priority="999" constant="8" id="cSt-eG-R71"/>
+                            <constraint firstItem="hxJ-0D-gp7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="64" id="cUj-Gy-BpY"/>
+                            <constraint firstAttribute="trailing" secondItem="JwU-Ta-fyb" secondAttribute="trailing" id="cfL-oQ-D4n"/>
+                            <constraint firstItem="7ve-6b-q5j" firstAttribute="leading" secondItem="v7C-nd-rc2" secondAttribute="trailing" constant="19" id="hAe-yY-Irb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7ve-6b-q5j" secondAttribute="trailing" symbolic="YES" id="qUh-0T-3Qs"/>
+                            <constraint firstItem="JwU-Ta-fyb" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="xdS-IK-1X9"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>
@@ -102,6 +148,8 @@
                         <outlet property="bottomLine" destination="7ve-6b-q5j" id="XIz-gS-80S"/>
                         <outlet property="help" destination="v7C-nd-rc2" id="iVg-lu-EuH"/>
                         <outlet property="scroller" destination="JwU-Ta-fyb" id="I7M-sp-aot"/>
+                        <outlet property="scrollingViewHeight" destination="W9Z-uu-TWS" id="7dM-9b-fmn"/>
+                        <outlet property="scrollingViewWidth" destination="gTM-AI-txA" id="IAu-xH-sOW"/>
                         <outlet property="settings" destination="hxJ-0D-gp7" id="P4y-lr-v2F"/>
                         <segue destination="9WV-92-tHv" kind="custom" identifier="help" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="SUf-Gm-N8G"/>
                         <segue destination="6Hn-Md-Dfb" kind="custom" identifier="settings" customClass="BouncySegue" customModule="DoddleDo" customModuleProvider="target" id="m2h-as-al6"/>
@@ -153,17 +201,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5NB-hA-siT">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5NB-hA-siT">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WCj-q2-FMj">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WCj-q2-FMj">
                                 <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="wcG-hU-mlj" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="wcG-hU-mlj" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
                                 <rect key="frame" x="27" y="20" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="XCJ-Hz-YQ0"/>
+                                    <constraint firstAttribute="height" constant="50" id="k0d-Hr-Wuk"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="boardBack"/>
                                 </userDefinedRuntimeAttributes>
@@ -261,6 +310,18 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="5NB-hA-siT" secondAttribute="bottom" id="6To-DB-Lfd"/>
+                            <constraint firstItem="WCj-q2-FMj" firstAttribute="top" secondItem="oom-1y-glO" secondAttribute="top" id="KKh-IM-mMK"/>
+                            <constraint firstItem="5NB-hA-siT" firstAttribute="top" secondItem="oom-1y-glO" secondAttribute="top" id="MyA-J7-QD8"/>
+                            <constraint firstAttribute="leading" secondItem="wcG-hU-mlj" secondAttribute="leading" constant="-27" id="RA9-s7-fC6"/>
+                            <constraint firstItem="wcG-hU-mlj" firstAttribute="top" secondItem="oom-1y-glO" secondAttribute="top" constant="20" id="eNz-bD-MlD"/>
+                            <constraint firstItem="WCj-q2-FMj" firstAttribute="leading" secondItem="oom-1y-glO" secondAttribute="leading" id="eUp-3o-3yu"/>
+                            <constraint firstAttribute="trailing" secondItem="WCj-q2-FMj" secondAttribute="trailing" id="h4Q-ks-See"/>
+                            <constraint firstAttribute="bottom" secondItem="WCj-q2-FMj" secondAttribute="bottom" id="kIA-xD-paz"/>
+                            <constraint firstAttribute="trailing" secondItem="5NB-hA-siT" secondAttribute="trailing" id="mir-aa-Hfj"/>
+                            <constraint firstItem="5NB-hA-siT" firstAttribute="leading" secondItem="oom-1y-glO" secondAttribute="leading" id="ogS-vV-pWq"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="e6u-mN-NmT"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
@@ -289,29 +350,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="bXM-8b-GjE" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="bXM-8b-GjE" customClass="ShadowedImageView" customModule="DoddleDo" customModuleProvider="target">
                                 <rect key="frame" x="30" y="20" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4Iv-u7-jhc"/>
+                                    <constraint firstAttribute="width" constant="50" id="PEA-rX-brm"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="finishBack"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hDg-VG-JGo" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
-                                <rect key="frame" x="100" y="20" width="696" height="321"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hDg-VG-JGo" customClass="ScrollingView" customModule="DoddleDo" customModuleProvider="target">
+                                <rect key="frame" x="100" y="30" width="696" height="321"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HI3-dP-Erk">
-                                        <rect key="frame" x="228" y="96" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HI3-dP-Erk">
+                                        <rect key="frame" x="228" y="96.5" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="JaG-K8-hjN"/>
+                                            <constraint firstAttribute="width" constant="240" id="ok7-HP-hUh"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="HI3-dP-Erk" firstAttribute="centerY" secondItem="hDg-VG-JGo" secondAttribute="centerY" id="Elv-Jt-xNx"/>
+                                    <constraint firstAttribute="height" constant="321" id="Hhq-UX-Ugn"/>
+                                    <constraint firstAttribute="width" constant="696" id="J73-kJ-v7E"/>
+                                    <constraint firstItem="HI3-dP-Erk" firstAttribute="centerX" secondItem="hDg-VG-JGo" secondAttribute="centerX" id="u3t-wB-A5A"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="blankImage"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bXM-8b-GjE" firstAttribute="top" secondItem="I06-c9-8jC" secondAttribute="top" constant="20" id="8nq-k7-m4C"/>
+                            <constraint firstAttribute="leading" secondItem="bXM-8b-GjE" secondAttribute="leading" constant="-30" id="XLH-JY-H6O"/>
+                            <constraint firstItem="hDg-VG-JGo" firstAttribute="centerX" secondItem="L13-Eu-Kyx" secondAttribute="centerX" id="c56-Bk-hf1"/>
+                            <constraint firstItem="hDg-VG-JGo" firstAttribute="top" secondItem="L13-Eu-Kyx" secondAttribute="top" constant="30" id="eGP-Tp-aEu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="I06-c9-8jC"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>
@@ -321,6 +399,8 @@
                         <outlet property="finishBack" destination="bXM-8b-GjE" id="v9K-ce-f28"/>
                         <outlet property="loading" destination="HI3-dP-Erk" id="lSO-Xe-jf5"/>
                         <outlet property="mainImageView" destination="hDg-VG-JGo" id="eUW-g1-xes"/>
+                        <outlet property="mainImageViewHeight" destination="Hhq-UX-Ugn" id="67u-rt-vDr"/>
+                        <outlet property="mainImageViewWidth" destination="J73-kJ-v7E" id="4db-Oq-3me"/>
                         <segue destination="i0X-SM-Yxz" kind="unwind" identifier="finishBack" customClass="BouncyUnwindSegue" customModule="DoddleDo" customModuleProvider="target" unwindAction="unwindToBoard:" id="Wrh-dC-d1t"/>
                     </connections>
                 </viewController>
@@ -410,12 +490,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="BX7-oK-QDs">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="name" translatesAutoresizingMaskIntoConstraints="NO" id="BX7-oK-QDs">
                                 <rect key="frame" x="164.5" y="140" width="567" height="114"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="114" id="Dfw-TA-lQM"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="567" id="pwT-5Y-m5m"/>
+                                    <constraint firstAttribute="width" secondItem="BX7-oK-QDs" secondAttribute="height" multiplier="189:38" id="s1q-Le-bS2"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="BX7-oK-QDs" firstAttribute="centerX" secondItem="WzZ-hX-Lre" secondAttribute="centerX" id="iSH-vW-CbF"/>
+                            <constraint firstItem="BX7-oK-QDs" firstAttribute="centerY" secondItem="WzZ-hX-Lre" secondAttribute="centerY" constant="-10" id="pdO-JE-Poe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="0Dm-U0-0xX"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="identifier" value="mainBackground"/>

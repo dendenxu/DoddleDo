@@ -11,7 +11,7 @@ import UIKit
 class BouncyUnwindSegue: UIStoryboardSegue {
 
     var sourceZoomPoint = CGPoint(x: 0, y: 0)
-    var desinationZoomPoint = CGPoint(x: 0, y: constants.screenHeight)
+    var desinationZoomPoint = CGPoint(x: 0, y: UIView.constants.screenHeight)
 
     override func perform() {
         if let currentView = source.view, let backView = destination.view, let window = UIApplication.shared.keyWindow {
@@ -35,7 +35,7 @@ class BouncyUnwindSegue: UIStoryboardSegue {
                 animations: {
 
                     currentSnapshot.frame = CGRect(origin: self.desinationZoomPoint, size: constants.sharedZoomSize)
-                    backSnapshot.frame = CGRect(x: 0, y: 0, width: constants.screenWidth, height: constants.screenHeight)
+                    backSnapshot.frame = CGRect(x: 0, y: 0, width: UIView.constants.screenWidth, height: UIView.constants.screenHeight)
                 },
                 completion: { finished in
                     currentSnapshot.removeFromSuperview()
@@ -50,9 +50,7 @@ class BouncyUnwindSegue: UIStoryboardSegue {
 
 extension BouncyUnwindSegue {
     private struct constants {
-        static let screenHeight = UIScreen.main.bounds.size.height
-        static let screenWidth = UIScreen.main.bounds.size.width
-        static let sharedZoomSize = CGSize(width: constants.screenWidth * scale, height: constants.screenHeight * scale)
+        static let sharedZoomSize = CGSize(width: UIView.constants.screenWidth * scale, height: UIView.constants.screenHeight * scale)
         static let scale: CGFloat = 0.001
         static let animationDuration: Double = 0.45
         static let animationSpringDamping: CGFloat = 0.7

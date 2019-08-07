@@ -60,21 +60,23 @@ class MainSceneViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    @IBOutlet weak var scroller: UIScrollView! {
-        didSet {
-            scroller.delegate = self
-            scroller.canCancelContentTouches = true
-            if let subView = scroller.subviews.first as? UIStackView { // first subview is the stack view that contains the subviews
-                scroller.contentSize = subView.frame.size
-                for image in subView.subviews {
-                    if let image = image as? ScrollingView {
-                        addImageTappedGestureRecognizer(to: image)
-                    }
-                }
+    @IBOutlet weak var scrollingViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollingViewWidth: NSLayoutConstraint!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        scroller.delegate = self
+        scroller.canCancelContentTouches = true
+        scrollingViewHeight.constant = UIView.constants.screenHeight * constants.scrollingViewScale
+        scrollingViewWidth.constant = UIView.constants.screenWidth * constants.scrollingViewScale
+        if let subView = scroller.subviews.first as? UIStackView { // first subview is the stack view that contains the subviews
+            for image in subView.subviews {
+                addImageTappedGestureRecognizer(to: image as! ScrollingView)
             }
+            scroller.contentSize = subView.frame.size
         }
     }
 
+    @IBOutlet weak var scroller: UIScrollView!
     func addImageTappedGestureRecognizer(to view: ScrollingView) {
         let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped(recognizer:)))
         view.addGestureRecognizer(tap)
@@ -216,5 +218,6 @@ extension MainSceneViewController {
     private struct constants {
         static let bottomLineFontSize: CGFloat = 25
         static let bottomLineKern: CGFloat = 2
+        static let scrollingViewScale: CGFloat = 0.377
     }
 }

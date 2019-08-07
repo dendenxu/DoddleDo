@@ -30,6 +30,6 @@ class BackgroundView: UIView {
 
 extension BackgroundView {
     private struct constants {
-        static let cornerRadius:CGFloat = 40
+        static let cornerRadius:CGFloat = 20
     }
 }

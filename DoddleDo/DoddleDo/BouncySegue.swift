@@ -10,7 +10,7 @@ import UIKit
 
 class BouncySegue: UIStoryboardSegue {
 
-    var desinationZoomPoint = CGPoint(x: 0, y: constants.screenHeight)
+    var desinationZoomPoint = CGPoint(x: 0, y: UIView.constants.screenHeight)
     var sourceZoomPoint = CGPoint(x: 0, y: 0)
 
     override func perform() {
@@ -35,7 +35,7 @@ class BouncySegue: UIStoryboardSegue {
                 animations: {
                     sourceSnapshot.frame = CGRect(origin: self.sourceZoomPoint, size: constants.sharedZoomSize)
 
-                    destinationSnapshot.frame = CGRect(x: 0, y: 0, width: constants.screenWidth, height: constants.screenHeight)
+                    destinationSnapshot.frame = CGRect(x: 0, y: 0, width: UIView.constants.screenWidth, height: UIView.constants.screenHeight)
 
                 },
                 completion: { finished in
@@ -66,12 +66,19 @@ extension UIStoryboardSegue {
 
 extension BouncySegue {
     private struct constants {
-        static let screenHeight = UIScreen.main.bounds.size.height
-        static let screenWidth = UIScreen.main.bounds.size.width
-        static let sharedZoomSize = CGSize(width: constants.screenWidth * scale, height: constants.screenHeight * scale)
+        static let sharedZoomSize = CGSize(width: UIView.constants.screenWidth * scale, height: UIView.constants.screenHeight * scale)
         static let scale: CGFloat = 0.001
         static let animationDuration: Double = 0.45
         static let animationSpringDamping: CGFloat = 0.7
+    }
+}
+
+extension UIView {
+    struct constants {
+        static let screenHeight = UIScreen.main.bounds.size.height
+        static let screenWidth = UIScreen.main.bounds.size.width
+        static let screenSize = CGSize(width: UIView.constants.screenWidth, height: UIView.constants.screenHeight)
+        static let screenRect = CGRect(origin: CGPoint.zero, size: UIView.constants.screenSize)
     }
 }
 
